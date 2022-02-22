@@ -2,10 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context
-       https://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 <!--    读取jdbc.properties属性文件-->
     <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
@@ -19,7 +16,7 @@
     </bean>
 
 <!--    创建SqlSessionFactoryBean-->
-    <bean id= "sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
     <!--    配置数据源-->
         <property name="dataSource" ref="dataSource"></property>
     <!--    配置MyBatis的核心配置文件-->
@@ -31,7 +28,6 @@
 
 <!--    创建mapper文件的扫描器-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
         <property name="basePackage" value="com.sqs.mapper"></property>
     </bean>
 

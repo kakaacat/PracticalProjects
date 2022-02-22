@@ -23,7 +23,7 @@ public class Admin {
     }
 
     public void setaName(String aName) {
-        this.aName = aName;
+        this.aName = aName == null ? null : aName.trim();
     }
 
     public String getaPass() {
@@ -31,6 +31,6 @@ public class Admin {
     }
 
     public void setaPass(String aPass) {
-        this.aPass = aPass;
+        this.aPass = aPass == null ? null : aPass.trim();
     }
 }

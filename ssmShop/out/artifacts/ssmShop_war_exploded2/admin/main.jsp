@@ -41,7 +41,7 @@
             </div>
             <div id="lbottom">
                 <ul>
-                    <a href="${pageContext.request.contextPath}/prod/getAll.action" target="myright" >
+                    <a href="${pageContext.request.contextPath}/prod/split.action" target="myright" >
                         <li class="two"><span class="glyphicon glyphicon-book" style="color: white;"></span>&nbsp;&nbsp;&nbsp;&nbsp;商品管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-play" style="color: white;"></span> </li>
                     </a>
                     <a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">

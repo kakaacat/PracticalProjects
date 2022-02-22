@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
 <!--设定业务逻辑层的包扫描器，目的是在指定路径下，使用@Service注解的类，Spring负责创建对象，并添加依赖-->
     <context:component-scan base-package="com.sqs.service"></context:component-scan>
 
@@ -36,6 +44,6 @@
 <!--完成切面和切入点的植入-->
     <aop:config>
         <aop:pointcut id="mypointcut" expression="execution(* com.sqs.service.*.*(..))"/>
-        <aop:advisor advice-ref="myadvice" pointcut-ref="mypointcut"></aop:advisor>
+        <aop:advisor advice-ref="myadvice" pointcut-ref="mypointcut"/>
     </aop:config>
 </beans>
