@@ -36,9 +36,7 @@ public class AdminServiceImpl implements AdminService {
             if (miPwd.equals(admin.getaPass())) {
                 return admin;
             }
-
         }
-
         return null;
     }
 }
