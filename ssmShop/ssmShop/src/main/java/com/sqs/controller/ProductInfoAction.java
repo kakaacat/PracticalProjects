@@ -1,13 +1,16 @@
 package com.sqs.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.sqs.pojo.ProductInfo;
 import com.sqs.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -40,4 +43,14 @@ public class ProductInfoAction {
         request.setAttribute("info", info);
         return "product";
     }
+
+    //ajax分页翻页处理
+    @ResponseBody
+    @RequestMapping("/ajaxsplit")
+    public void ajaxSplit(int page, HttpSession session) {
+        //取当前page参数的页面的数据
+        PageInfo info = productInfoService.splitPage(page, PAGE_SIZE);
+        session.setAttribute("info", info);
+    }
+
 }

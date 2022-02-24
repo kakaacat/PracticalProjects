@@ -8,6 +8,7 @@ import com.sqs.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.PrivateKey;
 import java.util.List;
 
 /**
@@ -32,8 +33,11 @@ public class AdminServiceImpl implements AdminService {
         if (list.size() > 0) {
             Admin admin = list.get(0);
             //如果得到了，就进行密码比对
-            String miPwd = MD5Util.getMD5(pwd);
-            if (miPwd.equals(admin.getaPass())) {
+//            String miPwd = MD5Util.getMD5(pwd);
+//            if (miPwd.equals(admin.getaPass())) {
+//                return admin;
+//            }
+            if (pwd.equals(admin.getaPass())) {
                 return admin;
             }
         }
