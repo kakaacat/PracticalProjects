@@ -9,7 +9,8 @@ import org.junit.Test;
 public class test {
     @Test
     public void test1() {
-        String mi = MD5Util.getMD5("000000");
-        System.out.println(mi);
+//        String mi = MD5Util.getMD5("000000");
+//        System.out.println(mi);
+        
     }
 }

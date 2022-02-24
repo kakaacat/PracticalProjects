@@ -1,5 +1,6 @@
 package com.sqs.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.sqs.pojo.ProductInfo;
 import com.sqs.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,27 @@ import java.util.List;
 @Controller
 @RequestMapping("/prod")
 public class ProductInfoAction {
-    //界面层有业务逻辑层的对象
-    @Autowired
-    ProductInfoService productInfoService;
+    //每页显示的记录数
+    public static final int PAGE_SIZE = 5;
 
+    //界面层(springMVC)有业务逻辑层(spring)的对象
+    @Autowired
+    private ProductInfoService productInfoService;
+
+    //显示所有商品不分页
     @RequestMapping("/getAll")
     public String getAll(HttpServletRequest request) {
         List<ProductInfo> list = productInfoService.getAll();
         request.setAttribute("list", list);
+        return "product";
+    }
+
+    //显示第一页的5条记录
+    @RequestMapping("/split")
+    public String split(HttpServletRequest request){
+        //得到第一页的数据
+        PageInfo info = productInfoService.splitPage(1, PAGE_SIZE);
+        request.setAttribute("info", info);
         return "product";
     }
 }
