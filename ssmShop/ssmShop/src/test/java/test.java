@@ -14,5 +14,7 @@ public class test {
     public void test1() {
         String mi = MD5Util.getMD5("000000");
         System.out.println(mi);
+
+       // System.out.println(mi instanceof String);
     }
 }
