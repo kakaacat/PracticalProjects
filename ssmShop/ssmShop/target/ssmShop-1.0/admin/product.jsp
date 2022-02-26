@@ -131,7 +131,7 @@
                                             <li>
                                                     <%--                                                <a href="${pageContext.request.contextPath}/prod/split.action?page=${i}" style="background-color: grey">${i}</a>--%>
                                                 <a href="javascript:ajaxsplit(${i})"
-                                                   style="background-color: grey">${i}</a>
+                                                   style="background-color: #808080">${i}</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${info.pageNum!=i}">
@@ -217,6 +217,7 @@ alert(str+"11111111");
         location.href = "${pageContext.request.contextPath}/prod/one.action?pid=" + pid + "&page=" + ispage;
     }
 </script>
+
 <!--分页的AJAX实现-->
 <script type="text/javascript">
     function ajaxsplit(page) {
@@ -230,8 +231,8 @@ alert(str+"11111111");
                 //location.href---->http://localhost:8080/admin/login.action
                 $("#table").load("http://localhost:8080/admin/product.jsp #table");
             }
-        })
-    };
+        });
+    }
 
 </script>
 
