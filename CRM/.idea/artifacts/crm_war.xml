@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="crm.war">
+    <root id="archive" name="crm-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="crm:war exploded" />
     </root>
   </artifact>
