@@ -225,4 +225,11 @@
       edit_by = #{editBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+  <select id="selectUserByLoginActAndPwd" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where login_act=#{loginAct} and login_pwd=#{loginPwd}
+  </select>
 </mapper>
