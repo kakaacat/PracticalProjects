@@ -18,6 +18,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/crm/pom.xml" />
+        <option value="$PROJECT_DIR$/crm_mybatis_generator/pom.xml" />
       </list>
     </option>
   </component>
