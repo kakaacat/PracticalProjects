@@ -5,13 +5,16 @@ import com.sqs.crm.commons.domain.ReturnObject;
 import com.sqs.crm.commons.utils.DateUtils;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.UserService;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +37,7 @@ public class UserController {
 
     @RequestMapping("/settings/qx/user/login.do")
     public  @ResponseBody Object login(String loginAct, String loginPwd, String isRemPwd, HttpServletRequest request,
+                                       HttpServletResponse response,
                                        HttpSession session){
         //封装参数
         Map<String, Object> map = new HashMap<>();
@@ -65,6 +69,24 @@ public class UserController {
                 //登录成功
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
                 session.setAttribute(Contants.SESSION_USER, user);
+
+                //如果需要记住密码，则往外写cookie
+                if ("true".equals(isRemPwd)) {
+                    Cookie c1 = new Cookie("loginAct", user.getLoginAct());
+                    c1.setMaxAge(3 * 24 * 60 * 60);
+                    response.addCookie(c1);
+                    Cookie c2 = new Cookie("loginPwd", user.getLoginPwd());
+                    c2.setMaxAge(3 * 24 * 60 * 60);
+                    response.addCookie(c2);
+                } else {
+                    //把没有过期的cookie删除
+                    Cookie c1 = new Cookie("loginAct", "1");
+                    c1.setMaxAge(0);
+                    response.addCookie(c1);
+                    Cookie c2 = new Cookie("loginPwd", "1");
+                    c2.setMaxAge(0);
+                    response.addCookie(c2);
+                }
             }
         }
         return returnObject;
