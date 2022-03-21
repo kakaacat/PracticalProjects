@@ -12,6 +12,16 @@
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(function () {
+		//给整个窗口加个键盘按下事件
+		$(window).keydown(function (event) {
+			//如果按的是回车键，就提交登录
+			if (event.keyCode == 13) {
+				$("#loginBtn").click();
+			}
+		});
+
+
+
 		//给“登录”按钮添加单击事件
 		$("#loginBtn").click(function () {
 			//收集参数
@@ -27,6 +37,10 @@
 				alert("密码不能为空！");
 				return;
 			}
+
+			//显示正在验证
+			//$("msg").text("正在验证...");
+
 			//发送请求
 			$.ajax({
 				url:'settings/qx/user/login.do',
@@ -45,6 +59,10 @@
 						//提示信息
 						$("#msg").html(data.message);
 					}
+				},
+				beforeSend:function(){
+					$("msg").text("正在验证...");
+					return true;
 				}
 			});
 		});
@@ -78,7 +96,7 @@
 							<input type="checkbox" id="isRemPwd"> 十天内免登录
 						</label>
 						&nbsp;&nbsp;
-						<span id="msg"></span>
+						<span id="msg" style="color: red"></span>
 					</div>
 					<button type="button" id="loginBtn" class="btn btn-primary btn-lg btn-block"  style="width: 350px;position: relative;top: 45px;">登录</button>
 				</div>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,7 +33,8 @@ public class UserController {
     }
 
     @RequestMapping("/settings/qx/user/login.do")
-    public  @ResponseBody Object login(String loginAct, String loginPwd, String isRemPwd, HttpServletRequest request){
+    public  @ResponseBody Object login(String loginAct, String loginPwd, String isRemPwd, HttpServletRequest request,
+                                       HttpSession session){
         //封装参数
         Map<String, Object> map = new HashMap<>();
         map.put("loginAct", loginAct);
@@ -62,6 +64,7 @@ public class UserController {
             } else {
                 //登录成功
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+                session.setAttribute(Contants.SESSION_USER, user);
             }
         }
         return returnObject;
