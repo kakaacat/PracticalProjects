@@ -38,6 +38,12 @@
 		
 		
 		window.open("main/index.html","workareaFrame");
+
+		//给确定按钮添加单击事件
+		$("#logoutBtn").click(function () {
+			//发送同步请求
+			window.location.href="settings/qx/user/logout.do";
+		});
 		
 	});
 	
@@ -130,7 +136,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href='login.html';">确定</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="logoutBtn">确定</button>
 				</div>
 			</div>
 		</div>
