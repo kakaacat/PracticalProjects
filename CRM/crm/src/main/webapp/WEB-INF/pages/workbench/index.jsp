@@ -37,7 +37,7 @@
 		});
 		
 		
-		window.open("main/index.html","workareaFrame");
+		window.open("workbench/main/index.do","workareaFrame");
 
 		//给确定按钮添加单击事件
 		$("#logoutBtn").click(function () {
@@ -68,7 +68,7 @@
 						登录帐号：<b>zhangsan</b><br><br>
 						组织机构：<b>1005，市场部，二级部门</b><br><br>
 						邮箱：<b>zhangsan@sqs.com</b><br><br>
-						失效时间：<b>2017-02-14 10:10:10</b><br><br>
+						失效时间：<b>2024-02-14 10:10:10</b><br><br>
 						允许访问IP：<b>127.0.0.1,192.168.100.2</b>
 					</div>
 				</div>
@@ -167,10 +167,10 @@
 	<div id="center" style="position: absolute;top: 50px; bottom: 30px; left: 0px; right: 0px;">
 	
 		<!-- 导航 -->
-		<div id="navigation" style="left: 0px; width: 18%; position: relative; height: 100%; overflow:auto;">
+		<div id="navigation" style="left: 0px; width: 15%; position: relative; height: 100%; overflow:auto;">
 		
 			<ul id="no1" class="nav nav-pills nav-stacked">
-				<li class="liClass"><a href="main/index.html" target="workareaFrame"><span class="glyphicon glyphicon-home"></span> 工作台</a></li>
+				<li class="liClass"><a href="workbench/main/index.do" target="workareaFrame"><span class="glyphicon glyphicon-home"></span> 工作台</a></li>
 				<li class="liClass"><a href="javascript:void(0);" target="workareaFrame"><span class="glyphicon glyphicon-tag"></span> 动态</a></li>
 				<li class="liClass"><a href="javascript:void(0);" target="workareaFrame"><span class="glyphicon glyphicon-time"></span> 审批</a></li>
 				<li class="liClass"><a href="javascript:void(0);" target="workareaFrame"><span class="glyphicon glyphicon-user"></span> 客户公海</a></li>
