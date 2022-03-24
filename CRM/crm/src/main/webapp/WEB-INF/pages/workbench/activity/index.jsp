@@ -18,9 +18,41 @@ request.getContextPath() + "/";
 <script type="text/javascript">
 
 	$(function(){
-		
-		
-		
+		//给“创建”按钮添加事件
+		$("#createActivityBtn").click(function () {
+			//弹出创建窗口
+			$("#createActivityModal").modal("show");
+
+		});
+
+		//给“保存”按钮添加事件
+		$("#saveCreateActivityBtn").click(function () {
+			//收集参数
+			var owner = $("#create-marketActivityOwner").val();
+			var name = $.trim($("#create-marketActivityName").val());
+			var startDate = $("#create-startDate").val();
+			var endDate = $("#create-endDate").val();
+			var cost =$.trim($("#create-cost").val());
+			var description = $.trim($("#create-description").val());
+
+			//表单验证
+			if (owner == "") {
+				alert("所有者不能为空");
+				return;
+			}
+			if (name == "") {
+				alert("名称不能为空");
+				return;
+			}
+			if (startDate != "" && endDate != "") {
+				if (endDate < startDate) {
+					alert("结束日期不能小于开始日期");
+					return;
+				}
+			}
+
+			var regExp = /^(([1-9]\d*) | 0)$/;
+		});
 	});
 	
 </script>
@@ -57,13 +89,13 @@ request.getContextPath() + "/";
 						</div>
 						
 						<div class="form-group">
-							<label for="create-startTime" class="col-sm-2 control-label">开始日期</label>
+							<label for="create-startDate" class="col-sm-2 control-label">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-startTime">
+								<input type="text" class="form-control" id="create-startDate">
 							</div>
-							<label for="create-endTime" class="col-sm-2 control-label">结束日期</label>
+							<label for="create-endDate" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-endTime">
+								<input type="text" class="form-control" id="create-endDate">
 							</div>
 						</div>
                         <div class="form-group">
@@ -74,9 +106,9 @@ request.getContextPath() + "/";
                             </div>
                         </div>
 						<div class="form-group">
-							<label for="create-describe" class="col-sm-2 control-label">描述</label>
+							<label for="create-description" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 81%;">
-								<textarea class="form-control" rows="3" id="create-describe"></textarea>
+								<textarea class="form-control" rows="3" id="create-description"></textarea>
 							</div>
 						</div>
 						
@@ -85,7 +117,7 @@ request.getContextPath() + "/";
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+					<button type="button" class="btn btn-primary" id="saveCreateActivityBtn">保存</button>
 				</div>
 			</div>
 		</div>
@@ -242,7 +274,9 @@ request.getContextPath() + "/";
 			</div>
 			<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;top: 5px;">
 				<div class="btn-group" style="position: relative; top: 18%;">
-				  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createActivityModal"><span class="glyphicon glyphicon-plus"></span> 创建</button>
+				  <button type="button" class="btn btn-primary" id="createActivityBtn"><span
+						  class="glyphicon glyphicon-plus"></span> 创建
+				  </button>
 				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
 				  <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 				</div>
