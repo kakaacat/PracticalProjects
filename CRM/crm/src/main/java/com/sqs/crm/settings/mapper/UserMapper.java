@@ -2,6 +2,7 @@ package com.sqs.crm.settings.mapper;
 
 import com.sqs.crm.settings.model.User;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
@@ -59,4 +60,9 @@ public interface UserMapper {
      * @return
      */
     User selectUserByLoginActAndPwd(Map<String, Object> map);
+
+    /**
+     * 查询所有用户
+     */
+    List<User> selectAllUsers();
 }
