@@ -87,8 +87,19 @@ request.getContextPath() + "/";
 				}
 			});
 		});
+
+		//日历函数
+		$(".mydate").datetimepicker({
+			language : 'zh-CN',
+			format : 'yyyy-mm-dd',
+			minView : 'month',
+			initialDate : new Date(),
+			autoclose : true,
+			todayBtn : true,
+			clearBtn : true
+		});
+
 	});
-	
 </script>
 </head>
 <body>
@@ -125,11 +136,11 @@ request.getContextPath() + "/";
 						<div class="form-group">
 							<label for="create-startDate" class="col-sm-2 control-label">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-startDate">
+								<input type="text" class="form-control mydate" id="create-startDate" readonly>
 							</div>
 							<label for="create-endDate" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-endDate">
+								<input type="text" class="form-control mydate" id="create-endDate" readonly>
 							</div>
 						</div>
                         <div class="form-group">
