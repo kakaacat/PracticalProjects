@@ -20,6 +20,9 @@ request.getContextPath() + "/";
 	$(function(){
 		//给“创建”按钮添加事件
 		$("#createActivityBtn").click(function () {
+			//刷新重置
+			$("#creataActivityForm")[0].reset();
+
 			//弹出创建窗口
 			$("#createActivityModal").modal("show");
 
@@ -102,7 +105,7 @@ request.getContextPath() + "/";
 				</div>
 				<div class="modal-body">
 				
-					<form class="form-horizontal" role="form">
+					<form id="creataActivityForm" class="form-horizontal" role="form">
 					
 						<div class="form-group">
 							<label for="create-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
