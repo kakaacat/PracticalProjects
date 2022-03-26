@@ -51,7 +51,38 @@ request.getContextPath() + "/";
 				}
 			}
 
-			var regExp = /^(([1-9]\d*) | 0)$/;
+			var regExp = /^(([1-9]\d*)|0)$/;
+			if (!regExp.test(cost)) {
+				alert("成本只能为非负整数！");
+				return;
+			}
+
+			//发送请求
+			$.ajax({
+				url: 'workbench/activity/saveCreateActivity.do',
+				data:{
+					owner : owner,
+					name : name,
+					startDate : startDate,
+					endDate : endDate,
+					cost : cost,
+					description : description
+				},
+				type: 'post',
+				dataType: 'json',
+				success: function (data) {
+					if (data.code == "1") {
+						//关闭模态窗口
+						$("#createActivityModal").modal("hide");
+						//刷新市场活动列
+
+					} else {
+						alert(data.message);
+						//模态窗口不关闭
+						$("#createActivityModal").modal("show");
+					}
+				}
+			});
 		});
 	});
 	
