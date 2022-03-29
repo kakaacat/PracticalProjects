@@ -2,6 +2,9 @@ package com.sqs.crm.workbench.mapper;
 
 import com.sqs.crm.workbench.model.Activity;
 
+import java.util.List;
+import java.util.Map;
+
 
 public interface ActivityMapper {
     /**
@@ -51,4 +54,14 @@ public interface ActivityMapper {
      * 保存创建的活动
      */
     int insertActivity(Activity activity);
+
+    /**
+     * 根据条件分页查询活动列表
+     */
+    List<Activity> selectActivityByConditionForPage(Map<String, Object> map);
+
+    /**
+     * 根据条件查询市场活动的总条数
+     */
+    int selectCountOfActivityByCondition(Map<String, Object> map);
 }
