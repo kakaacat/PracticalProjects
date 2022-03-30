@@ -207,16 +207,16 @@
     left join tbl_user u3 on a.edit_by = u3.id
     <where>
       <if test="name != null and name != ''">
-        and a.name like '%'#{name}'%'
+        and a.name like concat('%', #{name}, '%')
       </if>
       <if test="owner != null and owner != ''">
-        and u1.name like '%'#{owner}'%'
+        and u1.name like concat('%', #{owner}, '%')
       </if>
       <if test="startDate != null and startDate != ''">
-        and a.start_date $gt;= #{startDate}
+        and a.start_date &gt;= #{startDate}
       </if>
       <if test="endDate != null and endDate != ''">
-        and a.end_date $lt;= #{endDate}
+        and a.end_date &lt;= #{endDate}
       </if>
     </where>
     order by a.create_time desc
@@ -231,16 +231,16 @@
     left join tbl_user u3 on a.edit_by = u3.id
     <where>
       <if test="name != null and name != ''">
-        and a.name like '%'#{name}'%'
+        and a.name like concat('%', #{name}, '%')
       </if>
       <if test="owner != null and owner != ''">
-        and u1.name like '%'#{owner}'%'
+        and u1.name like  concat('%', #{owner}, '%')
       </if>
       <if test="startDate != null and startDate != ''">
-        and a.start_date $gt;= #{startDate}
+        and a.start_date &gt;= #{startDate}
       </if>
       <if test="endDate != null and endDate != ''">
-        and a.end_date $lt;= #{endDate}
+        and a.end_date &lt;= #{endDate}
       </if>
     </where>
   </select>

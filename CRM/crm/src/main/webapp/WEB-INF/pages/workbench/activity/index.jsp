@@ -16,7 +16,6 @@ request.getContextPath() + "/";
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script type="text/javascript">
-
 	$(function(){
 		//给“创建”按钮添加事件
 		$("#createActivityBtn").click(function () {
@@ -100,6 +99,16 @@ request.getContextPath() + "/";
 		});
 
 		//查询所有数据的第一页以及总条数
+		queryActivityByConditionForPage();
+
+		//给“查询”按钮添加单击事件
+		$("#queryActivityBtn").click(function () {
+			queryActivityByConditionForPage();
+		});
+
+	});
+
+	function queryActivityByConditionForPage() {
 		//收集参数
 		var name = $("#query-name").val();
 		var owner = $("#query-owner").val();
@@ -137,9 +146,8 @@ request.getContextPath() + "/";
 				});
 				$("#tBody").html(htmlStr);
 			}
-		})
-
-	});
+		});
+	}
 </script>
 </head>
 <body>
@@ -353,7 +361,7 @@ request.getContextPath() + "/";
 				    </div>
 				  </div>
 				  
-				  <button type="submit" class="btn btn-default">查询</button>
+				  <button type="button" class="btn btn-default" id="queryActivityBtn">查询</button>
 				  
 				</form>
 			</div>
