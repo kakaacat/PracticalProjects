@@ -9,11 +9,14 @@ request.getContextPath() + "/";
 	<base href="<%=basePath%>">
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bs_pagination-master/css/jquery.bs_pagination.min.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination-master/js/jquery.bs_pagination.min.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination-master/localization/en.js"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -99,23 +102,23 @@ request.getContextPath() + "/";
 		});
 
 		//查询所有数据的第一页以及总条数
-		queryActivityByConditionForPage();
+		queryActivityByConditionForPage(1, 10);
 
 		//给“查询”按钮添加单击事件
 		$("#queryActivityBtn").click(function () {
-			queryActivityByConditionForPage();
+			queryActivityByConditionForPage(1, 10);
 		});
 
 	});
 
-	function queryActivityByConditionForPage() {
+	function queryActivityByConditionForPage(pageNo, pageSize) {
 		//收集参数
 		var name = $("#query-name").val();
 		var owner = $("#query-owner").val();
 		var startDate = $("#query-startDate").val();
 		var endDate = $("#query-endDate").val();
-		var pageNo = 1;
-		var pageSize = 10;
+		// var pageNo = 1;
+		// var pageSize = 10;
 		//发送请求
 		$.ajax({
 			url: 'workbench/activity/queryActivityByConditionForPage.do',
@@ -131,7 +134,7 @@ request.getContextPath() + "/";
 			dataType: 'json',
 			success : function (data) {
 				//显示总条数
-				$("#totalRowsB").text(data.totalRows);
+				//$("#totalRowsB").text(data.totalRows);
 				//显示市场活动列表
 				var htmlStr = "";
 				$.each(data.activityList, function (index, obj) {
@@ -145,6 +148,25 @@ request.getContextPath() + "/";
 					htmlStr+= "</tr>";
 				});
 				$("#tBody").html(htmlStr);
+
+				//调用分页插件，显示分页信息
+				$("#pageDiv").bs_pagination({
+					currentPage: pageNo,
+
+					rowsPerPage: pageSize,
+					totalRows: data.totalRows,
+					totalPages: Math.ceil(data.totalRows / pageSize),
+
+					visiblePageLinks: 5,
+
+					showGoToPage: true,
+					showRowsPerPage: true,
+					showRowsInfo: true,
+
+					onChangePage: function (event, pageObj) {
+						queryActivityByConditionForPage(pageObj.currentPage, pageObj.rowsPerPage)
+					}
+				});
 			}
 		});
 	}
@@ -408,43 +430,46 @@ request.getContextPath() + "/";
                         --%>
 					</tbody>
 				</table>
+				<div id="pageDiv"></div>
 			</div>
+
+
 			
-			<div style="height: 50px; position: relative;top: 30px;">
-				<div>
-					<button type="button" class="btn btn-default" style="cursor: default;">共<b id="totalRowsB">50</b>条记录
-					</button>
-				</div>
-				<div class="btn-group" style="position: relative;top: -34px; left: 110px;">
-					<button type="button" class="btn btn-default" style="cursor: default;">显示</button>
-					<div class="btn-group">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							10
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">20</a></li>
-							<li><a href="#">30</a></li>
-						</ul>
-					</div>
-					<button type="button" class="btn btn-default" style="cursor: default;">条/页</button>
-				</div>
-				<div style="position: relative;top: -88px; left: 285px;">
-					<nav>
-						<ul class="pagination">
-							<li class="disabled"><a href="#">首页</a></li>
-							<li class="disabled"><a href="#">上一页</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">下一页</a></li>
-							<li class="disabled"><a href="#">末页</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
+<%--			<div style="height: 50px; position: relative;top: 30px;">--%>
+<%--				<div>--%>
+<%--					<button type="button" class="btn btn-default" style="cursor: default;">共<b id="totalRowsB">50</b>条记录--%>
+<%--					</button>--%>
+<%--				</div>--%>
+<%--				<div class="btn-group" style="position: relative;top: -34px; left: 110px;">--%>
+<%--					<button type="button" class="btn btn-default" style="cursor: default;">显示</button>--%>
+<%--					<div class="btn-group">--%>
+<%--						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">--%>
+<%--							10--%>
+<%--							<span class="caret"></span>--%>
+<%--						</button>--%>
+<%--						<ul class="dropdown-menu" role="menu">--%>
+<%--							<li><a href="#">20</a></li>--%>
+<%--							<li><a href="#">30</a></li>--%>
+<%--						</ul>--%>
+<%--					</div>--%>
+<%--					<button type="button" class="btn btn-default" style="cursor: default;">条/页</button>--%>
+<%--				</div>--%>
+<%--				<div style="position: relative;top: -88px; left: 285px;">--%>
+<%--					<nav>--%>
+<%--						<ul class="pagination">--%>
+<%--							<li class="disabled"><a href="#">首页</a></li>--%>
+<%--							<li class="disabled"><a href="#">上一页</a></li>--%>
+<%--							<li class="active"><a href="#">1</a></li>--%>
+<%--							<li><a href="#">2</a></li>--%>
+<%--							<li><a href="#">3</a></li>--%>
+<%--							<li><a href="#">4</a></li>--%>
+<%--							<li><a href="#">5</a></li>--%>
+<%--							<li><a href="#">下一页</a></li>--%>
+<%--							<li class="disabled"><a href="#">末页</a></li>--%>
+<%--						</ul>--%>
+<%--					</nav>--%>
+<%--				</div>--%>
+<%--			</div>--%>
 			
 		</div>
 		
