@@ -80,6 +80,7 @@ request.getContextPath() + "/";
 						//关闭模态窗口
 						$("#createActivityModal").modal("hide");
 						//刷新市场活动列
+						queryActivityByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
 
 					} else {
 						alert(data.message);
@@ -106,9 +107,13 @@ request.getContextPath() + "/";
 
 		//给“查询”按钮添加单击事件
 		$("#queryActivityBtn").click(function () {
-			queryActivityByConditionForPage(1, 10);
+			queryActivityByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
 		});
 
+		//给全选按钮添加点击事件
+		$("#checkAll").click(function () {
+			$("#tBody input[type='checkbox']").porp("checked", this.checked);
+		});
 	});
 
 	function queryActivityByConditionForPage(pageNo, pageSize) {
@@ -405,7 +410,7 @@ request.getContextPath() + "/";
 				<table class="table table-hover">
 					<thead>
 						<tr style="color: #B3B3B3;">
-							<td><input type="checkbox" /></td>
+							<td><input type="checkbox"  id="checkAll"/></td>
 							<td>名称</td>
                             <td>所有者</td>
 							<td>开始日期</td>
