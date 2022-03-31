@@ -112,7 +112,16 @@ request.getContextPath() + "/";
 
 		//给全选按钮添加点击事件
 		$("#checkAll").click(function () {
-			$("#tBody input[type='checkbox']").porp("checked", this.checked);
+			$("#tBody input[type='checkbox']").prop("checked", this.checked);
+		});
+		
+		$("#tBody").on("click", "input[type='checkbox']", function () {
+			//如果列表中的checkedbox全部选中，全选也选中
+			if ($("#tBody input[type='checkbox']").size() == $("#tBody input[type='checkbox']:checked").size()){
+				$("#checkAll").prop("checked", true);
+			} else {
+				$("#checkAll").prop("checked", false);
+			}
 		});
 	});
 
