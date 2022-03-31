@@ -163,6 +163,9 @@ request.getContextPath() + "/";
 				});
 				$("#tBody").html(htmlStr);
 
+				//取消全选
+				$("#checkAll").prop("checked", false);
+
 				//调用分页插件，显示分页信息
 				$("#pageDiv").bs_pagination({
 					currentPage: pageNo,
