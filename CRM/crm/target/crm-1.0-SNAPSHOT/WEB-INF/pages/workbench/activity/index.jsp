@@ -114,13 +114,44 @@ request.getContextPath() + "/";
 		$("#checkAll").click(function () {
 			$("#tBody input[type='checkbox']").prop("checked", this.checked);
 		});
-		
+
 		$("#tBody").on("click", "input[type='checkbox']", function () {
 			//如果列表中的checkedbox全部选中，全选也选中
 			if ($("#tBody input[type='checkbox']").size() == $("#tBody input[type='checkbox']:checked").size()){
 				$("#checkAll").prop("checked", true);
 			} else {
 				$("#checkAll").prop("checked", false);
+			}
+		});
+
+		//给删除按钮添加单击事件
+		$("#deleteActivityBtn").click(function () {
+			var checkedIds = $("#tBody input[type='checkbox']:checked");
+			if (checkedIds.size() == 0) {
+				alert("请选择要删除的市场活动！")
+				return;
+			}
+			if (window.confirm("确定删除吗？")){
+				var ids = "";
+				$.each(checkedIds, function () {
+					ids += "id="+this.value+"&";
+				});
+				ids = ids.substr(0, ids.length - 1);
+				alert(ids);
+				$.ajax({
+					url: 'workbench/activity/deleteActivityByIds.do',
+					data: ids,
+					type: 'post',
+					dataType: 'json',
+					success: function (data) {
+						if (data.code == "1") {
+							//刷新市场活动列
+							queryActivityByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
+						} else {
+							alert(data.message);
+						}
+					}
+				});
 			}
 		});
 	});
@@ -162,6 +193,9 @@ request.getContextPath() + "/";
 					htmlStr+= "</tr>";
 				});
 				$("#tBody").html(htmlStr);
+
+				//取消全选
+				$("#checkAll").prop("checked", false);
 
 				//调用分页插件，显示分页信息
 				$("#pageDiv").bs_pagination({
@@ -407,7 +441,9 @@ request.getContextPath() + "/";
 						  class="glyphicon glyphicon-plus"></span> 创建
 				  </button>
 				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
-				  <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
+				  <button type="button" class="btn btn-danger" id="deleteActivityBtn"><span
+						  class="glyphicon glyphicon-minus"></span> 删除
+				  </button>
 				</div>
 				<div class="btn-group" style="position: relative; top: 18%;">
                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importActivityModal" ><span class="glyphicon glyphicon-import"></span> 上传列表数据（导入）</button>

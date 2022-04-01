@@ -64,4 +64,9 @@ public interface ActivityMapper {
      * 根据条件查询市场活动的总条数
      */
     int selectCountOfActivityByCondition(Map<String, Object> map);
+
+    /**
+     * 批量删除市场活动
+     */
+    int deleteActivityByIds(String[] ids);
 }

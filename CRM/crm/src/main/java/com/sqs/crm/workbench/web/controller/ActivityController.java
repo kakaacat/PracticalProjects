@@ -89,4 +89,25 @@ public class ActivityController {
 
         return retMap;
     }
+
+    @RequestMapping("/workbench/activity/deleteActivityByIds.do")
+    public @ResponseBody Object deleteActivityByIds(String[] id) {
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            //调用service层方法
+            int ret = activityService.deleteActivityByIds(id);
+            if (ret > 0) {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+            } else {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+                returnObject.setMessage("系统繁忙，请稍后重试...");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage("系统繁忙，请稍后重试...");
+        }
+
+        return returnObject;
+    }
 }
