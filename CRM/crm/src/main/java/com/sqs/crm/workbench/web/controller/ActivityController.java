@@ -110,4 +110,14 @@ public class ActivityController {
 
         return returnObject;
     }
+
+    @RequestMapping("/workbench/activity/selectActivityById.do")
+    public @ResponseBody Object selectActivityById(String id) {
+        //调用service层方法
+        Activity activity = activityService.queryActivityById(id);
+        //根据查询结果返回相应信息
+        return activity;
+    }
+
+
 }

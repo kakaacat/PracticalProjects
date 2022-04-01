@@ -154,6 +154,41 @@ request.getContextPath() + "/";
 				});
 			}
 		});
+
+		//给修改按钮添加单击事件
+		$("#editActivityBtn").click(function () {
+			//收集参数
+			var checkedIds = $("#tBody input[type='checkbox']:checked");
+			if (checkedIds.size() == 0) {
+				alert("请选择要修改的市场活动！");
+				return;
+			}
+			if (checkedIds.size() > 1) {
+				alert("每次只能修改一条市场活动！");
+				return;
+			}
+			var id = checkedIds.val();
+			//发送请求
+			$.ajax({
+				url:'workbench/activity/selectActivityById.do',
+				data: {id: id},
+				type:'post',
+				dataType:'json',
+				success: function (data) {
+					$("#edit-id").val(data.id);
+					$("#edit-marketActivityOwner").val(data.owner);
+					$("#edit-marketActivityName").val(data.name);
+					$("#edit-startTime").val(data.startDate);
+					$("#edit-endTime").val(data.endDate);
+					$("#edit-cost").val(data.cost);
+					$("#edit-describe").val(data.description);
+					//弹出模态窗口
+					$("#editActivityModal").modal("show");
+				}
+			});
+		});
+
+
 	});
 
 	function queryActivityByConditionForPage(pageNo, pageSize) {
@@ -299,7 +334,7 @@ request.getContextPath() + "/";
 				<div class="modal-body">
 				
 					<form class="form-horizontal" role="form">
-					
+						<input type="hidden" id="edit-id">
 						<div class="form-group">
 							<label for="edit-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
@@ -316,13 +351,13 @@ request.getContextPath() + "/";
 						</div>
 
 						<div class="form-group">
-							<label for="edit-startTime" class="col-sm-2 control-label">开始日期</label>
+							<label for="edit-startTime" class="col-sm-2 control-label ">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-startTime" value="2020-10-10">
+								<input type="text" class="form-control mydate" id="edit-startTime" readonly>
 							</div>
-							<label for="edit-endTime" class="col-sm-2 control-label">结束日期</label>
+							<label for="edit-endTime" class="col-sm-2 control-label ">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-endTime" value="2020-10-20">
+								<input type="text" class="form-control mydate" id="edit-endTime" readonly>
 							</div>
 						</div>
 						
@@ -440,7 +475,8 @@ request.getContextPath() + "/";
 				  <button type="button" class="btn btn-primary" id="createActivityBtn"><span
 						  class="glyphicon glyphicon-plus"></span> 创建
 				  </button>
-				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
+				  <button type="button" class="btn btn-default" id="editActivityBtn"><span
+						  class="glyphicon glyphicon-pencil"></span> 修改</button>
 				  <button type="button" class="btn btn-danger" id="deleteActivityBtn"><span
 						  class="glyphicon glyphicon-minus"></span> 删除
 				  </button>

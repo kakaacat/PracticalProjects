@@ -189,6 +189,8 @@
   </update>
 
 
+
+
   <insert id="insertActivity" parameterType="com.sqs.crm.workbench.model.Activity" >
     insert into tbl_activity (id, owner, name, start_date,
     end_date, cost, description,
@@ -253,4 +255,11 @@
       #{id}
     </foreach>
   </delete>
+
+  <select id="selectActivityById" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from tbl_activity
+    where id = #{id}
+  </select>
 </mapper>
