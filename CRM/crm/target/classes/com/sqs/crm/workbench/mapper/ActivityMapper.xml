@@ -262,4 +262,11 @@
     from tbl_activity
     where id = #{id}
   </select>
+
+  <update id="updateActivity" parameterType="com.sqs.crm.workbench.model.Activity">
+    update tbl_activity
+    set owner=#{owner}, name=#{name}, start_date=#{startDate}, end_date=#{endDate}, cost=#{cost},
+    description=#{description}, edit_time=#{editTime}, edit_by=#{editBy}
+    where id=#{id}
+  </update>
 </mapper>

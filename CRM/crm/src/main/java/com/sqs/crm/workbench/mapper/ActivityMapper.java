@@ -77,4 +77,9 @@ public interface ActivityMapper {
      * 保存修改的市场活动
      */
     int updateActivity(Activity activity);
+
+    /**
+     * 查询所有的市场活动
+     */
+    List<Activity> selectAllActivities();
 }

@@ -8,17 +8,22 @@ import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.model.Activity;
 import com.sqs.crm.workbench.service.ActivityService;
+import org.apache.commons.collections4.Put;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 /**
  * @Author : kaka
@@ -144,6 +149,74 @@ public class ActivityController {
         }
 
         return returnObject;
+    }
+
+    @RequestMapping("/workbench/activity/exportAllActivities.do")
+    public void exportAllActivities(HttpServletResponse response) throws Exception {
+        //调用service层方法，查询所有市场活动
+        List<Activity> activityList = activityService.queryAllActivities();
+        //创建excel文件，并把市场活动写入文件
+        HSSFWorkbook wb = new HSSFWorkbook();
+        HSSFSheet sheet = wb.createSheet("市场活动列表");
+        HSSFRow row = sheet.createRow(0);
+        HSSFCell cell = null;
+        String[] listHead = {"ID", "所有者", "名称", "开始日期", "结束日期", "成本", "描述", "创建时间", "创建者", "修改时间", "修改者"};
+
+        for (int i = 0; i < listHead.length; i++) {
+            cell = row.createCell(i);
+            cell.setCellValue(listHead[i]);
+        }
+
+        //遍历activityList, 创建HSSFRow对象，生成所有的数据行
+        if (activityList != null && activityList.size() > 0) {
+            for (int i = 0; i < activityList.size(); i++) {
+
+                Activity activity = activityList.get(i);
+
+                row = sheet.createRow(i + 1);
+                cell = row.createCell(0);
+                cell.setCellValue(activity.getId());
+                cell = row.createCell(1);
+                cell.setCellValue(activity.getOwner());
+                cell = row.createCell(2);
+                cell.setCellValue(activity.getName());
+                cell = row.createCell(3);
+                cell.setCellValue(activity.getStartDate());
+                cell = row.createCell(4);
+                cell.setCellValue(activity.getEndDate());
+                cell = row.createCell(5);
+                cell.setCellValue(activity.getCost());
+                cell = row.createCell(6);
+                cell.setCellValue(activity.getDescription());
+                cell = row.createCell(7);
+                cell.setCellValue(activity.getCreateTime());
+                cell = row.createCell(8);
+                cell.setCellValue(activity.getCreateBy());
+                cell = row.createCell(9);
+                cell.setCellValue(activity.getEditTime());
+                cell = row.createCell(10);
+                cell.setCellValue(activity.getEditBy());
+            }
+        }
+        //根据wb对象生成excel文件
+        OutputStream os = new FileOutputStream("activityList.xls");
+        wb.write(os);
+        //关闭资源
+        os.close();
+        wb.close();
+
+        //把生成的文件下载到客户端
+        response.setContentType("application/octet-stream;charset=UTF-8");
+        OutputStream out = response.getOutputStream();
+        InputStream is = new FileInputStream("activityList.xls");
+        byte[] buff = new byte[256];
+        int len = 0;
+        while ((len = is.read(buff)) != -1) {
+            out.write(buff, 0, len);
+        }
+
+        is.close();
+        out.flush();
     }
 
 }
