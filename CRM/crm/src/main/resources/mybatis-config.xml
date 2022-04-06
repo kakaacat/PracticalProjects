@@ -7,9 +7,11 @@
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <typeAliases>
-        <package name="com.sqs.crm.model"/>
+        <package name="com.sqs.crm.settings.model"/>
+        <package name="com.sqs.crm.workbench.model"/>
     </typeAliases>
     <mappers>
-        <package name="com.sqs.crm.mapper"/>
+        <package name="com.sqs.crm.settings.mapper"/>
+        <package name="com.sqs.crm.workbench.mapper"/>
     </mappers>
 </configuration>

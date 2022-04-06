@@ -124,7 +124,7 @@ request.getContextPath() + "/";
 			}
 		});
 
-		//给删除按钮添加单击事件
+		//给“删除”按钮添加单击事件
 		$("#deleteActivityBtn").click(function () {
 			var checkedIds = $("#tBody input[type='checkbox']:checked");
 			if (checkedIds.size() == 0) {
@@ -155,7 +155,7 @@ request.getContextPath() + "/";
 			}
 		});
 
-		//给修改按钮添加单击事件
+		//给“修改”按钮添加单击事件
 		$("#editActivityBtn").click(function () {
 			//收集参数
 			var checkedIds = $("#tBody input[type='checkbox']:checked");
@@ -188,6 +188,67 @@ request.getContextPath() + "/";
 			});
 		});
 
+		//给“保存”按钮添加点击事件
+		$("#saveEditActivityBtn").click(function () {
+			//收集参数
+			var id = $("#edit-id").val();
+			var owner = $("#edit-marketActivityOwner").val();
+			var name = $.trim($("#edit-marketActivityName").val());
+			var startDate = $("#edit-startTime").val();
+			var endDate = $("#edit-endTime").val();
+			var cost = $.trim($("#edit-cost").val());
+			var description = $.trim($("#edit-describe").val());
+
+			//表单验证
+			if (owner == "") {
+				alert("所有者不能为空");
+				return;
+			}
+			if (name == "") {
+				alert("名称不能为空");
+				return;
+			}
+			if (startDate != "" && endDate != "") {
+				if (endDate < startDate) {
+					alert("结束日期不能小于开始日期");
+					return;
+				}
+			}
+
+			var regExp = /^(([1-9]\d*)|0)$/;
+			if (!regExp.test(cost)) {
+				alert("成本只能为非负整数！");
+				return;
+			}
+
+			//发送请求
+			$.ajax({
+				url: 'workbench/activity/saveEditActivity.do',
+				data: {
+					id : id,
+					owner : owner,
+					name : name,
+					startDate : startDate,
+					endDate : endDate,
+					cost : cost,
+					description : description
+				},
+				type: 'post',
+				dataType: 'json',
+				success: function (data) {
+					if (data.code == "1") {
+						//关闭模态窗口
+						$("#editActivityModal").modal("hide");
+						//刷新市场活动，保持页号和每页条数不变
+						queryActivityByConditionForPage($("#pageDiv").bs_pagination('getOption', 'currentPage'), $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
+					} else {
+						alert(data.message);
+						//模态窗口不关闭
+						$("#editActivityModal").modal("show");
+					}
+				}
+			});
+		});
 
 	});
 
@@ -380,7 +441,7 @@ request.getContextPath() + "/";
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">更新</button>
+					<button type="button" class="btn btn-primary" id="saveEditActivityBtn">更新</button>
 				</div>
 			</div>
 		</div>

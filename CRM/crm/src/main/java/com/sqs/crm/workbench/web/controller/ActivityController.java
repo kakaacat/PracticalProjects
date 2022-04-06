@@ -119,5 +119,31 @@ public class ActivityController {
         return activity;
     }
 
+    @RequestMapping("/workbench/activity/saveEditActivity.do")
+    public @ResponseBody Object saveEditActivity(Activity activity, HttpSession session) {
+        User user = (User) session.getAttribute(Contants.SESSION_USER);
+        //封装参数
+        activity.setEditTime(DateUtils.formateDateTime(new Date()));
+        activity.setEditBy(user.getId());
+
+        //调用service层方法,保存修改的市场活动
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            int ret = activityService.saveEditActivity(activity);
+
+            if (ret > 0) {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+            } else {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+                returnObject.setMessage("系统繁忙，请稍后重试...");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage("系统繁忙，请稍后重试...");
+        }
+
+        return returnObject;
+    }
 
 }

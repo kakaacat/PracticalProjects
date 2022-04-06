@@ -15,4 +15,6 @@ public interface ActivityService {
     int deleteActivityByIds(String[] ids);
 
     Activity queryActivityById(String id);
+
+    int saveEditActivity(Activity activity);
 }

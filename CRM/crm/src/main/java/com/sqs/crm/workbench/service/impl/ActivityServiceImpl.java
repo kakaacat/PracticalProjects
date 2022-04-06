@@ -43,4 +43,9 @@ public class ActivityServiceImpl implements ActivityService {
     public Activity queryActivityById(String id) {
         return activityMapper.selectActivityById(id);
     }
+
+    @Override
+    public int saveEditActivity(Activity activity) {
+        return activityMapper.updateActivity(activity);
+    }
 }
