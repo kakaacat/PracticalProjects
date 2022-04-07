@@ -198,24 +198,30 @@ public class ActivityController {
                 cell.setCellValue(activity.getEditBy());
             }
         }
-        //根据wb对象生成excel文件
-        OutputStream os = new FileOutputStream("activityList.xls");
-        wb.write(os);
-        //关闭资源
-        os.close();
-        wb.close();
+//        String filePath = "D:\\IntelliJ IDEA\\PracticalProjects\\CRM\\crm\\src\\main\\java\\com\\sqs\\crm\\files\\";
+//        //根据wb对象生成excel文件
+//        OutputStream os = new FileOutputStream(filePath+"activityList.xls");
+//        wb.write(os);
+//        //关闭资源
+//        os.close();
+//        wb.close();
 
         //把生成的文件下载到客户端
         response.setContentType("application/octet-stream;charset=UTF-8");
+        response.addHeader("Content-Disposition", "attachment;filename=activityList.xls");
         OutputStream out = response.getOutputStream();
-        InputStream is = new FileInputStream("activityList.xls");
-        byte[] buff = new byte[256];
-        int len = 0;
-        while ((len = is.read(buff)) != -1) {
-            out.write(buff, 0, len);
-        }
+//        InputStream is = new FileInputStream(filePath+"activityList.xls");
+//        byte[] buff = new byte[256];
+//        int len = 0;
+//        while ((len = is.read(buff)) != -1) {
+//            out.write(buff, 0, len);
+//        }
 
-        is.close();
+        //is.close();
+
+        wb.write(out);
+
+        wb.close();
         out.flush();
     }
 

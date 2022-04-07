@@ -250,6 +250,12 @@ request.getContextPath() + "/";
 			});
 		});
 
+		//给“批量导出”按钮添加单击事件
+		$("#exportActivityAllBtn").click(function () {
+			//发送请求
+			window.location.href = "workbench/activity/exportAllActivities.do";
+		});
+
 	});
 
 	function queryActivityByConditionForPage(pageNo, pageSize) {
