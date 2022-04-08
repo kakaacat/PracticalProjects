@@ -15,7 +15,9 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletOutputStream;
@@ -218,6 +220,63 @@ public class ActivityController {
 //        }
 
         //is.close();
+
+        wb.write(out);
+
+        wb.close();
+        out.flush();
+    }
+
+    @RequestMapping("/workbench/activity/queryActivitiesByIds.do")
+    public void queryActivitiesByIds(String[] id, HttpServletResponse response) throws Exception{
+        //调用service层方法
+        List<Activity> activityList = activityService.queryActivitiesByIds(id);
+        //创建excel文件，并把市场活动写入文件
+        HSSFWorkbook wb = new HSSFWorkbook();
+        HSSFSheet sheet = wb.createSheet("市场活动列表");
+        HSSFRow row = sheet.createRow(0);
+        HSSFCell cell = null;
+        String[] listHead = {"ID", "所有者", "名称", "开始日期", "结束日期", "成本", "描述", "创建时间", "创建者", "修改时间", "修改者"};
+
+        for (int i = 0; i < listHead.length; i++) {
+            cell = row.createCell(i);
+            cell.setCellValue(listHead[i]);
+        }
+
+        //遍历activityList, 创建HSSFRow对象，生成所有的数据行
+        if (activityList != null && activityList.size() > 0) {
+            for (int i = 0; i < activityList.size(); i++) {
+
+                Activity activity = activityList.get(i);
+
+                row = sheet.createRow(i + 1);
+                cell = row.createCell(0);
+                cell.setCellValue(activity.getId());
+                cell = row.createCell(1);
+                cell.setCellValue(activity.getOwner());
+                cell = row.createCell(2);
+                cell.setCellValue(activity.getName());
+                cell = row.createCell(3);
+                cell.setCellValue(activity.getStartDate());
+                cell = row.createCell(4);
+                cell.setCellValue(activity.getEndDate());
+                cell = row.createCell(5);
+                cell.setCellValue(activity.getCost());
+                cell = row.createCell(6);
+                cell.setCellValue(activity.getDescription());
+                cell = row.createCell(7);
+                cell.setCellValue(activity.getCreateTime());
+                cell = row.createCell(8);
+                cell.setCellValue(activity.getCreateBy());
+                cell = row.createCell(9);
+                cell.setCellValue(activity.getEditTime());
+                cell = row.createCell(10);
+                cell.setCellValue(activity.getEditBy());
+            }
+        }
+        response.setContentType("application/octet-stream;charset=UTF-8");
+        response.addHeader("Content-Disposition", "attachment;filename=activityList.xls");
+        OutputStream out = response.getOutputStream();
 
         wb.write(out);
 

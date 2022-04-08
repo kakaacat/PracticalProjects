@@ -82,4 +82,9 @@ public interface ActivityMapper {
      * 查询所有的市场活动
      */
     List<Activity> selectAllActivities();
+
+    /**
+     * 根据ids查询市场活动
+     */
+    List<Activity> selectActivitiesByIds(String[] ids);
 }

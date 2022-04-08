@@ -11,7 +11,8 @@
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+
+<script type="text/javascript" src="js/settings/qx/user/index.js">
 	$(function () {
 		//给整个窗口加个键盘按下事件
 		$(window).keydown(function (event) {
@@ -40,7 +41,7 @@
 			}
 
 			//显示正在验证
-			//$("msg").text("正在验证...");
+			$("msg").text("正在验证...");
 
 			//发送请求
 			$.ajax({
@@ -69,6 +70,7 @@
 		});
 	});
 </script>
+
 </head>
 <body>
 	<div style="position: absolute; top: 0px; left: 0px; width: 60%;">
