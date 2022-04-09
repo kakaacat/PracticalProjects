@@ -10,7 +10,7 @@ public class ReturnObject {
     //提示信息
     private String message;
     //其他数据
-    private Object retDate;
+    private Object retData;
 
 
     public String getCode() {
@@ -29,11 +29,11 @@ public class ReturnObject {
         this.message = message;
     }
 
-    public Object getRetDate() {
-        return retDate;
+    public Object getRetData() {
+        return retData;
     }
 
-    public void setRetDate(Object retDate) {
-        this.retDate = retDate;
+    public void setRetData(Object retData) {
+        this.retData = retData;
     }
 }

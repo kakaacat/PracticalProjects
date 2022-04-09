@@ -248,7 +248,9 @@ request.getContextPath() + "/";
 				  </button>
 				</div>
 				<div class="btn-group" style="position: relative; top: 18%;">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importActivityModal" ><span class="glyphicon glyphicon-import"></span> 上传列表数据（导入）</button>
+                    <button id="importMyActivityBtn" type="button" class="btn btn-default"><span
+							class="glyphicon glyphicon-import"></span>
+						上传列表数据（导入）</button>
                     <button id="exportActivityAllBtn" type="button" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> 下载列表数据（批量导出）</button>
                     <button id="exportActivityXzBtn" type="button" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> 下载列表数据（选择导出）</button>
                 </div>
