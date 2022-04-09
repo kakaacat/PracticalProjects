@@ -263,6 +263,10 @@ $(function(){
     $("#importActivityBtn").click(function () {
         //收集参数
         var activityFileName = $("#activityFile").val();
+        if (activityFileName == "") {
+            alert("请选择要导入的xls文件！");
+            return;
+        }
         var suffix = activityFileName.substr(activityFileName.lastIndexOf(".")+1).toLocaleLowerCase();
         if (suffix != "xls") {
             alert("只支持xls文件!")
