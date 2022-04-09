@@ -288,16 +288,19 @@ public class ActivityController {
         ReturnObject returnObject = new ReturnObject();
 
         try {
-            //把上传的Excel文件写入磁盘目录
-            String filename = activityFile.getOriginalFilename();
-            File file = new File("D:\\IntelliJ IDEA\\PracticalProjects\\CRM\\crm\\src\\main\\java\\com\\sqs\\crm" +
-                    "\\files\\server\\", filename);
-            activityFile.transferTo(file);
+//            //把上传的Excel文件写入磁盘目录
+//            String filename = activityFile.getOriginalFilename();
+//            File file = new File("D:\\IntelliJ IDEA\\PracticalProjects\\CRM\\crm\\src\\main\\java\\com\\sqs\\crm" +
+//                    "\\files\\server\\", filename);
+//            activityFile.transferTo(file);
+//
+//            //解析excel文件，获取文件数据，并封装成activityList
+//            FileInputStream is = new FileInputStream("D:\\IntelliJ IDEA\\PracticalProjects\\CRM\\crm\\src\\main\\java" +
+//                    "\\com\\sqs\\crm\\files\\server\\" + filename);
+//            HSSFWorkbook wb = new HSSFWorkbook(is);
+            //优化
+            HSSFWorkbook wb = new HSSFWorkbook(activityFile.getInputStream());
 
-            //解析excel文件，获取文件数据，并封装成activityList
-            FileInputStream is = new FileInputStream("D:\\IntelliJ IDEA\\PracticalProjects\\CRM\\crm\\src\\main\\java" +
-                    "\\com\\sqs\\crm\\files\\server\\" + filename);
-            HSSFWorkbook wb = new HSSFWorkbook(is);
             HSSFSheet sheet = wb.getSheetAt(0);
             HSSFRow row = null;
             HSSFCell cell = null;
