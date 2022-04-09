@@ -254,6 +254,58 @@ $(function(){
 
     });
 
+    //点击“导入市场活动”按钮显示模态窗口
+    $("#importMyActivityBtn").click(function () {
+        $("#importActivityModal").modal("show");
+    });
+
+    //给“导入”按钮添加单击事件
+    $("#importActivityBtn").click(function () {
+        //收集参数
+        var activityFileName = $("#activityFile").val();
+        var suffix = activityFileName.substr(activityFileName.lastIndexOf(".")+1).toLocaleLowerCase();
+        if (suffix != "xls") {
+            alert("只支持xls文件!")
+            return;
+        }
+        //$("#activityFile")[0] 获取DOM对象  等价于 .get(0)
+        var activityFile = $("#activityFile")[0].files[0];
+        if (activityFile.size > 5 * 1024 * 1024) {
+            alert("文件大小不能超过5MB!");
+            return;
+        }
+
+        //FormData是Ajax提供的接口
+        var formData = new FormData();
+        formData.append("activityFile", activityFile);
+
+        //发送请求
+        $.ajax({
+            url: 'workbench/activity/importActivities.do',
+            data: formData,
+            // 告诉jQuery不要去处理发送的数据
+            processData: false,
+            // 告诉jQuery不要去设置Content-Type请求头
+            contentType: false,
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == "1") {
+                    alert("成功导入" + data.retData + "条记录");
+                    //关闭模态窗口
+                    $("#importActivityModal").modal("hide");
+                    //刷新页面
+                    queryActivityByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
+                } else {
+                    alert(data.message);
+                    //模态窗口不关闭
+                    $("#importActivityModal").modal("show");
+                }
+            }
+        });
+    });
+
+
 });
 
 function queryActivityByConditionForPage(pageNo, pageSize) {

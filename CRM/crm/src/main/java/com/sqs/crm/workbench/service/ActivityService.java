@@ -21,4 +21,6 @@ public interface ActivityService {
     List<Activity> queryAllActivities();
 
     List<Activity> queryActivitiesByIds(String[] ids);
+
+    int saveCreateActivitiesByList(List<Activity> activityList);
 }

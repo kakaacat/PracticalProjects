@@ -3,24 +3,22 @@ package com.sqs.crm.workbench.web.controller;
 import com.sqs.crm.commons.contants.Contants;
 import com.sqs.crm.commons.domain.ReturnObject;
 import com.sqs.crm.commons.utils.DateUtils;
+import com.sqs.crm.commons.utils.HSSFUtils;
 import com.sqs.crm.commons.utils.UUIDUtils;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.model.Activity;
 import com.sqs.crm.workbench.service.ActivityService;
-import org.apache.commons.collections4.Put;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -282,6 +280,70 @@ public class ActivityController {
 
         wb.close();
         out.flush();
+    }
+
+    @RequestMapping("/workbench/activity/importActivities.do")
+    public @ResponseBody Object importActivities(MultipartFile activityFile, HttpSession session) {
+        User user = (User) session.getAttribute(Contants.SESSION_USER);
+        ReturnObject returnObject = new ReturnObject();
+
+        try {
+            //把上传的Excel文件写入磁盘目录
+            String filename = activityFile.getOriginalFilename();
+            File file = new File("D:\\IntelliJ IDEA\\PracticalProjects\\CRM\\crm\\src\\main\\java\\com\\sqs\\crm" +
+                    "\\files\\server", filename);
+            activityFile.transferTo(file);
+
+            //解析excel文件，获取文件数据，并封装成activityList
+            FileInputStream is = new FileInputStream("D:\\IntelliJ IDEA\\PracticalProjects\\CRM\\crm\\src\\main\\java" +
+                    "\\com\\sqs\\crm\\files\\server" + filename);
+            HSSFWorkbook wb = new HSSFWorkbook(is);
+            HSSFSheet sheet = wb.getSheetAt(0);
+            HSSFRow row = null;
+            HSSFCell cell = null;
+            List<Activity> activityList = new ArrayList<>();
+
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {      //getLastRowNum()最后一行的下标
+                row = sheet.getRow(i);
+
+                Activity activity = new Activity();
+                activity.setId(UUIDUtils.getUUID());
+                activity.setOwner(user.getId());
+                activity.setCreateBy(user.getId());
+                activity.setCreateTime(DateUtils.formateDateTime(new Date()));
+
+                for (int j = 0; j < row.getLastCellNum(); j++) {     //getLastCellNum()最后一列的下标+1
+                    cell  = row.getCell(j);
+
+                    String cellValue = HSSFUtils.getCellValueForStr(cell);
+                    if (j == 0) {
+                        activity.setName(cellValue);
+                    } else if (j == 1) {
+                        activity.setStartDate(cellValue);
+                    } else if (j == 2) {
+                        activity.setEndDate(cellValue);
+                    } else if (j == 3) {
+                        activity.setCost(cellValue);
+                    } else if (j == 4) {
+                        activity.setDescription(cellValue);
+                    }
+                }
+                //每一行一个activity
+                activityList.add(activity);
+            }
+
+            //调用service层方法，保存arrayList数据
+            int ret = activityService.saveCreateActivitiesByList(activityList);
+
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+            returnObject.setRetDate(ret);
+        } catch (IOException e) {
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage("系统繁忙，请稍后重试...");
+        }
+
+        return returnObject;
     }
 
 }
