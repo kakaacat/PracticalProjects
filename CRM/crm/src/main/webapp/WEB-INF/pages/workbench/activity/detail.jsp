@@ -58,7 +58,7 @@ request.getContextPath() + "/";
 		<div class="page-header">
 			<h3>市场活动-${activity.name} <small>${activity.startDate} ~ ${activity.endDate}</small></h3>
 		</div>
-		
+		<input type="hidden" id="sessionUsername" value="${sessionScope.sessionUser.name}">
 	</div>
 	
 	<br/>
@@ -67,11 +67,13 @@ request.getContextPath() + "/";
 
 	<!-- 详细信息 -->
 	<div style="position: relative; top: -70px;">
+		<input type="hidden" id="activityId" value="${activity.id}">
 		<div style="position: relative; left: 40px; height: 30px;">
 			<div style="width: 300px; color: gray;">所有者</div>
 			<div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>${activity.owner}</b></div>
 			<div style="width: 300px;position: relative; left: 450px; top: -40px; color: gray;">名称</div>
-			<div style="width: 300px;position: relative; left: 650px; top: -60px;"><b>${activity.name}</b></div>
+			<div style="width: 300px;position: relative; left: 650px; top: -60px;"><b>${activity.name}</b> <input
+					type="hidden" id="activityName" value="${activity.name}"></div>
 			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
 			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 450px;"></div>
 		</div>
@@ -164,7 +166,7 @@ request.getContextPath() + "/";
 				<textarea id="remark" class="form-control" style="width: 850px; resize : none;" rows="2"  placeholder="添加备注..."></textarea>
 				<p id="cancelAndSaveBtn" style="position: relative;left: 737px; top: 10px; display: none;">
 					<button id="cancelBtn" type="button" class="btn btn-default">取消</button>
-					<button type="button" class="btn btn-primary">保存</button>
+					<button id="saveCreateActivityRemarkBtn" type="button" class="btn btn-primary">保存</button>
 				</p>
 			</form>
 		</div>

@@ -1,5 +1,6 @@
 package com.sqs.crm.workbench.mapper;
 
+import com.sqs.crm.workbench.model.Activity;
 import com.sqs.crm.workbench.model.ActivityRemark;
 
 import java.util.List;
@@ -57,4 +58,9 @@ public interface ActivityRemarkMapper {
      * 根据市场活动id查询备注信息
      */
     List<ActivityRemark> selectActivityRemarkByActivityIdForDetail(String activityId);
+
+    /**
+     * 保存添加的市场活动
+     */
+    int insertActivityRemark(ActivityRemark activityRemark);
 }
