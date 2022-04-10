@@ -8,6 +8,8 @@ import com.sqs.crm.commons.utils.UUIDUtils;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.model.Activity;
+import com.sqs.crm.workbench.model.ActivityRemark;
+import com.sqs.crm.workbench.service.ActivityRemarkService;
 import com.sqs.crm.workbench.service.ActivityService;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -36,6 +38,10 @@ public class ActivityController {
     private UserService userService;
     @Autowired
     private ActivityService activityService;
+    @Autowired
+    private ActivityRemarkService activityRemarkService;
+
+
 
     @RequestMapping("/workbench/activity/index.do")
     public String index(HttpServletRequest request){
@@ -347,6 +353,20 @@ public class ActivityController {
         }
 
         return returnObject;
+    }
+
+    @RequestMapping("/workbench/activity/activityDetail.do")
+    public String activityDetail(String id, HttpServletRequest request) {
+        //调用service层方法
+        Activity activity = activityService.queryActivityByIdForDetail(id);
+        List<ActivityRemark> activityRemarkList = activityRemarkService.queryActivityRemarkByActivityIdForDetail(id);
+
+        //把数据保存到request中
+        request.setAttribute("activity", activity);
+        request.setAttribute("activityRemarkList", activityRemarkList);
+
+        //请求转发
+        return "workbench/activity/detail";
     }
 
 }
