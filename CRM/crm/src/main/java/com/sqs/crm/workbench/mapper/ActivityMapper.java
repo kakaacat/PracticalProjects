@@ -92,4 +92,9 @@ public interface ActivityMapper {
      * 批量保存市场活动
      */
     int insertActivitiesByList(List<Activity> activityList);
+
+    /**
+     * 根据id查询市场活动详情
+     */
+    Activity selectActivityByIdForDetail(String id);
 }
