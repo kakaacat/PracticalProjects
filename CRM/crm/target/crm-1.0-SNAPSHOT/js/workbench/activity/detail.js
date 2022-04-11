@@ -48,7 +48,7 @@ $(function(){
 
 
         //表单验证
-        if (noteContent == "" || noteContent == null) {
+        if (noteContent == "") {
             alert("备注内容不能为空！");
             return;
         }
