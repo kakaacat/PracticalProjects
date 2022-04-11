@@ -21,22 +21,33 @@ $(function(){
         cancelAndSaveBtnDefault = true;
     });
 
-    $(".remarkDiv").mouseover(function(){
+    // $(".remarkDiv").mouseover(function(){
+    //     $(this).children("div").children("div").show();
+    // });
+    $("#remarkListDiv").on("mouseover", ".remarkDiv", function () {
         $(this).children("div").children("div").show();
     });
 
-    $(".remarkDiv").mouseout(function(){
+    // $(".remarkDiv").mouseout(function(){
+    //     $(this).children("div").children("div").hide();
+    // });
+    $("#remarkListDiv").on("mouseout", ".remarkDiv", function () {
         $(this).children("div").children("div").hide();
     });
 
-    $(".myHref").mouseover(function(){
+    // $(".myHref").mouseover(function(){
+    //     $(this).children("span").css("color","red");
+    // });
+    $("#remarkListDiv").on("mouseover", ".myHref", function () {
         $(this).children("span").css("color","red");
     });
 
-    $(".myHref").mouseout(function(){
+    // $(".myHref").mouseout(function(){
+    //     $(this).children("span").css("color","#E6E6E6");
+    // });
+    $("#remarkListDiv").on("mouseout", ".myHref", function () {
         $(this).children("span").css("color","#E6E6E6");
     });
-
 
     //给“保存”按钮添加单击事件
     $("#saveCreateActivityRemarkBtn").click(function () {
@@ -48,7 +59,7 @@ $(function(){
 
 
         //表单验证
-        if (noteContent == "") {
+        if (noteContent == "" || noteContent == null) {
             alert("备注内容不能为空！");
             return;
         }

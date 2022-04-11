@@ -172,6 +172,7 @@
     join tbl_user u1 on ar.create_by = u1.id
     left join tbl_user u2 on ar.edit_by = u2.id
     where ar.activity_id = #{activityId}
+    order by ar.create_time asc
   </select>
 
   <insert id="insertActivityRemark" parameterType="com.sqs.crm.workbench.model.ActivityRemark">
