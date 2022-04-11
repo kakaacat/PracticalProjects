@@ -44,14 +44,35 @@ public class ActivityRemarkController {
                 returnObject.setRetData(activityRemark);
             } else {
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-                returnObject.setMessage("系统繁忙，请稍后重试...");
+                returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
             returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-            returnObject.setMessage("系统繁忙，请稍后重试...");
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
         }
 
+        return returnObject;
+    }
+
+    @RequestMapping("/workbench/activity/deleteActivityRemarkById.do")
+    public @ResponseBody Object deleteActivityRemarkById(String id) {
+        ReturnObject returnObject = new ReturnObject();
+
+        try {
+            int ret = activityRemarkService.deleteActivityRemarkById(id);
+
+            if (ret > 0) {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+            } else {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+                returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+        }
         return returnObject;
     }
 

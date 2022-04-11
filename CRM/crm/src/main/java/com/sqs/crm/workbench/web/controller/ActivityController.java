@@ -67,12 +67,12 @@ public class ActivityController {
                 object.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
             } else {
                 object.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-                object.setMessage("系统繁忙，请稍后重试...");
+                object.setMessage(Contants.RETURN_OBJECT_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
             object.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-            object.setMessage("系统繁忙，请稍后重试...");
+            object.setMessage(Contants.RETURN_OBJECT_MESSAGE);
         }
         return object;
     }
@@ -111,12 +111,12 @@ public class ActivityController {
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
             } else {
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-                returnObject.setMessage("系统繁忙，请稍后重试...");
+                returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
             returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-            returnObject.setMessage("系统繁忙，请稍后重试...");
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
         }
 
         return returnObject;
@@ -146,12 +146,12 @@ public class ActivityController {
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
             } else {
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-                returnObject.setMessage("系统繁忙，请稍后重试...");
+                returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
             returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-            returnObject.setMessage("系统繁忙，请稍后重试...");
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
         }
 
         return returnObject;
@@ -349,7 +349,7 @@ public class ActivityController {
         } catch (IOException e) {
             e.printStackTrace();
             returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
-            returnObject.setMessage("系统繁忙，请稍后重试...");
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
         }
 
         return returnObject;

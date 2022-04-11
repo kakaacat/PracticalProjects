@@ -124,7 +124,7 @@ request.getContextPath() + "/";
 
 		<!-- 备注 -->
 		<c:forEach items="${activityRemarkList}" var="activityRemark">
-			<div class="remarkDiv" style="height: 60px;">
+			<div id="div_${activityRemark.id}" class="remarkDiv" style="height: 60px;">
 				<img title="${activityRemark.createBy}" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 				<div style="position: relative; top: -40px; left: 40px;" >
 					<h5>${activityRemark.noteContent}</h5>
@@ -136,11 +136,11 @@ request.getContextPath() + "/";
 						${activityRemark.createTime}由${activityRemark.createBy}创建
 					</c:if></small>
 					<div style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">
-						<a class="myHref" remarkId="${activityRemark.id}" href="javascript:void(0);"><span
+						<a class="myHref" name="editA" remarkId="${activityRemark.id}" href="javascript:void(0);"><span
 								class="glyphicon glyphicon-edit"
 																			style="font-size: 20px; color: #E6E6E6;"></span></a>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="myHref" remarkId="${activityRemark.id}" href="javascript:void(0);"><span class="glyphicon glyphicon-remove"
+						<a class="myHref" name="deleteA" remarkId="${activityRemark.id}" href="javascript:void(0);"><span class="glyphicon glyphicon-remove"
 																			style="font-size: 20px; color: #E6E6E6;"></span></a>
 					</div>
 				</div>
