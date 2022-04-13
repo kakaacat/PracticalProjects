@@ -76,4 +76,32 @@ public class ActivityRemarkController {
         return returnObject;
     }
 
+    @RequestMapping("/workbench/activity/saveEditActivityRemark.do")
+    public @ResponseBody Object saveEditActivityRemark(ActivityRemark activityRemark, HttpSession session){
+        User user = (User) session.getAttribute(Contants.SESSION_USER);
+        //封装参数
+        activityRemark.setEditTime(DateUtils.formateDateTime(new Date()));
+        activityRemark.setEditBy(user.getId());
+        activityRemark.setEditFlag(Contants.REMARK_EDITED_TRUE);
+
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            //调用service层方法
+            int ret = activityRemarkService.saveEditedActivityRemark(activityRemark);
+
+            if (ret > 0) {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+                returnObject.setRetData(activityRemark);
+            } else {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+                returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+        }
+
+        return returnObject;
+    }
 }

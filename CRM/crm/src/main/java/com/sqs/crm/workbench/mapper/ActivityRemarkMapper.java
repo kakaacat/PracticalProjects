@@ -68,4 +68,10 @@ public interface ActivityRemarkMapper {
      * 根据Id删除市场活动
      */
     int deleteActivityRemarkById(String id);
+
+    /**
+     * 保存修改的市场活动
+     */
+    int updateEditedActivityRemark(ActivityRemark activityRemark);
+
 }
