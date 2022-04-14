@@ -185,4 +185,10 @@
     where id=#{id}
   </delete>
 
+
+  <update id="updateEditedActivityRemark" parameterType="com.sqs.crm.workbench.model.ActivityRemark">
+     update tbl_activity_remark
+     set note_content=#{noteContent}, edit_time = #{editTime}, edit_by = #{editBy}, edit_flag = #{editFlag}
+     where id=#{id}
+  </update>
 </mapper>

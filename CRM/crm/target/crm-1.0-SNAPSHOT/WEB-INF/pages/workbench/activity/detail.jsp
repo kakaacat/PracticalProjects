@@ -19,7 +19,7 @@ request.getContextPath() + "/";
 	<!-- 修改市场活动备注的模态窗口 -->
 	<div class="modal fade" id="editRemarkModal" role="dialog">
 		<%-- 备注的id --%>
-		<input type="hidden" id="remarkId">
+		<input type="hidden" id="edit-id"><input type="hidden" id="edit-sessionUsername">
         <div class="modal-dialog" role="document" style="width: 40%;">
             <div class="modal-content">
                 <div class="modal-header">
@@ -31,15 +31,15 @@ request.getContextPath() + "/";
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label for="noteContent" class="col-sm-2 control-label">内容</label>
+                            <label for="edit-noteContent" class="col-sm-2 control-label">内容</label>
                             <div class="col-sm-10" style="width: 81%;">
-                                <textarea class="form-control" rows="3" id="noteContent"></textarea>
+                                <textarea class="form-control" rows="3" id="edit-noteContent"></textarea>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-default" >关闭</button>
                     <button type="button" class="btn btn-primary" id="updateRemarkBtn">更新</button>
                 </div>
             </div>
@@ -127,7 +127,7 @@ request.getContextPath() + "/";
 			<div id="div_${activityRemark.id}" class="remarkDiv" style="height: 60px;">
 				<img title="${activityRemark.createBy}" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 				<div style="position: relative; top: -40px; left: 40px;" >
-					<h5>${activityRemark.noteContent}</h5>
+					<h5 id="h5_${activityRemark.id}">${activityRemark.noteContent}</h5>
 					<font color="gray">市场活动</font> <font color="gray">-</font> <b>${activity.name}</b> <small style="color: gray;">
 					<c:if test="${activityRemark.editFlag == '1'}">
 						${activityRemark.editTime}由${activityRemark.editBy}修改

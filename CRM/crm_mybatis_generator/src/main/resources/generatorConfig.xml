@@ -41,7 +41,7 @@
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径|指定生成到的工程名称
         -->
-        <javaModelGenerator targetPackage="com.sqs.crm.workbench.model"
+        <javaModelGenerator targetPackage="com.sqs.crm.settings.model"
                             targetProject="D:/IntelliJ IDEA/PracticalProjects/CRM/crm/src/main/java">
 
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
@@ -55,7 +55,7 @@
         </javaModelGenerator>
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
-        <sqlMapGenerator targetPackage="com.sqs.crm.workbench.mapper"
+        <sqlMapGenerator targetPackage="com.sqs.crm.settings.mapper"
                          targetProject="D:/IntelliJ IDEA/PracticalProjects/CRM/crm/src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -65,7 +65,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator targetPackage="com.sqs.crm.workbench.mapper"
+        <javaClientGenerator targetPackage="com.sqs.crm.settings.mapper"
                              targetProject="D:/IntelliJ IDEA/PracticalProjects/CRM/crm/src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -132,20 +132,20 @@
                        selectByExampleQueryId="false">
                 </table>
 
-
-                <table tableName="tbl_dictionary_value" domainObjectName="DictionaryValue"
+-->
+                <table tableName="tbl_dic_value" domainObjectName="DicValue"
                        enableCountByExample="false" enableUpdateByExample="false"
                        enableDeleteByExample="false" enableSelectByExample="false"
                        selectByExampleQueryId="false">
                 </table>
-
+<!--
 
                 <table tableName="tbl_activity" domainObjectName="Activity"
                        enableCountByExample="false" enableUpdateByExample="false"
                        enableDeleteByExample="false" enableSelectByExample="false"
                        selectByExampleQueryId="false">
                 </table>
--->
+
 
 
                 <table tableName="tbl_activity_remark" domainObjectName="ActivityRemark"
@@ -153,7 +153,7 @@
                        enableDeleteByExample="false" enableSelectByExample="false"
                        selectByExampleQueryId="false">
                 </table>
-<!--
+
 
         <table tableName="tbl_transaction" domainObjectName="Transaction"
                enableCountByExample="false" enableUpdateByExample="false"
