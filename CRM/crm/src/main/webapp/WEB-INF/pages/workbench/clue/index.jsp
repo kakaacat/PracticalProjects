@@ -9,11 +9,14 @@ request.getContextPath() + "/";
 	<base href="<%=basePath%>">
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bs_pagination-master/css/jquery.bs_pagination.min.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination-master/js/jquery.bs_pagination.min.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination-master/localization/en.js"></script>
 
 <script type="text/javascript" src="js/workbench/clue/index.js"></script>
 </head>
@@ -318,29 +321,29 @@ request.getContextPath() + "/";
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">名称</div>
-				      <input class="form-control" type="text">
+				      <input id="query-fullnameInput" class="form-control" type="text">
 				    </div>
 				  </div>
 
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">公司</div>
-				      <input class="form-control" type="text">
+				      <input id="query-companyInput" class="form-control" type="text">
 				    </div>
 				  </div>
 
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">公司座机</div>
-				      <input class="form-control" type="text">
+				      <input id="query-phoneInput" class="form-control" type="text">
 				    </div>
 				  </div>
 
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">线索来源</div>
-					  <select class="form-control">
-						  <option>--请选择--</option>
+					  <select id="query-sourceSel" class="form-control">
+						  <option disabled selected>--请选择--</option>
 						  <c:forEach items="${sourceList}" var="s">
 							  <option value="${s.id}">${s.value}</option>
 						  </c:forEach>
@@ -353,7 +356,7 @@ request.getContextPath() + "/";
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">所有者</div>
-				      <input class="form-control" type="text">
+				      <input id="query-ownerInput" class="form-control" type="text">
 				    </div>
 				  </div>
 
@@ -362,15 +365,15 @@ request.getContextPath() + "/";
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">手机</div>
-				      <input class="form-control" type="text">
+				      <input id="query-mphoneInput" class="form-control" type="text">
 				    </div>
 				  </div>
 
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">线索状态</div>
-					  <select class="form-control">
-					  	<option>--请选择--</option>
+					  <select id="query-stateSel" class="form-control">
+					  	<option disabled selected>--请选择--</option>
 						  <c:forEach items="${clueStateList}" var="c">
 							  <option value="${c.id}">${c.value}</option>
 						  </c:forEach>
@@ -378,7 +381,7 @@ request.getContextPath() + "/";
 				    </div>
 				  </div>
 
-				  <button type="submit" class="btn btn-default">查询</button>
+				  <button id="queryClueByConditionBtn" type="submit" class="btn btn-default">查询</button>
 
 				</form>
 			</div>
@@ -395,7 +398,7 @@ request.getContextPath() + "/";
 				<table class="table table-hover">
 					<thead>
 						<tr style="color: #B3B3B3;">
-							<td><input type="checkbox" /></td>
+							<td><input type="checkbox" id="checkAll"/></td>
 							<td>名称</td>
 							<td>公司</td>
 							<td>公司座机</td>
@@ -405,65 +408,66 @@ request.getContextPath() + "/";
 							<td>线索状态</td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>
-							<td>动力节点</td>
-							<td>010-84846003</td>
-							<td>12345678901</td>
-							<td>广告</td>
-							<td>zhangsan</td>
-							<td>已联系</td>
-						</tr>
-                        <tr class="active">
-                            <td><input type="checkbox" /></td>
-                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>
-                            <td>动力节点</td>
-                            <td>010-84846003</td>
-                            <td>12345678901</td>
-                            <td>广告</td>
-                            <td>zhangsan</td>
-                            <td>已联系</td>
-                        </tr>
+					<tbody id="tBody">
+<%--						<tr>--%>
+<%--							<td><input type="checkbox" /></td>--%>
+<%--							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>--%>
+<%--							<td>动力节点</td>--%>
+<%--							<td>010-84846003</td>--%>
+<%--							<td>12345678901</td>--%>
+<%--							<td>广告</td>--%>
+<%--							<td>zhangsan</td>--%>
+<%--							<td>已联系</td>--%>
+<%--						</tr>--%>
+<%--                        <tr class="active">--%>
+<%--                            <td><input type="checkbox" /></td>--%>
+<%--                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>--%>
+<%--                            <td>动力节点</td>--%>
+<%--                            <td>010-84846003</td>--%>
+<%--                            <td>12345678901</td>--%>
+<%--                            <td>广告</td>--%>
+<%--                            <td>zhangsan</td>--%>
+<%--                            <td>已联系</td>--%>
+<%--                        </tr>--%>
 					</tbody>
 				</table>
+				<div id="pageDiv"></div>
 			</div>
 
-			<div style="height: 50px; position: relative;top: 60px;">
-				<div>
-					<button type="button" class="btn btn-default" style="cursor: default;">共<b>50</b>条记录</button>
-				</div>
-				<div class="btn-group" style="position: relative;top: -34px; left: 110px;">
-					<button type="button" class="btn btn-default" style="cursor: default;">显示</button>
-					<div class="btn-group">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							10
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">20</a></li>
-							<li><a href="#">30</a></li>
-						</ul>
-					</div>
-					<button type="button" class="btn btn-default" style="cursor: default;">条/页</button>
-				</div>
-				<div style="position: relative;top: -88px; left: 285px;">
-					<nav>
-						<ul class="pagination">
-							<li class="disabled"><a href="#">首页</a></li>
-							<li class="disabled"><a href="#">上一页</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">下一页</a></li>
-							<li class="disabled"><a href="#">末页</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
+<%--			<div style="height: 50px; position: relative;top: 60px;">--%>
+<%--				<div>--%>
+<%--					<button type="button" class="btn btn-default" style="cursor: default;">共<b>50</b>条记录</button>--%>
+<%--				</div>--%>
+<%--				<div class="btn-group" style="position: relative;top: -34px; left: 110px;">--%>
+<%--					<button type="button" class="btn btn-default" style="cursor: default;">显示</button>--%>
+<%--					<div class="btn-group">--%>
+<%--						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">--%>
+<%--							10--%>
+<%--							<span class="caret"></span>--%>
+<%--						</button>--%>
+<%--						<ul class="dropdown-menu" role="menu">--%>
+<%--							<li><a href="#">20</a></li>--%>
+<%--							<li><a href="#">30</a></li>--%>
+<%--						</ul>--%>
+<%--					</div>--%>
+<%--					<button type="button" class="btn btn-default" style="cursor: default;">条/页</button>--%>
+<%--				</div>--%>
+<%--				<div style="position: relative;top: -88px; left: 285px;">--%>
+<%--					<nav>--%>
+<%--						<ul class="pagination">--%>
+<%--							<li class="disabled"><a href="#">首页</a></li>--%>
+<%--							<li class="disabled"><a href="#">上一页</a></li>--%>
+<%--							<li class="active"><a href="#">1</a></li>--%>
+<%--							<li><a href="#">2</a></li>--%>
+<%--							<li><a href="#">3</a></li>--%>
+<%--							<li><a href="#">4</a></li>--%>
+<%--							<li><a href="#">5</a></li>--%>
+<%--							<li><a href="#">下一页</a></li>--%>
+<%--							<li class="disabled"><a href="#">末页</a></li>--%>
+<%--						</ul>--%>
+<%--					</nav>--%>
+<%--				</div>--%>
+<%--			</div>--%>
 
 		</div>
 

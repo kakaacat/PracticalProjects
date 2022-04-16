@@ -57,4 +57,11 @@ public interface ClueMapper {
      */
     List<Clue> selectClueByConditionForPage(Map<String, Object> map);
 
+    /**
+     * 根据条件查询线索的总条数
+     */
+    int selectCountOfClueByCondition(Map<String, Object> map);
+
+
+
 }

@@ -311,7 +311,7 @@
     join tbl_user u2 on c.create_by = u2.id
     left join tbl_user u3 on c.edit_by = u3.id
     <where>
-      <if test="fullname != null and fullname ！= ''">
+      <if test="fullname != null and fullname != ''">
         and c.fullname like concat('%', #{fullname}, '%')
       </if>
       <if test="company != null and company != ''">
@@ -321,19 +321,53 @@
         and c.phone like concat('%', #{phone}, '%')
       </if>
       <if test="source != null and source != '--请选择--'">
-        and c.source like concat('%', #{source}, '%')
+        and dv3.value like concat('%', #{source}, '%')
       </if>
       <if test="owner != null and owner != ''" >
-        and c.owner like concat('%', #{owner}, '%')
+        and u1.name like concat('%', #{owner}, '%')
       </if>
       <if test="mphone != null and mphone != ''">
         and c.mphone like concat('%', #{mphone}, '%')
       </if>
       <if test="state != null and state != '--请选择--'">
-        and c.state like concat('%', #{state}, '%')
+        and dv2.value like concat('%', #{state}, '%')
       </if>
     </where>
     order by c.create_time desc
     limit #{beginNo}, #{pageSize}
+  </select>
+
+  <select id="selectCountOfClueByCondition" parameterType="map" resultType="int">
+    select count(*)
+    from tbl_clue c
+    join tbl_dic_value dv1 on c.appellation = dv1.id
+    join tbl_user u1 on c.owner = u1.id
+    join tbl_dic_value dv2 on c.state = dv2.id
+    join tbl_dic_value dv3 on c.source = dv3.id
+    join tbl_user u2 on c.create_by = u2.id
+    left join tbl_user u3 on c.edit_by = u3.id
+    <where>
+      <if test="fullname != null and fullname != ''">
+        and c.fullname like concat('%', #{fullname}, '%')
+      </if>
+      <if test="company != null and company != ''">
+        and c.company like concat('%', #{company}, '%')
+      </if>
+      <if test="phone != null and phone != ''">
+        and c.phone like concat('%', #{phone}, '%')
+      </if>
+      <if test="source != null and source != '--请选择--'">
+        and dv3.value like concat('%', #{source}, '%')
+      </if>
+      <if test="owner != null and owner != ''" >
+        and u1.name like concat('%', #{owner}, '%')
+      </if>
+      <if test="mphone != null and mphone != ''">
+        and c.mphone like concat('%', #{mphone}, '%')
+      </if>
+      <if test="state != null and state != '--请选择--'">
+        and dv2.value like concat('%', #{state}, '%')
+      </if>
+    </where>
   </select>
 </mapper>

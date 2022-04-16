@@ -10,6 +10,9 @@ $(function(){
         clearBtn : true
     });
 
+    //查询所有数据的第一页以及总条数
+    queryClueByConditionForPage(1, 10);
+
     //给“创建”按钮添加点击事件
     $("#createClueBtn").click(function () {
         //清空输入框
@@ -37,17 +40,18 @@ $(function(){
         var nextContactTime   =  $.trim($("#create-nextContactTime").val());
         var address           =  $.trim($("#create-address").val());
 
+        //alert(appellation);
 
         //表单验证
-        if (appellation == "--请选择--") {
+        if (appellation == null || appellation == "--请选择--") {
             alert("请选择称谓！");
             return;
         }
-        if (state == "--请选择--") {
+        if (state == null || state == "--请选择--") {
             alert("请选择线索状态！");
             return;
         }
-        if (source == "--请选择--") {
+        if (source == null || source == "--请选择--") {
             alert("请选择线索来源！");
             return;
         }
@@ -109,7 +113,7 @@ $(function(){
                     //关闭模态窗口
                     $("#createClueModal").modal("hide");
                     //刷新列表
-
+                    queryClueByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
                 } else {
                     //模态窗口不关闭
                     $("#createClueModal").modal("show");
@@ -122,3 +126,70 @@ $(function(){
 
 });
 
+function queryClueByConditionForPage(pageNo, pageSize) {
+    //收集参数
+    var fullname = $("#query-fullnameInput").val();
+    var company = $("#query-companyInput").val();
+    var phone = $("#query-phoneInput").val();
+    var source = $("#query-sourceSel").val();
+    var owner = $("#query-ownerInput").val();
+    var mphone = $("#query-mphoneInput").val();
+    var state = $("#query-stateSel").val();
+
+    //发送请求
+    $.ajax({
+        url: 'workbench/clue/queryClueByConditionForPage.do',
+        data: {
+            fullname: fullname,
+            company: company,
+            phone: phone,
+            source: source,
+            owner: owner,
+            mphone: mphone,
+            state: state,
+            pageNo: pageNo,
+            pageSize: pageSize
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function (data) {
+            //显示线索列表
+            var htmlStr = "";
+            $.each(data.clueList, function (index, obj) {
+                htmlStr+= "<tr class=\"active\">";
+                htmlStr+= "<td><input type=\"checkbox\" value=\""+ obj.id +"\"/></td>";
+                htmlStr+= "<td><a style=\"text-decoration: none; cursor: pointer;\" onclick=\"window.location.href='detail.html';\">"+ obj.fullname +"</a></td>";
+                htmlStr+= "<td>"+ obj.company +"</td>";
+                htmlStr+= "<td>"+ obj.phone +"</td>";
+                htmlStr+= "<td>"+ obj.mphone +"</td>";
+                htmlStr+= "<td>"+ obj.source +"</td>";
+                htmlStr+= "<td>"+ obj.owner +"</td>";
+                htmlStr+= "<td>"+ obj.state +"</td>";
+                htmlStr+= "</tr>";
+            });
+            $("#tBody").html(htmlStr);
+
+            //取消全选
+            $("#checkAll").prop("checked", false);
+            //调用分页插件，显示分页信息
+            $("#pageDiv").bs_pagination({
+                currentPage: pageNo,
+
+                rowsPerPage: pageSize,
+                totalRows: data.totalRows,
+                totalPages: Math.ceil(data.totalRows / pageSize),
+
+                visiblePageLinks: 5,
+
+                showGoToPage: true,
+                showRowsPerPage: true,
+                showRowsInfo: true,
+
+                onChangePage: function (event, pageObj) {
+                    queryClueByConditionForPage(pageObj.currentPage, pageObj.rowsPerPage)
+                }
+            });
+        }
+    });
+
+}

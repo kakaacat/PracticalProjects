@@ -6,6 +6,9 @@ import com.sqs.crm.workbench.service.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Author : kaka
  * @Date: 2022-04-16 15:29
@@ -19,5 +22,15 @@ public class ClueServiceImpl implements ClueService {
     @Override
     public int saveClue(Clue clue) {
         return clueMapper.insert(clue);
+    }
+
+    @Override
+    public List<Clue> queryClueByConditionForPage(Map<String, Object> map) {
+        return clueMapper.selectClueByConditionForPage(map);
+    }
+
+    @Override
+    public int queryCountOfClueByCondition(Map<String, Object> map) {
+        return clueMapper.selectCountOfClueByCondition(map);
     }
 }
