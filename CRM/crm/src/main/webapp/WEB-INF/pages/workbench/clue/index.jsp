@@ -340,7 +340,7 @@ request.getContextPath() + "/";
 				    <div class="input-group">
 				      <div class="input-group-addon">线索来源</div>
 					  <select class="form-control">
-					  	  <option></option>
+						  <option>--请选择--</option>
 						  <c:forEach items="${sourceList}" var="s">
 							  <option value="${s.id}">${s.value}</option>
 						  </c:forEach>
@@ -370,7 +370,7 @@ request.getContextPath() + "/";
 				    <div class="input-group">
 				      <div class="input-group-addon">线索状态</div>
 					  <select class="form-control">
-					  	<option></option>
+					  	<option>--请选择--</option>
 						  <c:forEach items="${clueStateList}" var="c">
 							  <option value="${c.id}">${c.value}</option>
 						  </c:forEach>
