@@ -381,7 +381,7 @@ request.getContextPath() + "/";
 				    </div>
 				  </div>
 
-				  <button id="queryClueByConditionBtn" type="submit" class="btn btn-default">查询</button>
+				  <button id="queryClueByConditionBtn" type="button" class="btn btn-default">查询</button>
 
 				</form>
 			</div>
@@ -408,7 +408,7 @@ request.getContextPath() + "/";
 							<td>线索状态</td>
 						</tr>
 					</thead>
-					<tbody id="tBody">
+					<tbody id="tBody-clue">
 <%--						<tr>--%>
 <%--							<td><input type="checkbox" /></td>--%>
 <%--							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>--%>
@@ -431,7 +431,7 @@ request.getContextPath() + "/";
 <%--                        </tr>--%>
 					</tbody>
 				</table>
-				<div id="pageDiv"></div>
+				<div id="cluePageDiv"></div>
 			</div>
 
 <%--			<div style="height: 50px; position: relative;top: 60px;">--%>

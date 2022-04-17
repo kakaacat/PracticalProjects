@@ -320,7 +320,7 @@
       <if test="phone != null and phone != ''">
         and c.phone like concat('%', #{phone}, '%')
       </if>
-      <if test="source != null and source != '--请选择--'">
+      <if test="source != null and source != ''">
         and dv3.value like concat('%', #{source}, '%')
       </if>
       <if test="owner != null and owner != ''" >
@@ -329,7 +329,7 @@
       <if test="mphone != null and mphone != ''">
         and c.mphone like concat('%', #{mphone}, '%')
       </if>
-      <if test="state != null and state != '--请选择--'">
+      <if test="state != null and state != ''">
         and dv2.value like concat('%', #{state}, '%')
       </if>
     </where>
@@ -356,7 +356,7 @@
       <if test="phone != null and phone != ''">
         and c.phone like concat('%', #{phone}, '%')
       </if>
-      <if test="source != null and source != '--请选择--'">
+      <if test="source != null and source != ''">
         and dv3.value like concat('%', #{source}, '%')
       </if>
       <if test="owner != null and owner != ''" >
@@ -365,7 +365,7 @@
       <if test="mphone != null and mphone != ''">
         and c.mphone like concat('%', #{mphone}, '%')
       </if>
-      <if test="state != null and state != '--请选择--'">
+      <if test="state != null and state != ''">
         and dv2.value like concat('%', #{state}, '%')
       </if>
     </where>

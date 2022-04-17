@@ -113,7 +113,7 @@ $(function(){
                     //关闭模态窗口
                     $("#createClueModal").modal("hide");
                     //刷新列表
-                    queryClueByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
+                    queryClueByConditionForPage(1, $("#cluePageDiv").bs_pagination('getOption', 'rowsPerPage'));
                 } else {
                     //模态窗口不关闭
                     $("#createClueModal").modal("show");
@@ -125,7 +125,7 @@ $(function(){
 
     //给“查询”添加单击事件
     $("#queryClueByConditionBtn").click(function () {
-        queryClueByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
+        queryClueByConditionForPage(1, $("#cluePageDiv").bs_pagination('getOption', 'rowsPerPage'));
 
     });
 
@@ -134,13 +134,14 @@ $(function(){
 
 function queryClueByConditionForPage(pageNo, pageSize) {
     //收集参数
-    var fullname = $("#query-fullnameInput").val();
-    var company = $("#query-companyInput").val();
-    var phone = $("#query-phoneInput").val();
+    var fullname = $.trim($("#query-fullnameInput").val());
+    var company = $.trim($("#query-companyInput").val());
+    var phone = $.trim($("#query-phoneInput").val());
     var source = $("#query-sourceSel").val();
-    var owner = $("#query-ownerInput").val();
-    var mphone = $("#query-mphoneInput").val();
+    var owner = $.trim($("#query-ownerInput").val());
+    var mphone = $.trim($("#query-mphoneInput").val());
     var state = $("#query-stateSel").val();
+
 
     //发送请求
     $.ajax({
@@ -173,12 +174,12 @@ function queryClueByConditionForPage(pageNo, pageSize) {
                 htmlStr+= "<td>"+ obj.state +"</td>";
                 htmlStr+= "</tr>";
             });
-            $("#tBody").html(htmlStr);
+            $("#tBody-clue").html(htmlStr);
 
             //取消全选
             $("#checkAll").prop("checked", false);
             //调用分页插件，显示分页信息
-            $("#pageDiv").bs_pagination({
+            $("#cluePageDiv").bs_pagination({
                 currentPage: pageNo,
 
                 rowsPerPage: pageSize,
