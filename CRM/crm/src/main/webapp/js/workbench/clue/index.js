@@ -124,7 +124,10 @@ $(function(){
     });
 
     //给“查询”添加单击事件
-    
+    $("#queryClueByConditionBtn").click(function () {
+        queryClueByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
+
+    });
 
 
 });
