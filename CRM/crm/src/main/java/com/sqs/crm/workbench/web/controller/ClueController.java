@@ -97,6 +97,8 @@ public class ClueController {
         map.put("beginNo", (pageNo - 1) * pageSize);
         map.put("pageSize", pageSize);
 
+        System.out.println("============" + state);
+
         //调用service层方法
         List<Clue> clueList = clueService.queryClueByConditionForPage(map);
         int totalRows = clueService.queryCountOfClueByCondition(map);
