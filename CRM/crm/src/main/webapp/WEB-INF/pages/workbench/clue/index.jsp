@@ -411,7 +411,7 @@ request.getContextPath() + "/";
 					<tbody id="tBody-clue">
 <%--						<tr>--%>
 <%--							<td><input type="checkbox" /></td>--%>
-<%--							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>--%>
+<%--							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">李四先生</a></td>--%>
 <%--							<td>动力节点</td>--%>
 <%--							<td>010-84846003</td>--%>
 <%--							<td>12345678901</td>--%>
@@ -421,7 +421,7 @@ request.getContextPath() + "/";
 <%--						</tr>--%>
 <%--                        <tr class="active">--%>
 <%--                            <td><input type="checkbox" /></td>--%>
-<%--                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>--%>
+<%--                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">李四先生</a></td>--%>
 <%--                            <td>动力节点</td>--%>
 <%--                            <td>010-84846003</td>--%>
 <%--                            <td>12345678901</td>--%>
