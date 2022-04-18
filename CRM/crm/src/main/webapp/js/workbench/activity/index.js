@@ -369,7 +369,7 @@ function queryActivityByConditionForPage(pageNo, pageSize) {
                 showRowsInfo: true,
 
                 onChangePage: function (event, pageObj) {
-                    queryActivityByConditionForPage(pageObj.currentPage, pageObj.rowsPerPage)
+                    queryActivityByConditionForPage(pageObj.currentPage, pageObj.rowsPerPage);
                 }
             });
         }

@@ -97,4 +97,9 @@ public interface ActivityMapper {
      * 根据id查询市场活动详情
      */
     Activity selectActivityByIdForDetail(String id);
+
+    /**
+     * 根据clueId查询与线索相关的市场活动
+     */
+    List<Activity> selectActivityByClueIdForDetail(String clueId);
 }

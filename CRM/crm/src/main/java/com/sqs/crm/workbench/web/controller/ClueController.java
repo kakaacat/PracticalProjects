@@ -8,7 +8,11 @@ import com.sqs.crm.settings.model.DicValue;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.DicValueService;
 import com.sqs.crm.settings.service.UserService;
+import com.sqs.crm.workbench.model.Activity;
 import com.sqs.crm.workbench.model.Clue;
+import com.sqs.crm.workbench.model.ClueRemark;
+import com.sqs.crm.workbench.service.ActivityService;
+import com.sqs.crm.workbench.service.ClueRemarkService;
 import com.sqs.crm.workbench.service.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +40,10 @@ public class ClueController {
     private DicValueService dicValueService;
     @Autowired
     private ClueService clueService;
+    @Autowired
+    private ClueRemarkService clueRemarkService;
+    @Autowired
+    private ActivityService activityService;
 
 
     @RequestMapping("/workbench/clue/index.do")
@@ -97,7 +105,6 @@ public class ClueController {
         map.put("beginNo", (pageNo - 1) * pageSize);
         map.put("pageSize", pageSize);
 
-        System.out.println("============" + state);
 
         //调用service层方法
         List<Clue> clueList = clueService.queryClueByConditionForPage(map);
@@ -109,5 +116,19 @@ public class ClueController {
         retMap.put("totalRows", totalRows);
 
         return retMap;
+    }
+
+    @RequestMapping("/workbench/clue/clueDetail.do")
+    public String clueDetail(String clueId, HttpServletRequest request) {
+        //调用service层方法，查询数据
+        Clue clue = clueService.queryClueByIdForDetail(clueId);
+        List<ClueRemark> clueRemarkList = clueRemarkService.queryClueRemarkByClueIdForDetail(clueId);
+        List<Activity> activityList = activityService.queryActivityByClueIdForDetail(clueId);
+        //把数据保存到作用域中request
+        request.setAttribute("clue", clue);
+        request.setAttribute("clueRemarkList", clueRemarkList);
+        request.setAttribute("activityList", activityList);
+        //请求转发
+        return "workbench/clue/detail";
     }
 }

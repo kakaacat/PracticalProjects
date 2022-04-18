@@ -113,7 +113,7 @@ $(function(){
                     //关闭模态窗口
                     $("#createClueModal").modal("hide");
                     //刷新列表
-                    queryClueByConditionForPage(1, $("#cluePageDiv").bs_pagination('getOption', 'rowsPerPage'));
+                    queryClueByConditionForPage(1, $("#pageDiv-clue").bs_pagination('getOption', 'rowsPerPage'));
                 } else {
                     //模态窗口不关闭
                     $("#createClueModal").modal("show");
@@ -125,7 +125,7 @@ $(function(){
 
     //给“查询”添加单击事件
     $("#queryClueByConditionBtn").click(function () {
-        queryClueByConditionForPage(1, $("#cluePageDiv").bs_pagination('getOption', 'rowsPerPage'));
+        queryClueByConditionForPage(1, $("#pageDiv-clue").bs_pagination('getOption', 'rowsPerPage'));
 
     });
 
@@ -195,8 +195,9 @@ function queryClueByConditionForPage(pageNo, pageSize) {
             //取消全选
             $("#checkAll-clue").prop("checked", false);
 
+
             //调用分页插件，显示分页信息
-            $("#cluePageDiv").bs_pagination({
+            $("#pageDiv-clue").bs_pagination({
                 currentPage: pageNo,
 
                 rowsPerPage: pageSize,
@@ -210,7 +211,7 @@ function queryClueByConditionForPage(pageNo, pageSize) {
                 showRowsInfo: true,
 
                 onChangePage: function (event, pageObj) {
-                    queryClueByConditionForPage(pageObj.currentPage, pageObj.rowsPerPage)
+                    queryClueByConditionForPage(pageObj.currentPage, pageObj.rowsPerPage);
                 }
             });
         }
