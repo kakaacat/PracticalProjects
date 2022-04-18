@@ -311,7 +311,7 @@ $(function(){
 
 
 });
-
+//--------------------------------------------------
 function queryActivityByConditionForPage(pageNo, pageSize) {
     //收集参数
     var name = $("#query-name").val();
