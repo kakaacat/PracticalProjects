@@ -129,9 +129,24 @@ $(function(){
 
     });
 
+    //给全选按钮添加点击事件
+    $("#checkAll-clue").click(function () {
+        $("#tBody-clue input[type='checkbox']").prop("checked", this.checked);
+    });
+
+    $("#tBody-clue").on("click", "input[type='checkbox']", function () {
+        if ($("#tBody-clue input[type='checkbox']").size() == $("#tBody-clue input[type='checkbox']:checked").size()) {
+            $("#checkAll-clue").prop("checked", true);
+        } else {
+            $("#checkAll-clue").prop("checked", false);
+        }
+    });
+
+
+
 
 });
-
+//----------------------------------------------------------
 function queryClueByConditionForPage(pageNo, pageSize) {
     //收集参数
     var fullname = $.trim($("#query-fullnameInput").val());
@@ -142,6 +157,7 @@ function queryClueByConditionForPage(pageNo, pageSize) {
     var mphone = $.trim($("#query-mphoneInput").val());
     var state = $("#query-stateSel").val();
 
+    //alert(source);
 
     //发送请求
     $.ajax({
@@ -177,7 +193,8 @@ function queryClueByConditionForPage(pageNo, pageSize) {
             $("#tBody-clue").html(htmlStr);
 
             //取消全选
-            $("#checkAll").prop("checked", false);
+            $("#checkAll-clue").prop("checked", false);
+
             //调用分页插件，显示分页信息
             $("#cluePageDiv").bs_pagination({
                 currentPage: pageNo,

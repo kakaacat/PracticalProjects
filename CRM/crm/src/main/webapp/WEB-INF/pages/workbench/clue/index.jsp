@@ -398,7 +398,7 @@ request.getContextPath() + "/";
 				<table class="table table-hover">
 					<thead>
 						<tr style="color: #B3B3B3;">
-							<td><input type="checkbox" id="checkAll"/></td>
+							<td><input type="checkbox" id="checkAll-clue"/></td>
 							<td>名称</td>
 							<td>公司</td>
 							<td>公司座机</td>
