@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.PrivateKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -119,11 +118,11 @@ public class ClueController {
     }
 
     @RequestMapping("/workbench/clue/clueDetail.do")
-    public String clueDetail(String clueId, HttpServletRequest request) {
+    public String clueDetail(String id, HttpServletRequest request) {
         //调用service层方法，查询数据
-        Clue clue = clueService.queryClueByIdForDetail(clueId);
-        List<ClueRemark> clueRemarkList = clueRemarkService.queryClueRemarkByClueIdForDetail(clueId);
-        List<Activity> activityList = activityService.queryActivityByClueIdForDetail(clueId);
+        Clue clue = clueService.queryClueByIdForDetail(id);
+        List<ClueRemark> clueRemarkList = clueRemarkService.queryClueRemarkByClueIdForDetail(id);
+        List<Activity> activityList = activityService.queryActivityByClueIdForDetail(id);
         //把数据保存到作用域中request
         request.setAttribute("clue", clue);
         request.setAttribute("clueRemarkList", clueRemarkList);

@@ -136,12 +136,12 @@ request.getContextPath() + "/";
 		</div>
 		<div style="position: relative; left: 40px; height: 30px; top: 50px;">
 			<div style="width: 300px; color: gray;">创建者</div>
-			<div style="width: 500px;position: relative; left: 200px; top: -20px;"><b>${clue.create_by}&nbsp;&nbsp;</b><small style="font-size: 10px; color: gray;">${clue.create_time}</small></div>
+			<div style="width: 500px;position: relative; left: 200px; top: -20px;"><b>${clue.createBy}&nbsp;&nbsp;</b><small style="font-size: 10px; color: gray;">${clue.createTime}</small></div>
 			<div style="height: 1px; width: 550px; background: #D5D5D5; position: relative; top: -20px;"></div>
 		</div>
 		<div style="position: relative; left: 40px; height: 30px; top: 60px;">
 			<div style="width: 300px; color: gray;">修改者</div>
-			<div style="width: 500px;position: relative; left: 200px; top: -20px;"><b>${clue.edit_by}&nbsp;&nbsp;</b><small style="font-size: 10px; color: gray;">${clue.edit_time}</small></div>
+			<div style="width: 500px;position: relative; left: 200px; top: -20px;"><b>${clue.editBy}&nbsp;&nbsp;</b><small style="font-size: 10px; color: gray;">${clue.editTime}</small></div>
 			<div style="height: 1px; width: 550px; background: #D5D5D5; position: relative; top: -20px;"></div>
 		</div>
 		<div style="position: relative; left: 40px; height: 30px; top: 70px;">
@@ -157,14 +157,14 @@ request.getContextPath() + "/";
 			<div style="width: 300px; color: gray;">联系纪要</div>
 			<div style="width: 630px;position: relative; left: 200px; top: -20px;">
 				<b>
-					${clue.contact_summary}
+					${clue.contactSummary}
 				</b>
 			</div>
 			<div style="height: 1px; width: 850px; background: #D5D5D5; position: relative; top: -20px;"></div>
 		</div>
 		<div style="position: relative; left: 40px; height: 30px; top: 90px;">
 			<div style="width: 300px; color: gray;">下次联系时间</div>
-			<div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>${clue.next_contact_time}</b></div>
+			<div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>${clue.nextContactTime}</b></div>
 			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -20px; "></div>
 		</div>
         <div style="position: relative; left: 40px; height: 30px; top: 100px;">
@@ -186,7 +186,7 @@ request.getContextPath() + "/";
 		
 		<!-- 备注1 -->
 		<c:forEach items="${clueRemarkList}" var="remark">
-			<div class="remarkDiv" id="div_#{remark.id}" style="height: 60px;">
+			<div class="remarkDiv" id="div_${remark.id}" style="height: 60px;">
 				<img title="${remark.createBy}" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 				<div style="position: relative; top: -40px; left: 40px;" >
 					<h5>${remark.noteContent}</h5>
