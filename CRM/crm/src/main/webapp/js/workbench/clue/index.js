@@ -181,7 +181,7 @@ function queryClueByConditionForPage(pageNo, pageSize) {
             $.each(data.clueList, function (index, obj) {
                 htmlStr+= "<tr class=\"active\">";
                 htmlStr+= "<td><input type=\"checkbox\" value=\""+ obj.id +"\"/></td>";
-                htmlStr+= "<td><a style=\"text-decoration: none; cursor: pointer;\" onclick=\"window.location.href='detail.jsp';\">"+ obj.fullname + obj.appellation +"</a></td>";
+                htmlStr+= "<td><a style=\"text-decoration: none; cursor: pointer;\" onclick=\"window.location.href='workbench/clue/clueDetail.do?id="+ obj.id +"';\">"+ obj.fullname + obj.appellation +"</a></td>";
                 htmlStr+= "<td>"+ obj.company +"</td>";
                 htmlStr+= "<td>"+ obj.phone +"</td>";
                 htmlStr+= "<td>"+ obj.mphone +"</td>";
