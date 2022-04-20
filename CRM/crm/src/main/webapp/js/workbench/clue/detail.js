@@ -36,4 +36,40 @@ $(function(){
     $(".myHref").mouseout(function(){
         $(this).children("span").css("color","#E6E6E6");
     });
+
+    //给“关联市场活动”按钮添加单击事件
+    $("#bundActivityBtn").click(function () {
+
+        $("#bundModal").modal("show");
+    });
+
+    //给“搜索市场活动”添加键盘抬起事件
+    $("#searchActivityTxt").keyup(function () {
+        var activityName = this.value;
+        var clueId = $("#clueIdHid").val();
+        $.ajax({
+            url: 'workbench/clue/queryActByNameClueIdForDetail.do',
+            data: {
+                activityName: activityName,
+                clueId: clueId
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                var htmlStr = "";
+
+                $.each(data, function (index, obj) {
+                    htmlStr+="<tr>";
+                    htmlStr+="<td><input type=\"checkbox\" value=\""+obj.id+"\"/></td>";
+                    htmlStr+="<td>"+obj.name+"</td>";
+                    htmlStr+="<td>"+obj.startDate+"</td>";
+                    htmlStr+="<td>"+obj.endDate+"</td>";
+                    htmlStr+="<td>"+obj.owner+"</td>";
+                    htmlStr+="</tr>";
+                });
+
+                $("#bundActivityTbody").html(htmlStr);
+            }
+        });
+    });
 });
