@@ -130,4 +130,17 @@ public class ClueController {
         //请求转发
         return "workbench/clue/detail";
     }
+
+    @RequestMapping("/workbench/clue/queryActByNameClueIdForDetail.do")
+    public @ResponseBody Object queryActByNameClueIdForDetail(String activityName, String ClueId) {
+        //封装参数
+        Map<String, Object> map = new HashMap<>();
+        map.put("activityName", activityName);
+        map.put("ClueId", ClueId);
+        //调用service层方法
+        List<Activity> activityList = activityService.queryActivityByNameClueIdForDetail(map);
+
+        //返回响应信息
+        return activityList;
+    }
 }

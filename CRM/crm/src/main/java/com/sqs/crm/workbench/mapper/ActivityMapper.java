@@ -102,4 +102,9 @@ public interface ActivityMapper {
      * 根据clueId查询与线索相关的市场活动
      */
     List<Activity> selectActivityByClueIdForDetail(String clueId);
+
+    /**
+     * 根据name模糊查询市场活动，并根据clueId排除已经关联过的市场活动
+     */
+    List<Activity> selectActivityByNameClueIDForDetail(Map<String, Object> map);
 }
