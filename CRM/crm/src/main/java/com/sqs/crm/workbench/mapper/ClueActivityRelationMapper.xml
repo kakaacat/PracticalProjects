@@ -116,4 +116,6 @@
       (#{obj.id}, #{obj.clueId}, #{obj.activityId})
     </foreach>
   </insert>
+
+
 </mapper>
