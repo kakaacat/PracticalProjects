@@ -39,6 +39,9 @@ $(function(){
 
     //给“关联市场活动”按钮添加单击事件
     $("#bundActivityBtn").click(function () {
+        //初始化
+        $("#searchActivityTxt").val("");
+        $("#bundActivityTbody").html("");
 
         $("#bundModal").modal("show");
     });

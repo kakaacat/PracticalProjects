@@ -47,13 +47,7 @@ request.getContextPath() + "/";
 							</tr>
 						</thead>
 						<tbody id="bundActivityTbody">
-<%--							<tr>--%>
-<%--								<td><input type="checkbox"/></td>--%>
-<%--								<td>发传单</td>--%>
-<%--								<td>2020-10-10</td>--%>
-<%--								<td>2020-10-20</td>--%>
-<%--								<td>zhangsan</td>--%>
-<%--							</tr>--%>
+
 <%--							<tr>--%>
 <%--								<td><input type="checkbox"/></td>--%>
 <%--								<td>发传单</td>--%>
@@ -66,7 +60,7 @@ request.getContextPath() + "/";
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">关联</button>
+					<button type="button" class="btn btn-primary" id="saveBundActivityBtn">关联</button>
 				</div>
 			</div>
 		</div>
@@ -257,7 +251,7 @@ request.getContextPath() + "/";
 							<td></td>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="relationedTbody">
 					<c:forEach items="${activityList}" var="act">
 						<tr>
 							<td>${act.name}</td>

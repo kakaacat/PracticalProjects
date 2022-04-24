@@ -39,6 +39,9 @@ $(function(){
 
     //给“关联市场活动”按钮添加单击事件
     $("#bundActivityBtn").click(function () {
+        //初始化
+        $("#searchActivityTxt").val("");
+        $("#bundActivityTbody").html("");
 
         $("#bundModal").modal("show");
     });
@@ -58,6 +61,7 @@ $(function(){
             success: function (data) {
                 var htmlStr = "";
 
+
                 $.each(data, function (index, obj) {
                     htmlStr+="<tr>";
                     htmlStr+="<td><input type=\"checkbox\" value=\""+obj.id+"\"/></td>";
@@ -72,4 +76,54 @@ $(function(){
             }
         });
     });
+
+    //给“关联”按钮添加单击事件
+    $("#saveBundActivityBtn").click(function () {
+        //收集参数
+        var clueId = $("#clueIdHid").val();
+        var checkedId = $("#bundActivityTbody input[type='checkbox']:checked");
+        //表单验证
+        if (checkedId.size() == 0) {
+            alert("请选择要关联的市场活动！");
+            return;
+        }
+        //封装参数
+        var ids = "";
+        $.each(checkedId, function () {
+            ids += "activityId=" + this.value + "&";
+        });
+        ids += "clueId="  + clueId;
+        //发送请求
+        $.ajax({
+            url: 'workbench/clue/saveBund.do',
+            data: ids,
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == "1") {
+                    //关闭模态窗口
+                    $("#bundModal").modal("hide");
+                    //刷新列表
+                    var htmlStr = "";
+                    $.each(data.retData, function (index, obj) {
+                        htmlStr+="<tr>";
+                        htmlStr+="<td>"+obj.name+"</td>";
+                        htmlStr+="<td>"+obj.startDate+"</td>";
+                        htmlStr+="<td>"+obj.endDate+"</td>";
+                        htmlStr+="<td>"+obj.owner+"</td>";
+                        htmlStr+="<td><a href=\"javascript:void(0);\" actId=\""+obj.id+"\"  style=\"text-decoration: none;\"><span class=\"glyphicon glyphicon-remove\"></span>解除关联</a></td>";
+                        htmlStr+="</tr>";
+                    });
+                    $("#relationedTbody").append(htmlStr);
+                } else {
+                    alert(data.message);
+                    $("#bundModal").modal("show");
+                }
+            }
+        });
+
+    });
+
+
+
 });
