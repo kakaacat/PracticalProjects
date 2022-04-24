@@ -146,7 +146,7 @@ public class ClueController {
     }
 
     @RequestMapping("/workbench/clue/saveBund.do")
-    public Object saveBund(String[] activityId, String clueId) {
+    public @ResponseBody Object saveBund(String[] activityId, String clueId) {
         List<ClueActivityRelation> relationList = new ArrayList<>();
         for (String aId : activityId) {
             ClueActivityRelation relation = new ClueActivityRelation();
