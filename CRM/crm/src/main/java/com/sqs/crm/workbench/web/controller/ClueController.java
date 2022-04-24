@@ -10,8 +10,10 @@ import com.sqs.crm.settings.service.DicValueService;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.model.Activity;
 import com.sqs.crm.workbench.model.Clue;
+import com.sqs.crm.workbench.model.ClueActivityRelation;
 import com.sqs.crm.workbench.model.ClueRemark;
 import com.sqs.crm.workbench.service.ActivityService;
+import com.sqs.crm.workbench.service.ClueActivityRelationService;
 import com.sqs.crm.workbench.service.ClueRemarkService;
 import com.sqs.crm.workbench.service.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author : kaka
@@ -43,6 +42,8 @@ public class ClueController {
     private ClueRemarkService clueRemarkService;
     @Autowired
     private ActivityService activityService;
+    @Autowired
+    private ClueActivityRelationService clueActivityRelationService;
 
 
     @RequestMapping("/workbench/clue/index.do")
@@ -142,5 +143,36 @@ public class ClueController {
 
         //返回响应信息
         return activityList;
+    }
+
+    @RequestMapping("/workbench/clue/saveBund.do")
+    public Object saveBund(String[] activityId, String clueId) {
+        List<ClueActivityRelation> relationList = new ArrayList<>();
+        for (String aId : activityId) {
+            ClueActivityRelation relation = new ClueActivityRelation();
+            relation.setActivityId(aId);
+            relation.setClueId(clueId);
+            relation.setId(UUIDUtils.getUUID());
+            relationList.add(relation);
+        }
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            int ret = clueActivityRelationService.saveClueActivityRelationByList(relationList);
+            if (ret > 0) {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+
+                List<Activity> activityList = activityService.queryActivityByIdsForDetail(activityId);
+                returnObject.setRetData(activityList);
+
+            } else {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+                returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+        }
+        return returnObject;
     }
 }

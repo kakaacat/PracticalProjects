@@ -73,4 +73,11 @@ $(function(){
             }
         });
     });
+
+    //给“关联”按钮添加单击事件
+    $("#saveBundActivityBtn").click(function () {
+
+
+    });
+
 });
