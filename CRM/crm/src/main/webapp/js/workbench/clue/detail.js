@@ -87,10 +87,9 @@ $(function(){
         //封装参数
         var ids = "";
         $.each(checkedId, function () {
-            ids += "activityId=" + this.value + "$";
+            ids += "activityId=" + this.value + "&";
         });
         ids += "clueId="  + clueId;
-
         //发送请求
         $.ajax({
             url: 'workbench/clue/saveBund.do',

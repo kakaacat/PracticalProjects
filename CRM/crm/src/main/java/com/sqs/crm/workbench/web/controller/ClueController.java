@@ -155,6 +155,7 @@ public class ClueController {
             relation.setId(UUIDUtils.getUUID());
             relationList.add(relation);
         }
+
         ReturnObject returnObject = new ReturnObject();
         try {
             int ret = clueActivityRelationService.saveClueActivityRelationByList(relationList);
