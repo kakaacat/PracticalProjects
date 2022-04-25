@@ -176,4 +176,24 @@ public class ClueController {
         }
         return returnObject;
     }
+
+    @RequestMapping("/workbench/clue/saveUnbund.do")
+    public @ResponseBody Object saveUnbund(ClueActivityRelation clueActivityRelation) {
+        ReturnObject returnObject = new ReturnObject();
+
+        try {
+            int ret = clueActivityRelationService.deleteCAaRelationByClueActId(clueActivityRelation);
+            if (ret > 0) {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+            } else {
+                returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+                returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+        }
+        return returnObject;
+    }
 }

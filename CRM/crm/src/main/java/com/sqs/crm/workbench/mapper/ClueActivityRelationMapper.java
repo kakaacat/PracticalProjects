@@ -57,4 +57,9 @@ public interface ClueActivityRelationMapper {
      * 插入线索市场活动关联关系
      */
     int insertClueActivityRelationByList(List<ClueActivityRelation> list);
+
+    /**
+     * 根据clueId和activityId删除关联关系
+     */
+    int deleteCARelationByClueAndActId(ClueActivityRelation clueActivityRelation);
 }
