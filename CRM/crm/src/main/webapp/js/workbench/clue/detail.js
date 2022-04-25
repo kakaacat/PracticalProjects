@@ -127,23 +127,26 @@ $(function(){
     $("#relationedTbody").on("click", "a", function () {
         var clueId = $("#clueIdHid").val();
         var activityId = $(this).attr("actId");
-        //发送请求
-        $.ajax({
-            url: 'workbench/clue/saveUnbund.do',
-            data: {
-                activityId: activityId,
-                clueId: clueId
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function (data) {
-                if (data.code == "1") {
-                    $("#tr_"+activityId).remove();
-                } else {
-                    alert(data.message);
+
+        if (window.confirm("确定删除吗？")) {
+            //发送请求
+            $.ajax({
+                url: 'workbench/clue/saveUnbund.do',
+                data: {
+                    activityId: activityId,
+                    clueId: clueId
+                },
+                type: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == "1") {
+                        $("#tr_" + activityId).remove();
+                    } else {
+                        alert(data.message);
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
 
