@@ -201,8 +201,10 @@ public class ClueController {
     public String toConvert(String id, HttpServletRequest request) {
         //调用service层方法
         Clue clue = clueService.queryClueByIdForDetail(id);
+        List<DicValue> stageList = dicValueService.queryDicValueByTypeCode("stage");
         //把数据保存到request中
         request.setAttribute("clue", clue);
+        request.setAttribute("stageList", stageList);
         //请求转发
         return "workbench/clue/convert";
     }

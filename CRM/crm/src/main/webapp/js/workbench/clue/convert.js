@@ -1,0 +1,9 @@
+$(function(){
+    $("#isCreateTransaction").click(function(){
+        if(this.checked){
+            $("#create-transaction2").show(200);
+        }else{
+            $("#create-transaction2").hide(200);
+        }
+    });
+});
