@@ -148,6 +148,9 @@ $(function(){
             });
         }
     });
-
+    //”线索转换“点击事件
+    $("#clueConvertBtn").click(function () {
+        window.location.href = "workbench/clue/toConvert.do?id=" + $("#clueIdHid").val();
+    });
 
 });
