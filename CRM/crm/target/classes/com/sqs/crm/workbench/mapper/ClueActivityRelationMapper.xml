@@ -117,5 +117,9 @@
     </foreach>
   </insert>
 
-
+  <delete id="deleteCARelationByClueAndActId" parameterType="com.sqs.crm.workbench.model.ClueActivityRelation">
+    delete
+    from tbl_clue_activity_relation
+    where clue_id = #{clueId} and activity_id = #{activityId}
+  </delete>
 </mapper>

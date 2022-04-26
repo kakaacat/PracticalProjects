@@ -78,7 +78,7 @@ request.getContextPath() + "/";
 			<h3>${clue.fullname}${clue.appellation} <small>${clue.company}</small></h3><input type="hidden" id="clueIdHid" value="${clue.id}">
 		</div>
 		<div style="position: relative; height: 50px; width: 500px;  top: -72px; left: 700px;">
-			<button type="button" class="btn btn-default" onclick="window.location.href='convert.html';"><span class="glyphicon glyphicon-retweet"></span> 转换</button>
+			<button type="button" class="btn btn-default" onclick="window.location.href='convert.jsp';"><span class="glyphicon glyphicon-retweet"></span> 转换</button>
 		</div>
 	</div>
 	

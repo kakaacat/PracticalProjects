@@ -196,4 +196,14 @@ public class ClueController {
         }
         return returnObject;
     }
+
+    @RequestMapping("/workbench/clue/toConvert.do")
+    public String toConvert(String id, HttpServletRequest request) {
+        //调用service层方法
+        Clue clue = clueService.queryClueByIdForDetail(id);
+        //把数据保存到request中
+        request.setAttribute("clue", clue);
+        //请求转发
+        return "workbench/clue/convert";
+    }
 }

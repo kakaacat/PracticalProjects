@@ -253,7 +253,7 @@ request.getContextPath() + "/";
 					</thead>
 					<tbody id="relationedTbody">
 					<c:forEach items="${activityList}" var="act">
-						<tr>
+						<tr id="tr_${act.id}">
 							<td>${act.name}</td>
 							<td>${act.startDate}</td>
 							<td>${act.endDate}</td>

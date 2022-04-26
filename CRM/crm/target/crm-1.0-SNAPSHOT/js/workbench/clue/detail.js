@@ -106,7 +106,7 @@ $(function(){
                     //刷新列表
                     var htmlStr = "";
                     $.each(data.retData, function (index, obj) {
-                        htmlStr+="<tr>";
+                        htmlStr+="<tr id=\"tr_"+obj.id+"\">";
                         htmlStr+="<td>"+obj.name+"</td>";
                         htmlStr+="<td>"+obj.startDate+"</td>";
                         htmlStr+="<td>"+obj.endDate+"</td>";
@@ -121,9 +121,33 @@ $(function(){
                 }
             }
         });
-
     });
 
+    //给“解除关联”按钮添加单击事件
+    $("#relationedTbody").on("click", "a", function () {
+        var clueId = $("#clueIdHid").val();
+        var activityId = $(this).attr("actId");
+
+        if (window.confirm("确定删除吗？")) {
+            //发送请求
+            $.ajax({
+                url: 'workbench/clue/saveUnbund.do',
+                data: {
+                    activityId: activityId,
+                    clueId: clueId
+                },
+                type: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == "1") {
+                        $("#tr_" + activityId).remove();
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        }
+    });
 
 
 });
