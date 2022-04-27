@@ -28,6 +28,7 @@ $(function () {
         //收集参数
         var clueId = $("#clueIdHiddenArea").val();
         var activityName = this.value;
+
         //发送请求
         $.ajax({
             url: 'workbench/clue/queryActivityForConvertByANameCId.do',

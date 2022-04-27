@@ -19,7 +19,7 @@ request.getContextPath() + "/";
 
 </head>
 <body>
-	
+	<input id="clueIdHiddenArea" type="hidden" value="${clue.id}">
 	<!-- 搜索市场活动的模态窗口 -->
 	<div class="modal fade" id="searchActivityModal" role="dialog" >
 		<div class="modal-dialog" role="document" style="width: 90%;">
@@ -34,7 +34,7 @@ request.getContextPath() + "/";
 					<div class="btn-group" style="position: relative; top: 18%; left: 8px;">
 						<form class="form-inline" role="form">
 						  <div class="form-group has-feedback">
-						    <input type="text" class="form-control" style="width: 300px;" placeholder="请输入市场活动名称，支持模糊查询">
+						    <input type="text" id="searchActivityTxt" class="form-control" style="width: 300px;" placeholder="请输入市场活动名称，支持模糊查询">
 						    <span class="glyphicon glyphicon-search form-control-feedback"></span>
 						  </div>
 						</form>
@@ -50,21 +50,21 @@ request.getContextPath() + "/";
 								<td></td>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td><input type="radio" name="activity"/></td>
-								<td>发传单</td>
-								<td>2020-10-10</td>
-								<td>2020-10-20</td>
-								<td>zhangsan</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="activity"/></td>
-								<td>发传单</td>
-								<td>2020-10-10</td>
-								<td>2020-10-20</td>
-								<td>zhangsan</td>
-							</tr>
+						<tbody id="tbodyClueConvert">
+<%--							<tr>--%>
+<%--								<td><input type="radio" name="activity"/></td>--%>
+<%--								<td>发传单</td>--%>
+<%--								<td>2020-10-10</td>--%>
+<%--								<td>2020-10-20</td>--%>
+<%--								<td>zhangsan</td>--%>
+<%--							</tr>--%>
+<%--							<tr>--%>
+<%--								<td><input type="radio" name="activity"/></td>--%>
+<%--								<td>发传单</td>--%>
+<%--								<td>2020-10-10</td>--%>
+<%--								<td>2020-10-20</td>--%>
+<%--								<td>zhangsan</td>--%>
+<%--							</tr>--%>
 						</tbody>
 					</table>
 				</div>
@@ -110,7 +110,7 @@ request.getContextPath() + "/";
 		    </select>
 		  </div>
 		  <div class="form-group" style="width: 400px;position: relative; left: 20px;">
-		    <label for="activity">市场活动源&nbsp;&nbsp;<a href="javascript:void(0);" data-toggle="modal" data-target="#searchActivityModal" style="text-decoration: none;"><span class="glyphicon glyphicon-search"></span></a></label>
+		    <label for="activity">市场活动源&nbsp;&nbsp;<a href="javascript:void(0);" id="activitySourceBtn" style="text-decoration: none;"><span class="glyphicon glyphicon-search"></span></a></label>
 		    <input type="text" class="form-control" id="activity" placeholder="点击上面搜索" readonly>
 		  </div>
 		</form>

@@ -210,7 +210,7 @@ public class ClueController {
     }
 
     @RequestMapping("/workbench/clue/queryActivityForConvertByANameCId.do")
-    public Object queryActivityForConvertByANameCId(String activityName, String clueId) {
+    public @ResponseBody Object queryActivityForConvertByANameCId(String activityName, String clueId) {
         //封装参数
         Map<String, Object> map = new HashMap<>();
         map.put("activityName", activityName);
