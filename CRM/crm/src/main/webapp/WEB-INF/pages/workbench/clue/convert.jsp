@@ -126,5 +126,6 @@ request.getContextPath() + "/";
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input class="btn btn-default" type="button" value="取消">
 	</div>
+
 </body>
 </html>

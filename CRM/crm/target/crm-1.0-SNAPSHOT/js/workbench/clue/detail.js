@@ -61,7 +61,6 @@ $(function(){
             success: function (data) {
                 var htmlStr = "";
 
-
                 $.each(data, function (index, obj) {
                     htmlStr+="<tr>";
                     htmlStr+="<td><input type=\"checkbox\" value=\""+obj.id+"\"/></td>";
