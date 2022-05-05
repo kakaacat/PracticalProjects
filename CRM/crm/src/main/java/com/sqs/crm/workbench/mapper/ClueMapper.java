@@ -63,8 +63,12 @@ public interface ClueMapper {
     int selectCountOfClueByCondition(Map<String, Object> map);
 
     /**
-     * 根据Id查询线索明细信息
+     * 线索详情页面根据Id查询线索明细信息
      */
     Clue selectClueByIdForDetail(String id);
 
+    /**
+     * 根据Id查询线索明细信息
+     */
+    Clue selectClueById(String id);
 }
