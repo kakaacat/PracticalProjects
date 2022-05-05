@@ -50,4 +50,11 @@ public interface CustomerMapper {
      * @mbggenerated Thu May 05 20:33:18 CST 2022
      */
     int updateByPrimaryKey(Customer record);
+
+    /**
+     * 保存创建的客户
+     * @param customer
+     * @return
+     */
+    int insertCustomer(Customer customer);
 }
