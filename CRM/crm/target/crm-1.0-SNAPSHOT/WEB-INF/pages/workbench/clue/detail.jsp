@@ -15,7 +15,7 @@ request.getContextPath() + "/";
 
 </head>
 <body>
-
+	<input type="hidden" id="clueIdHid" value="${clue.id}">
 	<!-- 关联市场活动的模态窗口 -->
 	<div class="modal fade" id="bundModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 80%;">
@@ -75,7 +75,7 @@ request.getContextPath() + "/";
 	<!-- 大标题 -->
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
-			<h3>${clue.fullname}${clue.appellation} <small>${clue.company}</small></h3><input type="hidden" id="clueIdHid" value="${clue.id}">
+			<h3>${clue.fullname}${clue.appellation} <small>${clue.company}</small></h3>
 		</div>
 		<div style="position: relative; height: 50px; width: 500px;  top: -72px; left: 700px;">
 			<button type="button" class="btn btn-default" id="clueConvertBtn"><span class="glyphicon glyphicon-retweet"></span> 转换</button>

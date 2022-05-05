@@ -53,7 +53,6 @@ $(function () {
             }
         });
     });
-
     //给模态窗口的“单选”按钮添加单击事件
     $("#tbodyClueConvert").on("click", "input[type='radio']", function () {
         //获取数据
@@ -63,8 +62,10 @@ $(function () {
         $("#activitySourceId").val(id);
         $("#activitySourceName").val(activityName);
         //关闭模态窗口
-        $("searchActivityModal").modal("hide");
+        $("#searchActivityModal").modal("hide");
     });
+
+
 
 
 });
