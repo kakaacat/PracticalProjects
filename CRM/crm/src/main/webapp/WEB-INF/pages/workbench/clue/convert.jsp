@@ -104,8 +104,9 @@ request.getContextPath() + "/";
 		    </select>
 		  </div>
 		  <div class="form-group" style="width: 400px;position: relative; left: 20px;">
-		    <label for="activity">市场活动源&nbsp;&nbsp;<a href="javascript:void(0);" id="activitySourceBtn" style="text-decoration: none;"><span class="glyphicon glyphicon-search"></span></a></label>
-		    <input type="text" class="form-control" id="activity" placeholder="点击上面搜索" readonly>
+		  	<input type="hidden" id="activitySourceId">
+		    <label for="activitySourceName">市场活动源&nbsp;&nbsp;<a href="javascript:void(0);" id="activitySourceBtn" style="text-decoration: none;"><span class="glyphicon glyphicon-search"></span></a></label>
+		    <input type="text" class="form-control" id="activitySourceName" placeholder="点击上面搜索" readonly>
 		  </div>
 		</form>
 		
