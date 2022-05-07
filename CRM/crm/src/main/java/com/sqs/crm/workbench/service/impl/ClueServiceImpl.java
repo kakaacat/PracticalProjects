@@ -1,14 +1,18 @@
 package com.sqs.crm.workbench.service.impl;
 
 import com.sqs.crm.commons.contants.Contants;
+import com.sqs.crm.commons.utils.DateUtils;
+import com.sqs.crm.commons.utils.UUIDUtils;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.workbench.mapper.ClueMapper;
+import com.sqs.crm.workbench.mapper.CustomerMapper;
 import com.sqs.crm.workbench.model.Clue;
 import com.sqs.crm.workbench.model.Customer;
 import com.sqs.crm.workbench.service.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +25,8 @@ import java.util.Map;
 public class ClueServiceImpl implements ClueService {
     @Autowired
     private ClueMapper clueMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -43,7 +49,7 @@ public class ClueServiceImpl implements ClueService {
     }
 
     @Override
-    public void saveConvert(Map<String, Object> map) {
+    public void saveConvertClue(Map<String, Object> map) {
         String id = (String) map.get("clueId");
         User user = (User) map.get(Contants.SESSION_USER);
         //根据id查询线索信息
@@ -53,6 +59,15 @@ public class ClueServiceImpl implements ClueService {
         customer.setAddress(clue.getAddress());
         customer.setContactSummary(clue.getContactSummary());
         customer.setCreateBy(user.getId());
+        customer.setCreateTime(DateUtils.formateDateTime(new Date()));
+        customer.setDescription(clue.getDescription());
+        customer.setId(UUIDUtils.getUUID());
+        customer.setName(clue.getCompany());
+        customer.setNextContactTime(clue.getNextContactTime());
+        customer.setOwner(user.getId());
+        customer.setPhone(clue.getPhone());
+        customer.setWebsite(clue.getWebsite());
+        customerMapper.insertCustomer(customer);
 
     }
 }
