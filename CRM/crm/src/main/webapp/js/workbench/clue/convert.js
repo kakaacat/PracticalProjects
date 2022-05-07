@@ -65,6 +65,18 @@ $(function () {
         $("#searchActivityModal").modal("hide");
     });
 
+    //给"转换按钮"添加单击事件
+    $("#saveConvertClueBtn").click(function () {
+        //收集参数
+        var clueId = $("#clueIdHiddenArea").val();
+        var money = $.trim($("#amountOfMoney").val());
+        var name = $("#tradeName").val();
+        var expectedDate = $("#expectedClosingDate").val();
+        var stage = $("#stage").val();
+        var activityId = $("#activitySourceId").val();
+        var isCreateTran = $("#isCreateTransaction").prop("checked");
+
+    });
 
 
 
