@@ -272,4 +272,9 @@
       address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+  <insert id="insertContacts" parameterType="com.sqs.crm.workbench.model.Contacts">
+    insert into tbl_contacts (id, owner, source, customer_id, fullname, appellation, email, mphone, job, create_by, create_time, description, contact_summary, next_contact_time, address)
+    values (#{id}, #{owner}, #{source}, #{customerId}, #{fullname}, #{appellation}, #{email}, #{mphone}, #{job}, #{createBy}, #{createTime}, #{description}, #{contactSummary}, #{nextContactTime}, #{address})
+  </insert>
 </mapper>
