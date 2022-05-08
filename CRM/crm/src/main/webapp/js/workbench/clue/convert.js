@@ -77,7 +77,7 @@ $(function () {
         var isCreateTran = $("#isCreateTransaction").prop("checked");
         //表单验证
         var regExp = /^(([1-9]\d*)|0)$/;
-        if (!regExp.test(money)) {
+        if (isCreateTran && !regExp.test(money)) {
             alert("金额只能为非负整数！");
             return;
         }
