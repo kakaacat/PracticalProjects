@@ -222,14 +222,13 @@ public class ClueController {
     }
 
     @RequestMapping("/workbench/clue/convertClue.do")
-    public @ResponseBody Object convertClue(String clueId, String money, String name, String expectedDate, String customerId, String stage, String activityId, String isCreateTran, HttpSession session) {
+    public @ResponseBody Object convertClue(String clueId, String money, String name, String expectedDate, String stage, String activityId, String isCreateTran, HttpSession session) {
         //封装参数
        Map<String, Object> map = new HashMap<String, Object>();
         map.put("clueId", clueId);
         map.put("money", money);
         map.put("name", name);
         map.put("expectedDate", expectedDate);
-        map.put("customerId", customerId);
         map.put("stage", stage);
         map.put("activityId", activityId);
         map.put("isCreateTran", isCreateTran);

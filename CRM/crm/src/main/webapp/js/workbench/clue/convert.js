@@ -75,7 +75,34 @@ $(function () {
         var stage = $("#stage").val();
         var activityId = $("#activitySourceId").val();
         var isCreateTran = $("#isCreateTransaction").prop("checked");
-
+        //表单验证
+        var regExp = /^(([1-9]\d*)|0)$/;
+        if (!regExp.test(money)) {
+            alert("金额只能为非负整数！");
+            return;
+        }
+        //发送请求
+        $.ajax({
+            url: 'workbench/clue/convertClue.do',
+            data:{
+                clueId: clueId,
+                money: money,
+                name: name,
+                expectedDate: expectedDate,
+                stage: stage,
+                activityId: activityId,
+                isCreateTran: isCreateTran
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == "1") {
+                    window.location.href = "workbench/clue/index.do";
+                } else {
+                    alert(data.message);
+                }
+            }
+        });
     });
 
 
