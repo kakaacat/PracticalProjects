@@ -94,12 +94,13 @@
                              enableDeleteByExample="false" enableSelectByExample="false"
                              selectByExampleQueryId="false">
                       </table>
-
+-->
         <table tableName="tbl_contacts" domainObjectName="Contacts"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
+        <!--
         <table tableName="tbl_contacts_activity_relation" domainObjectName="ContactsActivityRelation"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -110,13 +111,13 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        -->
+
         <table tableName="tbl_customer" domainObjectName="Customer"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-    <!--
+
         <table tableName="tbl_customer_remark" domainObjectName="CustomerRemark"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"

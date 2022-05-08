@@ -65,6 +65,45 @@ $(function () {
         $("#searchActivityModal").modal("hide");
     });
 
+    //给"转换按钮"添加单击事件
+    $("#saveConvertClueBtn").click(function () {
+        //收集参数
+        var clueId = $("#clueIdHiddenArea").val();
+        var money = $.trim($("#amountOfMoney").val());
+        var name = $("#tradeName").val();
+        var expectedDate = $("#expectedClosingDate").val();
+        var stage = $("#stage").val();
+        var activityId = $("#activitySourceId").val();
+        var isCreateTran = $("#isCreateTransaction").prop("checked");
+        //表单验证
+        var regExp = /^(([1-9]\d*)|0)$/;
+        if (isCreateTran && !regExp.test(money)) {
+            alert("金额只能为非负整数！");
+            return;
+        }
+        //发送请求
+        $.ajax({
+            url: 'workbench/clue/convertClue.do',
+            data:{
+                clueId: clueId,
+                money: money,
+                name: name,
+                expectedDate: expectedDate,
+                stage: stage,
+                activityId: activityId,
+                isCreateTran: isCreateTran
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == "1") {
+                    window.location.href = "workbench/clue/index.do";
+                } else {
+                    alert(data.message);
+                }
+            }
+        });
+    });
 
 
 
