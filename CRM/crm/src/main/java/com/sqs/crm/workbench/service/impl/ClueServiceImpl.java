@@ -7,11 +7,13 @@ import com.sqs.crm.settings.model.User;
 import com.sqs.crm.workbench.mapper.ClueMapper;
 import com.sqs.crm.workbench.mapper.CustomerMapper;
 import com.sqs.crm.workbench.model.Clue;
+import com.sqs.crm.workbench.model.Contacts;
 import com.sqs.crm.workbench.model.Customer;
 import com.sqs.crm.workbench.service.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +70,14 @@ public class ClueServiceImpl implements ClueService {
         customer.setPhone(clue.getPhone());
         customer.setWebsite(clue.getWebsite());
         customerMapper.insertCustomer(customer);
-        //把该线索中有关个人的信息转换到联系人表中
+        //把该线索中有关个人的信息转到联系人表中
+        Contacts contacts = new Contacts();
+        contacts.setAddress(clue.getAddress());
+        contacts.setAppellation(clue.getAppellation());
+        contacts.setContactSummary(clue.getContactSummary());
+        contacts.setCreateBy(user.getId());
+        contacts.setCreateTime(DateUtils.formateDateTime(new Date()));
+        contacts.setCustomerId();
 
 
     }
