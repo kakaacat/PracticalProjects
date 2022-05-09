@@ -5,6 +5,7 @@ import com.sqs.crm.commons.utils.DateUtils;
 import com.sqs.crm.commons.utils.UUIDUtils;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.workbench.mapper.ClueMapper;
+import com.sqs.crm.workbench.mapper.ContactsMapper;
 import com.sqs.crm.workbench.mapper.CustomerMapper;
 import com.sqs.crm.workbench.model.Clue;
 import com.sqs.crm.workbench.model.Contacts;
@@ -29,6 +30,8 @@ public class ClueServiceImpl implements ClueService {
     private ClueMapper clueMapper;
     @Autowired
     private CustomerMapper customerMapper;
+    @Autowired
+    private ContactsMapper contactsMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -77,8 +80,17 @@ public class ClueServiceImpl implements ClueService {
         contacts.setContactSummary(clue.getContactSummary());
         contacts.setCreateBy(user.getId());
         contacts.setCreateTime(DateUtils.formateDateTime(new Date()));
-        contacts.setCustomerId();
-
+        contacts.setCustomerId(customer.getId());
+        contacts.setDescription(clue.getDescription());
+        contacts.setEmail(clue.getEmail());
+        contacts.setFullname(clue.getFullname());
+        contacts.setId(UUIDUtils.getUUID());
+        contacts.setJob(clue.getJob());
+        contacts.setMphone(clue.getMphone());
+        contacts.setNextContactTime(clue.getNextContactTime());
+        contacts.setOwner(user.getId());
+        contacts.setSource(clue.getSource());
+        contactsMapper.insertContacts(contacts);
 
     }
 }
