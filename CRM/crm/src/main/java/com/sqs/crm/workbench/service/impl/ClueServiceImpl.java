@@ -68,6 +68,8 @@ public class ClueServiceImpl implements ClueService {
         customer.setPhone(clue.getPhone());
         customer.setWebsite(clue.getWebsite());
         customerMapper.insertCustomer(customer);
+        //把该线索中有关个人的信息转换到联系人表中
+
 
     }
 }
