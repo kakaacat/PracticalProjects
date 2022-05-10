@@ -4,19 +4,14 @@ import com.sqs.crm.commons.contants.Contants;
 import com.sqs.crm.commons.utils.DateUtils;
 import com.sqs.crm.commons.utils.UUIDUtils;
 import com.sqs.crm.settings.model.User;
-import com.sqs.crm.workbench.mapper.ClueMapper;
-import com.sqs.crm.workbench.mapper.ClueRemarkMapper;
-import com.sqs.crm.workbench.mapper.ContactsMapper;
-import com.sqs.crm.workbench.mapper.CustomerMapper;
-import com.sqs.crm.workbench.model.Clue;
-import com.sqs.crm.workbench.model.ClueRemark;
-import com.sqs.crm.workbench.model.Contacts;
-import com.sqs.crm.workbench.model.Customer;
+import com.sqs.crm.workbench.mapper.*;
+import com.sqs.crm.workbench.model.*;
 import com.sqs.crm.workbench.service.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +31,8 @@ public class ClueServiceImpl implements ClueService {
     private ContactsMapper contactsMapper;
     @Autowired
     private ClueRemarkMapper clueRemarkMapper;
+    @Autowired
+    private CustomerRemarkMapper customerRemarkMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -97,6 +94,22 @@ public class ClueServiceImpl implements ClueService {
         contactsMapper.insertContacts(contacts);
         //查询该线索下的所有备注
         List<ClueRemark> clueRemarkList = clueRemarkMapper.selectClueRemarkByClueId(clue.getId());
-
+        if (clueRemarkList != null && clueRemarkList.size() > 0) {
+            //把备注转换到客户备注中
+            ArrayList<CustomerRemark> customerRemarkList = new ArrayList<>();
+            for (ClueRemark clueRemark : clueRemarkList) {
+                CustomerRemark customerRemark = new CustomerRemark();
+                customerRemark.setCreateBy(clueRemark.getCreateBy());
+                customerRemark.setCreateTime(clueRemark.getCreateTime());
+                customerRemark.setCustomerId(customer.getId());
+                customerRemark.setEditBy(clueRemark.getEditBy());
+                customerRemark.setEditFlag(clueRemark.getEditFlag());
+                customerRemark.setEditTime(clueRemark.getEditTime());
+                customerRemark.setId(UUIDUtils.getUUID());
+                customerRemark.setNoteContent(clueRemark.getNoteContent());
+                customerRemarkList.add(customerRemark);
+            }
+            customerRemarkMapper.insertCustomerRemarkByList(customerRemarkList);
+        }
     }
 }
