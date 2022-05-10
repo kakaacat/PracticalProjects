@@ -57,4 +57,9 @@ public interface ClueRemarkMapper {
      * 根据clueId查询线索备注
      */
     List<ClueRemark> selectClueRemarkByClueIdForDetail(String clueId);
+
+    /**
+     * 线索转换中根据clueId查询线索备注
+     */
+    List<ClueRemark> selectClueRemarkByClueId(String clueId);
 }

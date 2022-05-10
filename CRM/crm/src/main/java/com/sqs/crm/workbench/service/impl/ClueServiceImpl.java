@@ -5,9 +5,11 @@ import com.sqs.crm.commons.utils.DateUtils;
 import com.sqs.crm.commons.utils.UUIDUtils;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.workbench.mapper.ClueMapper;
+import com.sqs.crm.workbench.mapper.ClueRemarkMapper;
 import com.sqs.crm.workbench.mapper.ContactsMapper;
 import com.sqs.crm.workbench.mapper.CustomerMapper;
 import com.sqs.crm.workbench.model.Clue;
+import com.sqs.crm.workbench.model.ClueRemark;
 import com.sqs.crm.workbench.model.Contacts;
 import com.sqs.crm.workbench.model.Customer;
 import com.sqs.crm.workbench.service.ClueService;
@@ -32,6 +34,8 @@ public class ClueServiceImpl implements ClueService {
     private CustomerMapper customerMapper;
     @Autowired
     private ContactsMapper contactsMapper;
+    @Autowired
+    private ClueRemarkMapper clueRemarkMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -91,6 +95,8 @@ public class ClueServiceImpl implements ClueService {
         contacts.setOwner(user.getId());
         contacts.setSource(clue.getSource());
         contactsMapper.insertContacts(contacts);
+        //查询该线索下的所有备注
+        List<ClueRemark> clueRemarkList = clueRemarkMapper.selectClueRemarkByClueId(clue.getId());
 
     }
 }

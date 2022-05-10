@@ -173,4 +173,11 @@
     left join tbl_user u2 on cr.edit_by = u2.id
     where cr.clue_id = #{clueId}
   </select>
+  
+  <select id="selectClueRemarkByClueId" parameterType="string" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"></include>
+    from tbl_clue_remark
+    where clue_id = #{clueId}
+  </select>
 </mapper>
