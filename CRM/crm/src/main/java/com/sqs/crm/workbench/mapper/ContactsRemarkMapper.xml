@@ -165,4 +165,12 @@
       contacts_id = #{contactsId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+  <insert id="insertContactsRemarkByList" parameterType="com.sqs.crm.workbench.model.ContactsRemark">
+    insert into tbl_contacts_remark ( id, note_content, create_by, create_time, edit_by, edit_time, edit_flag, contacts_id)
+    values
+    <foreach collection="list" item="obj" separator=",">
+      (#{obj.id}, #{obj.noteContent}, #{obj.createBy}, #{obj.createTime}, #{obj.editBy}, #{obj.editTime}, #{obj.editFlag}, #{obj.contactsId})
+    </foreach>
+  </insert>
 </mapper>
