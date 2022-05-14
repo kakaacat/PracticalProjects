@@ -37,6 +37,8 @@ public class ClueServiceImpl implements ClueService {
     private ContactsRemarkMapper contactsRemarkMapper;
     @Autowired
     private ClueActivityRelationMapper clueActivityRelationMapper;
+    @Autowired
+    private ContactsActivityRelationMapper contactsActivityRelationMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -132,6 +134,17 @@ public class ClueServiceImpl implements ClueService {
 
         //5.根据clueId查询该线索和市场活动关联关系
         List<ClueActivityRelation> clueActivityRelationList = clueActivityRelationMapper.selectClueActivityRelationByClueId(clueId);
-
+        //6.线索和市场活动关联关系转换到联系人和市场活动关联关系中
+        if (clueActivityRelationList != null && clueActivityRelationList.size() > 0) {
+            List<ContactsActivityRelation> contactsActivityRelationList = new ArrayList<>();
+            for (ClueActivityRelation clueActivityRelation : clueActivityRelationList) {
+                ContactsActivityRelation contactsActivityRelation = new ContactsActivityRelation();
+                contactsActivityRelation.setActivityId(clueActivityRelation.getActivityId());
+                contactsActivityRelation.setContactsId(contacts.getId());
+                contactsActivityRelation.setId(UUIDUtils.getUUID());
+                contactsActivityRelationList.add(contactsActivityRelation);
+            }
+            contactsActivityRelationMapper.insertContactsActivityRelationByList(contactsActivityRelationList);
+        }
     }
 }
