@@ -35,6 +35,8 @@ public class ClueServiceImpl implements ClueService {
     private CustomerRemarkMapper customerRemarkMapper;
     @Autowired
     private ContactsRemarkMapper contactsRemarkMapper;
+    @Autowired
+    private ClueActivityRelationMapper clueActivityRelationMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -58,10 +60,10 @@ public class ClueServiceImpl implements ClueService {
 
     @Override
     public void saveConvertClue(Map<String, Object> map) {
-        String id = (String) map.get("clueId");
+        String clueId = (String) map.get("clueId");
         User user = (User) map.get(Contants.SESSION_USER);
         //1.根据id查询线索信息
-        Clue clue = clueMapper.selectClueById(id);
+        Clue clue = clueMapper.selectClueById(clueId);
         //2.把线索中有关公司的信息转换到客户表中
         Customer customer = new Customer();
         customer.setAddress(clue.getAddress());
@@ -127,5 +129,9 @@ public class ClueServiceImpl implements ClueService {
             customerRemarkMapper.insertCustomerRemarkByList(customerRemarkList);
             contactsRemarkMapper.insertContactsRemarkByList(contactsRemarkList);
         }
+
+        //5.根据clueId查询该线索和市场活动关联关系
+        List<ClueActivityRelation> clueActivityRelationList = clueActivityRelationMapper.selectClueActivityRelationByClueId(clueId);
+
     }
 }

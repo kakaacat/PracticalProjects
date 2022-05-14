@@ -122,4 +122,10 @@
     from tbl_clue_activity_relation
     where clue_id = #{clueId} and activity_id = #{activityId}
   </delete>
+
+  <select id="selectClueActivityRelationByClueId" parameterType="string" resultMap="BaseResultMap">
+    select id, clue_id, activity_id
+    from tbl_clue_activity_relation
+    where clue_id = #{clueId}
+  </select>
 </mapper>
