@@ -33,6 +33,8 @@ public class ClueServiceImpl implements ClueService {
     private ClueRemarkMapper clueRemarkMapper;
     @Autowired
     private CustomerRemarkMapper customerRemarkMapper;
+    @Autowired
+    private ContactsRemarkMapper contactsRemarkMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -58,9 +60,9 @@ public class ClueServiceImpl implements ClueService {
     public void saveConvertClue(Map<String, Object> map) {
         String id = (String) map.get("clueId");
         User user = (User) map.get(Contants.SESSION_USER);
-        //根据id查询线索信息
+        //1.根据id查询线索信息
         Clue clue = clueMapper.selectClueById(id);
-        //把线索中有关公司的信息转换到客户表中
+        //2.把线索中有关公司的信息转换到客户表中
         Customer customer = new Customer();
         customer.setAddress(clue.getAddress());
         customer.setContactSummary(clue.getContactSummary());
@@ -74,7 +76,7 @@ public class ClueServiceImpl implements ClueService {
         customer.setPhone(clue.getPhone());
         customer.setWebsite(clue.getWebsite());
         customerMapper.insertCustomer(customer);
-        //把该线索中有关个人的信息转到联系人表中
+        //3.把该线索中有关个人的信息转到联系人表中
         Contacts contacts = new Contacts();
         contacts.setAddress(clue.getAddress());
         contacts.setAppellation(clue.getAppellation());
@@ -92,11 +94,12 @@ public class ClueServiceImpl implements ClueService {
         contacts.setOwner(user.getId());
         contacts.setSource(clue.getSource());
         contactsMapper.insertContacts(contacts);
-        //查询该线索下的所有备注
+        //4.查询该线索下的所有备注
         List<ClueRemark> clueRemarkList = clueRemarkMapper.selectClueRemarkByClueId(clue.getId());
         if (clueRemarkList != null && clueRemarkList.size() > 0) {
-            //把备注转换到客户备注中
-            ArrayList<CustomerRemark> customerRemarkList = new ArrayList<>();
+            //4-1-2.把备注转换到客户备注和联系人备注中
+            List<CustomerRemark> customerRemarkList = new ArrayList<>();
+            List<ContactsRemark> contactsRemarkList = new ArrayList<>();
             for (ClueRemark clueRemark : clueRemarkList) {
                 CustomerRemark customerRemark = new CustomerRemark();
                 customerRemark.setCreateBy(clueRemark.getCreateBy());
@@ -108,8 +111,21 @@ public class ClueServiceImpl implements ClueService {
                 customerRemark.setId(UUIDUtils.getUUID());
                 customerRemark.setNoteContent(clueRemark.getNoteContent());
                 customerRemarkList.add(customerRemark);
+
+                ContactsRemark contactsRemark = new ContactsRemark();
+                contactsRemark.setContactsId(contacts.getId());
+                contactsRemark.setCreateBy(clueRemark.getCreateBy());
+                contactsRemark.setCreateTime(clueRemark.getCreateTime());
+                contactsRemark.setEditBy(clueRemark.getEditBy());
+                contactsRemark.setEditFlag(clueRemark.getEditFlag());
+                contactsRemark.setEditTime(clueRemark.getEditTime());
+                contactsRemark.setId(UUIDUtils.getUUID());
+                contactsRemark.setNoteContent(clueRemark.getNoteContent());
+                contactsRemarkList.add(contactsRemark);
+
             }
             customerRemarkMapper.insertCustomerRemarkByList(customerRemarkList);
+            contactsRemarkMapper.insertContactsRemarkByList(contactsRemarkList);
         }
     }
 }
