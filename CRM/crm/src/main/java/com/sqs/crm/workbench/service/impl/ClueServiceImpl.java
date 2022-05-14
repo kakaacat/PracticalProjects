@@ -39,6 +39,8 @@ public class ClueServiceImpl implements ClueService {
     private ClueActivityRelationMapper clueActivityRelationMapper;
     @Autowired
     private ContactsActivityRelationMapper contactsActivityRelationMapper;
+    @Autowired
+    private TranMapper tranMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -63,6 +65,7 @@ public class ClueServiceImpl implements ClueService {
     @Override
     public void saveConvertClue(Map<String, Object> map) {
         String clueId = (String) map.get("clueId");
+        String isCreateTran = (String) map.get("isCreateTran");
         User user = (User) map.get(Contants.SESSION_USER);
         //1.根据id查询线索信息
         Clue clue = clueMapper.selectClueById(clueId);
@@ -145,6 +148,26 @@ public class ClueServiceImpl implements ClueService {
                 contactsActivityRelationList.add(contactsActivityRelation);
             }
             contactsActivityRelationMapper.insertContactsActivityRelationByList(contactsActivityRelationList);
+        }
+
+        //7.如果需要创建交易 就往数据库添加交易
+        if (isCreateTran.equals("true")){
+            Tran tran = new Tran();
+            tran.setActivityId((String) map.get("activityId"));
+            tran.setContactsId(contacts.getId());
+            tran.setCreateBy(user.getId());
+            tran.setCreateTime(DateUtils.formateDateTime(new Date()));
+            tran.setCustomerId(customer.getId());
+            tran.setExpectedDate((String) map.get("expectedDate"));
+            tran.setId(UUIDUtils.getUUID());
+            tran.setStage((String) map.get("stage"));
+            tran.setMoney((String) map.get("money"));
+            tran.setName((String) map.get("name"));
+            tran.setOwner(user.getId());
+            tranMapper.insertTran(tran);
+
+            //8.如果需要创建交易 把该线索备注表转换到交易备注表中
+
         }
     }
 }

@@ -100,13 +100,13 @@
                        enableDeleteByExample="false" enableSelectByExample="false"
                        selectByExampleQueryId="false">
                 </table>
--->
+
                 <table tableName="tbl_contacts_activity_relation" domainObjectName="ContactsActivityRelation"
                        enableCountByExample="false" enableUpdateByExample="false"
                        enableDeleteByExample="false" enableSelectByExample="false"
                        selectByExampleQueryId="false">
                 </table>
-        <!--
+
               <table tableName="tbl_contacts_remark" domainObjectName="ContactsRemark"
                      enableCountByExample="false" enableUpdateByExample="false"
                      enableDeleteByExample="false" enableSelectByExample="false"
@@ -153,12 +153,13 @@
                              selectByExampleQueryId="false">
                       </table>
 
-
-              <table tableName="tbl_transaction" domainObjectName="Transaction"
+  -->
+              <table tableName="tbl_tran" domainObjectName="Tran"
                      enableCountByExample="false" enableUpdateByExample="false"
                      enableDeleteByExample="false" enableSelectByExample="false"
                      selectByExampleQueryId="false">
               </table>
+        <!--
               <table tableName="tbl_transaction_history" domainObjectName="TransactionHistory"
                      enableCountByExample="false" enableUpdateByExample="false"
                      enableDeleteByExample="false" enableSelectByExample="false"
