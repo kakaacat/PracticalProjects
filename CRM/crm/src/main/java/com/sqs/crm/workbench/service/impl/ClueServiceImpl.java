@@ -41,6 +41,8 @@ public class ClueServiceImpl implements ClueService {
     private ContactsActivityRelationMapper contactsActivityRelationMapper;
     @Autowired
     private TranMapper tranMapper;
+    @Autowired
+    private TranRemarkMapper tranRemarkMapper;
 
     @Override
     public int saveClue(Clue clue) {
@@ -167,7 +169,28 @@ public class ClueServiceImpl implements ClueService {
             tranMapper.insertTran(tran);
 
             //8.如果需要创建交易 把该线索备注表转换到交易备注表中
-
+            if (clueRemarkList != null && clueRemarkList.size() > 0) {
+                List<TranRemark> tranRemarkList = new ArrayList<>();
+                for (ClueRemark clueRemark : clueRemarkList) {
+                    TranRemark tranRemark = new TranRemark();
+                    tranRemark.setId(UUIDUtils.getUUID());
+                    tranRemark.setCreateBy(clueRemark.getCreateBy());
+                    tranRemark.setCreateTime(clueRemark.getCreateTime());
+                    tranRemark.setEditBy(clueRemark.getEditBy());
+                    tranRemark.setEditFlag(clueRemark.getEditFlag());
+                    tranRemark.setEditTime(clueRemark.getEditTime());
+                    tranRemark.setNoteContent(clueRemark.getNoteContent());
+                    tranRemark.setTranId(tran.getId());
+                    tranRemarkList.add(tranRemark);
+                }
+                tranRemarkMapper.insertTranRemarkByList(tranRemarkList);
+            }
         }
+        //9.删除该线索下的所有备注
+        clueRemarkMapper.deleteClueRemarkByClueId(clueId);
+        //10.删除线索和市场活动关联关系
+        clueActivityRelationMapper.deleteClueActivityRelationByClueId(clueId);
+        //11.删除该线索
+        clueMapper.deleteClueById(clueId);
     }
 }

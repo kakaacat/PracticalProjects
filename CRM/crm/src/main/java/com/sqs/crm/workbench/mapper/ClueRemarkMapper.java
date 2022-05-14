@@ -62,4 +62,9 @@ public interface ClueRemarkMapper {
      * 线索转换中根据clueId查询线索备注
      */
     List<ClueRemark> selectClueRemarkByClueId(String clueId);
+
+    /**
+     * 根据线索下的所有备注
+     */
+    int deleteClueRemarkByClueId(String clueId);
 }
