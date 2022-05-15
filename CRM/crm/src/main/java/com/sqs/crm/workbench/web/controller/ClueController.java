@@ -233,11 +233,12 @@ public class ClueController {
         map.put("activityId", activityId);
         map.put("isCreateTran", isCreateTran);
         map.put(Contants.SESSION_USER, session.getAttribute(Contants.SESSION_USER));
-
+        //返回响应
         ReturnObject returnObject = new ReturnObject();
         try {
             clueService.saveConvertClue(map);
             returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+
         } catch (Exception e) {
             e.printStackTrace();
             returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
