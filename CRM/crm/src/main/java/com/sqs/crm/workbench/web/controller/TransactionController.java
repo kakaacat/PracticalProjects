@@ -23,9 +23,11 @@ public class TransactionController {
         //调用service层方法，查询数据
         List<DicValue> transactionTypeList = dicValueMapper.selectDicValueByTypeCode("transactionType");
         List<DicValue> sourceList = dicValueMapper.selectDicValueByTypeCode("source");
+        List<DicValue> stageList = dicValueMapper.selectDicValueByTypeCode("stage");
         //把数据保存到作用域
         request.setAttribute("transactionTypeList", transactionTypeList);
         request.setAttribute("sourceList", sourceList);
+        request.setAttribute("stageList", stageList);
         //请求转发
         return "workbench/transaction/index";
     }
