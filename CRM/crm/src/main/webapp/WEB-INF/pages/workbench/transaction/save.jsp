@@ -85,7 +85,7 @@ request.getContextPath() + "/";
 					<div class="btn-group" style="position: relative; top: 18%; left: 8px;">
 						<form class="form-inline" role="form">
 						  <div class="form-group has-feedback">
-						    <input type="text" class="form-control" style="width: 300px;" placeholder="请输入联系人名称，支持模糊查询">
+						    <input type="text" id="contactsSearchTxt" class="form-control" style="width: 300px;" placeholder="请输入联系人名称，支持模糊查询">
 						    <span class="glyphicon glyphicon-search form-control-feedback"></span>
 						  </div>
 						</form>
@@ -99,19 +99,19 @@ request.getContextPath() + "/";
 								<td>手机</td>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td><input type="radio" name="activity"/></td>
-								<td>李四</td>
-								<td>lisi@bjpowernode.com</td>
-								<td>12345678901</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="activity"/></td>
-								<td>李四</td>
-								<td>lisi@bjpowernode.com</td>
-								<td>12345678901</td>
-							</tr>
+						<tbody id="tBodycontactTran">
+<%--							<tr>--%>
+<%--								<td><input type="radio" name="activity"/></td>--%>
+<%--								<td>李四</td>--%>
+<%--								<td>lisi@bjpowernode.com</td>--%>
+<%--								<td>12345678901</td>--%>
+<%--							</tr>--%>
+<%--							<tr>--%>
+<%--								<td><input type="radio" name="activity"/></td>--%>
+<%--								<td>李四</td>--%>
+<%--								<td>lisi@bjpowernode.com</td>--%>
+<%--								<td>12345678901</td>--%>
+<%--							</tr>--%>
 						</tbody>
 					</table>
 				</div>

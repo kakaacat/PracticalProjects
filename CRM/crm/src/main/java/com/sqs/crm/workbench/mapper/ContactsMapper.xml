@@ -277,4 +277,10 @@
     insert into tbl_contacts (id, owner, source, customer_id, fullname, appellation, email, mphone, job, create_by, create_time, description, contact_summary, next_contact_time, address)
     values (#{id}, #{owner}, #{source}, #{customerId}, #{fullname}, #{appellation}, #{email}, #{mphone}, #{job}, #{createBy}, #{createTime}, #{description}, #{contactSummary}, #{nextContactTime}, #{address})
   </insert>
+
+  <select id="selectContactsByNameForCreateTrans" parameterType="string" resultMap="BaseResultMap">
+    select id, email, mphone
+    from tbl_contacts
+    where fullname like concat('%', #{name}, '%')
+  </select>
 </mapper>

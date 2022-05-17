@@ -7,7 +7,9 @@ import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.DicValueService;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.model.Activity;
+import com.sqs.crm.workbench.model.Contacts;
 import com.sqs.crm.workbench.service.ActivityService;
+import com.sqs.crm.workbench.service.ContactsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,8 @@ public class TransactionController {
     private UserService userService;
     @Autowired
     private ActivityService activityService;
+    @Autowired
+    private ContactsService contactsService;
 
     @RequestMapping("/workbench/transaction/index.do")
     public String index(HttpServletRequest request){
@@ -65,6 +69,14 @@ public class TransactionController {
         List<Activity> activityList = activityService.queryActivityByNameForTrans(name);
         //生成响应信息
         return activityList;
+    }
+
+    @RequestMapping("/workbench/transaction/queryContactsByNameForCreateTran.do")
+    public @ResponseBody Object queryContactsByNameForCreateTran(String name) {
+        //调用service层方法
+        List<Contacts> contactsList = contactsService.queryContactsByNameForCreateTrans(name);
+        //返回响应信息
+        return contactsList;
     }
 
 
