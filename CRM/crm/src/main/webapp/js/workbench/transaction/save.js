@@ -32,7 +32,17 @@ $(function () {
             }
         });
     });
-
+    //给模态窗口的“单选”按钮添加单击事件
+    $("#tBodyTrans").on("click", "input[type='radio']", function () {
+        //获取数据
+        var id = this.value;
+        var activityName = $(this).attr("activityName");
+        //把数据写入隐藏域
+        $("#activitySourceId").val(id);
+        $("#activitySourceName").val(activityName);
+        //关闭模态窗口
+        $("#searchActivityModal").modal("hide");
+    });
 
 
 
