@@ -16,6 +16,7 @@ request.getContextPath() + "/";
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
+	<script type="text/javascript" src="js/workbench/transaction/save.js"></script>
 </head>
 <body>
 
@@ -33,7 +34,7 @@ request.getContextPath() + "/";
 					<div class="btn-group" style="position: relative; top: 18%; left: 8px;">
 						<form class="form-inline" role="form">
 						  <div class="form-group has-feedback">
-						    <input type="text" class="form-control" style="width: 300px;" placeholder="请输入市场活动名称，支持模糊查询">
+						    <input type="text" id="searchActivityTxt" class="form-control" style="width: 300px;" placeholder="请输入市场活动名称，支持模糊查询">
 						    <span class="glyphicon glyphicon-search form-control-feedback"></span>
 						  </div>
 						</form>
@@ -48,21 +49,21 @@ request.getContextPath() + "/";
 								<td>所有者</td>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td><input type="radio" name="activity"/></td>
-								<td>发传单</td>
-								<td>2020-10-10</td>
-								<td>2020-10-20</td>
-								<td>zhangsan</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="activity"/></td>
-								<td>发传单</td>
-								<td>2020-10-10</td>
-								<td>2020-10-20</td>
-								<td>zhangsan</td>
-							</tr>
+						<tbody id="tBodyTrans">
+<%--							<tr>--%>
+<%--								<td><input type="radio" name="activity"/></td>--%>
+<%--								<td>发传单</td>--%>
+<%--								<td>2020-10-10</td>--%>
+<%--								<td>2020-10-20</td>--%>
+<%--								<td>zhangsan</td>--%>
+<%--							</tr>--%>
+<%--							<tr>--%>
+<%--								<td><input type="radio" name="activity"/></td>--%>
+<%--								<td>发传单</td>--%>
+<%--								<td>2020-10-10</td>--%>
+<%--								<td>2020-10-20</td>--%>
+<%--								<td>zhangsan</td>--%>
+<%--							</tr>--%>
 						</tbody>
 					</table>
 				</div>
@@ -196,9 +197,9 @@ request.getContextPath() + "/";
 					</c:forEach>
 				</select>
 			</div>
-			<label for="create-activitySrc" class="col-sm-2 control-label">市场活动源&nbsp;&nbsp;<a href="javascript:void(0);" data-toggle="modal" data-target="#findMarketActivity"><span class="glyphicon glyphicon-search"></span></a></label>
+			<label for="create-activitySrc" class="col-sm-2 control-label">市场活动源&nbsp;&nbsp;<a href="javascript:void(0);" id="activitySourceBtn"><span class="glyphicon glyphicon-search"></span></a></label>
 			<div class="col-sm-10" style="width: 300px;">
-				<input type="text" class="form-control" id="create-activitySrc">
+				<input type="text" class="form-control" id="create-activitySrc" readonly placeholder="点击搜索">
 			</div>
 		</div>
 		
