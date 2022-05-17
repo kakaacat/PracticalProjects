@@ -6,9 +6,12 @@ import com.sqs.crm.settings.model.DicValue;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.DicValueService;
 import com.sqs.crm.settings.service.UserService;
+import com.sqs.crm.workbench.model.Activity;
+import com.sqs.crm.workbench.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,6 +26,8 @@ public class TransactionController {
     private DicValueService dicValueService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ActivityService activityService;
 
     @RequestMapping("/workbench/transaction/index.do")
     public String index(HttpServletRequest request){
@@ -53,4 +58,14 @@ public class TransactionController {
         //请求转发
         return "workbench/transaction/save";
     }
+
+    @RequestMapping("/workbench/transaction/queryActivityByNameForTrans.do")
+    public @ResponseBody Object queryActivityByNameForTrans(String name) {
+        //调用service层方法
+        List<Activity> activityList = activityService.queryActivityByNameForTrans(name);
+        //生成响应信息
+        return activityList;
+    }
+
+
 }
