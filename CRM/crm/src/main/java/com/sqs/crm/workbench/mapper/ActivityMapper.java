@@ -117,4 +117,9 @@ public interface ActivityMapper {
      * 根据name模糊查询市场活动，并根据clueId选择关联的市场活动
      */
     List<Activity> selectActivityByNameClueIdForConvert(Map<String, Object> map);
+
+    /**
+     * 根据name模糊查询市场活动
+     */
+    List<Activity> selectActivityByNameForTrans(String name);
 }
