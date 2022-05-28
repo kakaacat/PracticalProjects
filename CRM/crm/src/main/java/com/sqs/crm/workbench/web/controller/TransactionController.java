@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * @Author : kaka
@@ -77,6 +78,14 @@ public class TransactionController {
         List<Contacts> contactsList = contactsService.queryContactsByNameForCreateTrans(name);
         //返回响应信息
         return contactsList;
+    }
+
+    @RequestMapping("/workbench/transaction/getPossibilityByStage.do")
+    public @ResponseBody Object getPossibilityByStage(String stageValue) {
+        ResourceBundle possibility = ResourceBundle.getBundle("possibility");
+        String p = possibility.getString(stageValue);
+
+        return p;
     }
 
 
