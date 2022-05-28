@@ -93,7 +93,7 @@ $(function () {
         var stageValue = $("#create-transactionStage option:selected").text();
         //验证
         if (stageValue == "" || stageValue == "---请选择---") {
-            alert(stageValue);
+            //alert(stageValue); //---请选择---
             //清空可能性输入框
             $("#create-possibility").val("");
             return;
