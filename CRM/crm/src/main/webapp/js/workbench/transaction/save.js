@@ -75,6 +75,30 @@ $(function () {
             }
         });
    });
+    //给“搜索联系人”的“单选”按钮添加键盘单击事件
+    $('#tBodycontactTran').on("click", "input[type='radio']", function () {
+        //获取数据
+        var id = this.value;
+        var name = $(this).attr("contactName");
+        //把数据写入隐藏域
+        $("#contactsId").val(id);
+        $("#create-contactsName").val(name);
+        //关闭模态窗口
+        $("#findContacts").modal("hide");
+    });
 
+    //给“阶段”输入框添加改变事件
+    $("#create-transactionStage").change(function () {
+        //收集参数
+        var stageValue = $("#create-transactionStage option:selected").text();
+        //验证
+        if (stageValue == "" || stageValue == "---请选择---") {
+            alert(stageValue);
+            //清空可能性输入框
+            $("#create-possibility").val("");
+            return;
+        }
+        //发送请求
 
+    });
 });
