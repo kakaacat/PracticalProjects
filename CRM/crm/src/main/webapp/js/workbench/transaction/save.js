@@ -99,6 +99,17 @@ $(function () {
             return;
         }
         //发送请求
-
+        $.ajax({
+            url: 'workbench/transaction/getPossibilityByStage.do',
+            data: {
+                stageValue: stageValue
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                //把获取到的可能性显示到输入框
+                $("#create-possibility").val(data);
+            }
+        });
     });
 });
