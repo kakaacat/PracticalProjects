@@ -74,10 +74,7 @@ $(function () {
                 $("#tBodycontactTran").html(htmlStr);
             }
         });
-
-
-
-    });
+   });
 
 
 });
