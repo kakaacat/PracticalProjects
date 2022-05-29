@@ -62,4 +62,9 @@ public interface ContactsMapper {
      * 根据name模糊查询联系人
      */
     List<Contacts> selectContactsByNameForCreateTrans(String name);
+
+    /**
+     * 查询所有的联系人
+     */
+    List<Contacts> selectAllContactsForIndex();
 }

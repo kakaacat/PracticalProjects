@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ContactsService {
    List<Contacts> queryContactsByNameForCreateTrans(String name);
+
+   List<Contacts> queryAllContactsForIndex();
 }

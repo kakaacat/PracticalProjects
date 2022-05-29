@@ -21,4 +21,9 @@ public class ContactsServiceImpl implements ContactsService {
     public List<Contacts> queryContactsByNameForCreateTrans(String name) {
         return contactsMapper.selectContactsByNameForCreateTrans(name);
     }
+
+    @Override
+    public List<Contacts> queryAllContactsForIndex() {
+        return contactsMapper.selectAllContactsForIndex();
+    }
 }
