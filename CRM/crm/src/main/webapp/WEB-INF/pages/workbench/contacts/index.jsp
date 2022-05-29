@@ -1,29 +1,22 @@
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+String basePath=request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +
+request.getContextPath() + "/";
+%>
 <html>
 <head>
-<meta charset="UTF-8">
+	<base href="<%=basePath%>">
+	<meta charset="UTF-8">
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 
-<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<link href="../../jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
-<script type="text/javascript" src="../../jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
-
-<script type="text/javascript">
-
-	$(function(){
-		
-		//定制字段
-		$("#definedColumns > li").click(function(e) {
-			//防止下拉菜单消失
-	        e.stopPropagation();
-	    });
-		
-	});
-	
-</script>
+<script type="text/javascript" src="js/workbench/contacts/index.js"></script>
 </head>
 <body>
 
@@ -45,29 +38,18 @@
 							<label for="create-contactsOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-contactsOwner">
-								  <option>zhangsan</option>
-								  <option>lisi</option>
-								  <option>wangwu</option>
+								  <c:forEach items="${userList}" var="u">
+									  <option value="${u.id}">${u.name}</option>
+								  </c:forEach>
 								</select>
 							</div>
 							<label for="create-clueSource" class="col-sm-2 control-label">来源</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-clueSource">
-								  <option></option>
-								  <option>广告</option>
-								  <option>推销电话</option>
-								  <option>员工介绍</option>
-								  <option>外部介绍</option>
-								  <option>在线商场</option>
-								  <option>合作伙伴</option>
-								  <option>公开媒介</option>
-								  <option>销售邮件</option>
-								  <option>合作伙伴研讨会</option>
-								  <option>内部研讨会</option>
-								  <option>交易会</option>
-								  <option>web下载</option>
-								  <option>web调研</option>
-								  <option>聊天</option>
+								  <option>---请选择---</option>
+								  <c:forEach items="${sourceList}" var="s">
+									  <option value="${s.id}">${s.value}</option>
+								  </c:forEach>
 								</select>
 							</div>
 						</div>
@@ -80,12 +62,10 @@
 							<label for="create-call" class="col-sm-2 control-label">称呼</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-call">
-								  <option></option>
-								  <option>先生</option>
-								  <option>夫人</option>
-								  <option>女士</option>
-								  <option>博士</option>
-								  <option>教授</option>
+								  <option>---请选择---</option>
+								  <c:forEach items="${appellationList}" var="a">
+									  <option value="${a.id}">${a.value}</option>
+								  </c:forEach>
 								</select>
 							</div>
 							
@@ -182,29 +162,18 @@
 							<label for="edit-contactsOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-contactsOwner">
-								  <option selected>zhangsan</option>
-								  <option>lisi</option>
-								  <option>wangwu</option>
+									<c:forEach items="${userList}" var="u">
+										<option value="${u.id}">${u.name}</option>
+									</c:forEach>
 								</select>
 							</div>
 							<label for="edit-clueSource1" class="col-sm-2 control-label">来源</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-clueSource1">
-								  <option></option>
-								  <option selected>广告</option>
-								  <option>推销电话</option>
-								  <option>员工介绍</option>
-								  <option>外部介绍</option>
-								  <option>在线商场</option>
-								  <option>合作伙伴</option>
-								  <option>公开媒介</option>
-								  <option>销售邮件</option>
-								  <option>合作伙伴研讨会</option>
-								  <option>内部研讨会</option>
-								  <option>交易会</option>
-								  <option>web下载</option>
-								  <option>web调研</option>
-								  <option>聊天</option>
+									<option>---请选择---</option>
+									<c:forEach items="${sourceList}" var="s">
+										<option value="${s.id}">${s.value}</option>
+									</c:forEach>
 								</select>
 							</div>
 						</div>
@@ -217,12 +186,10 @@
 							<label for="edit-call" class="col-sm-2 control-label">称呼</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-call">
-								  <option></option>
-								  <option selected>先生</option>
-								  <option>夫人</option>
-								  <option>女士</option>
-								  <option>博士</option>
-								  <option>教授</option>
+									<option>---请选择---</option>
+									<c:forEach items="${appellationList}" var="a">
+										<option value="${a.id}">${a.value}</option>
+									</c:forEach>
 								</select>
 							</div>
 						</div>
@@ -347,21 +314,10 @@
 				    <div class="input-group">
 				      <div class="input-group-addon">来源</div>
 				      <select class="form-control" id="edit-clueSource">
-						  <option></option>
-						  <option>广告</option>
-						  <option>推销电话</option>
-						  <option>员工介绍</option>
-						  <option>外部介绍</option>
-						  <option>在线商场</option>
-						  <option>合作伙伴</option>
-						  <option>公开媒介</option>
-						  <option>销售邮件</option>
-						  <option>合作伙伴研讨会</option>
-						  <option>内部研讨会</option>
-						  <option>交易会</option>
-						  <option>web下载</option>
-						  <option>web调研</option>
-						  <option>聊天</option>
+						  <option>---请选择---</option>
+						  <c:forEach items="${sourceList}" var="s">
+							  <option value="${s.id}">${s.value}</option>
+						  </c:forEach>
 						</select>
 				    </div>
 				  </div>

@@ -19,7 +19,7 @@ public class ContactsServiceImpl implements ContactsService {
 
 
     @Override
-    public int insertContacts(Contacts contacts) {
+    public int saveContacts(Contacts contacts) {
         return contactsMapper.insertContacts(contacts);
     }
 
