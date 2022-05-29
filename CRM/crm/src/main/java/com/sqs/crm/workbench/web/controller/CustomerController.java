@@ -8,7 +8,9 @@ import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.mapper.ContactsMapper;
 import com.sqs.crm.workbench.model.Contacts;
+import com.sqs.crm.workbench.model.Customer;
 import com.sqs.crm.workbench.service.ContactsService;
+import com.sqs.crm.workbench.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class CustomerController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ContactsService contactsService;
+    private CustomerService customerService;
 
     @RequestMapping("/workbench/customer/index.do")
     public String index(HttpServletRequest request){
@@ -37,17 +39,17 @@ public class CustomerController {
         return "workbench/customer/index";
     }
 
-    @RequestMapping("/workbench/customer/saveContacts.do")
-    public Object saveContacts(Contacts contacts, HttpSession session) {
+    @RequestMapping("/workbench/customer/saveCustomers.do")
+    public Object saveCustomers(Customer customer, HttpSession session) {
         User user = (User) session.getAttribute(Contants.SESSION_USER);
         //封装参数
-        contacts.setId(UUIDUtils.getUUID());
-        contacts.setCreateBy(user.getId());
-        contacts.setCreateTime(DateUtils.formateDateTime(new Date()));
+        customer.setId(UUIDUtils.getUUID());
+        customer.setCreateBy(user.getId());
+        customer.setCreateTime(DateUtils.formateDateTime(new Date()));
 
         ReturnObject returnObject = new ReturnObject();
         try {
-            int ret = contactsService.insertContacts(contacts);
+            int ret = customerService.insertCustomer(customer);
             if (ret > 0) {
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
             } else {

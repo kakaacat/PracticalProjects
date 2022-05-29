@@ -53,8 +53,6 @@ public interface CustomerMapper {
 
     /**
      * 保存创建的客户
-     * @param customer
-     * @return
      */
     int insertCustomer(Customer customer);
 }

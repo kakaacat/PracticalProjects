@@ -7,13 +7,21 @@ $(function(){
     });
 
     //给“创建”按钮添加事件
-    $("#createContactsBtn").click(function () {
+    $("#createCustomerBtn").click(function () {
         //刷新重置
-        $("#createContactsForm")[0].reset();
+        $("#createCustomerForm")[0].reset();
         //弹出创建窗口
         $("#createCustomerModal").modal("show");
     });
 
+    //给“保存”按钮添加点击事件
+    $("#saveCreateCustomerBtn").click(function () {
+        //收集参数
+        var owner = $("#create-customerOwner").val();
+        var name = $("#create-customerName").val();
+        var website = $("#create-website").val();
+        var phone = $("#create-phone").val();
+    });
 
 
 });
