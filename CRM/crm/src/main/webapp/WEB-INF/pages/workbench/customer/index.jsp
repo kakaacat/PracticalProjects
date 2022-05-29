@@ -16,7 +16,7 @@ request.getContextPath() + "/";
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
-<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="js/workbench/customer/index.js"></script>
 </head>
 <body>
 

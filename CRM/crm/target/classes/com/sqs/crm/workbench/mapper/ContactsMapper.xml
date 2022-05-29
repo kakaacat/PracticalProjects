@@ -283,4 +283,10 @@
     from tbl_contacts
     where fullname like concat('%', #{name}, '%')
   </select>
+
+  <select id="selectAllContactsForIndex" resultMap="BaseResultMap">
+    select c.id, c.fullname, u.name as owner, c.mphone, c.email
+    from tbl_contacts c
+    join tbl_user u on c.owner = u.id
+  </select>
 </mapper>

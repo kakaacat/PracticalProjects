@@ -1,5 +1,8 @@
 package com.sqs.crm.workbench.web.controller;
 
+import com.sqs.crm.commons.contants.Contants;
+import com.sqs.crm.commons.utils.DateUtils;
+import com.sqs.crm.commons.utils.UUIDUtils;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.mapper.ContactsMapper;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,5 +34,16 @@ public class CustomerController {
         List<User> userList = userService.queryAllUsers();
         request.setAttribute("userList", userList);
         return "workbench/customer/index";
+    }
+
+    @RequestMapping("/workbench/customer/saveContacts.do")
+    public Object saveContacts(Contacts contacts, HttpSession session) {
+        User user = (User) session.getAttribute(Contants.SESSION_USER);
+        //封装参数
+        contacts.setId(UUIDUtils.getUUID());
+        contacts.setCreateBy(user.getId());
+        contacts.setCreateTime(DateUtils.formateDateTime(new Date()));
+
+
     }
 }

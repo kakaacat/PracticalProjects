@@ -17,6 +17,12 @@ public class ContactsServiceImpl implements ContactsService {
     @Autowired
     private ContactsMapper contactsMapper;
 
+
+    @Override
+    public int insertContacts(Contacts contacts) {
+        return contactsMapper.insertContacts(contacts);
+    }
+
     @Override
     public List<Contacts> queryContactsByNameForCreateTrans(String name) {
         return contactsMapper.selectContactsByNameForCreateTrans(name);
