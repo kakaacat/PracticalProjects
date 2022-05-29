@@ -14,6 +14,7 @@ import com.sqs.crm.workbench.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,7 +41,7 @@ public class CustomerController {
     }
 
     @RequestMapping("/workbench/customer/saveCustomers.do")
-    public Object saveCustomers(Customer customer, HttpSession session) {
+    public @ResponseBody Object saveCustomers(Customer customer, HttpSession session) {
         User user = (User) session.getAttribute(Contants.SESSION_USER);
         //封装参数
         customer.setId(UUIDUtils.getUUID());
@@ -49,7 +50,7 @@ public class CustomerController {
 
         ReturnObject returnObject = new ReturnObject();
         try {
-            int ret = customerService.insertCustomer(customer);
+            int ret = customerService.saveCustomer(customer);
             if (ret > 0) {
                 returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
             } else {

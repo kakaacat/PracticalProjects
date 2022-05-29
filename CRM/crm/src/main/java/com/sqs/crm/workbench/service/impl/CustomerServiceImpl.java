@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerMapper;
 
     @Override
-    public int insertCustomer(Customer customer) {
+    public int saveCustomer(Customer customer) {
         return customerMapper.insertCustomer(customer);
     }
 }

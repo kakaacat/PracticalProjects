@@ -23,7 +23,7 @@ $(function(){
         var phone = $("#create-phone").val();
         var description = $("#create-describe").val();
         var contactSummary = $("#create-contactSummary").val();
-        var nextContactTime = $("create-nextContactTime").val();
+        var nextContactTime = $("#create-nextContactTime").val();
         var address = $("#create-address1").val();
 
         //表单验证
