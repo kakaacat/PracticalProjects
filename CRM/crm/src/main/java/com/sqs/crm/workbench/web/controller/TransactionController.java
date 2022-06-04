@@ -8,6 +8,7 @@ import com.sqs.crm.workbench.model.Activity;
 import com.sqs.crm.workbench.model.Contacts;
 import com.sqs.crm.workbench.service.ActivityService;
 import com.sqs.crm.workbench.service.ContactsService;
+import com.sqs.crm.workbench.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,8 @@ public class TransactionController {
     private ActivityService activityService;
     @Autowired
     private ContactsService contactsService;
+    @Autowired
+    private CustomerService customerService;
 
     @RequestMapping("/workbench/transaction/index.do")
     public String index(HttpServletRequest request){
@@ -86,7 +89,13 @@ public class TransactionController {
         return p;
     }
 
-
+    @RequestMapping("/workbench/transaction/queryAllCustomerName.do")
+    public @ResponseBody Object queryAllCustomerName() {
+        //调用service层方法
+        List<String> customerNameList = customerService.queryAllCustomerName();
+        //返回响应信息
+        return customerNameList;
+    }
 
 
 

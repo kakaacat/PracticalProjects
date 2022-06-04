@@ -6,6 +6,8 @@ import com.sqs.crm.workbench.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author : kaka
  * @Date: 2022-05-29 16:50
@@ -18,5 +20,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public int saveCustomer(Customer customer) {
         return customerMapper.insertCustomer(customer);
+    }
+
+    @Override
+    public List<String> queryAllCustomerName() {
+        return customerMapper.selectAllCustomerName();
     }
 }
