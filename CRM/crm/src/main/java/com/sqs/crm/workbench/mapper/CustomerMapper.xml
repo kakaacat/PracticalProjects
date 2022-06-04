@@ -235,4 +235,10 @@
     select name
     from tbl_customer
   </select>
+
+  <select id="selectCustomerByName" parameterType="string" resultType="string">
+    select name
+    from tbl_customer
+    where name like concat('%',#{customerName},'%');
+  </select>
 </mapper>

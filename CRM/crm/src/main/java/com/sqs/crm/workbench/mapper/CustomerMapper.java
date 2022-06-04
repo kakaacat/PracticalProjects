@@ -62,4 +62,9 @@ public interface CustomerMapper {
      * 查询所有的客户
      */
     List<String> selectAllCustomerName();
+
+    /**
+     * 根据名称模糊查询客户名
+     */
+    List<String> selectCustomerByName(String customerName);
 }

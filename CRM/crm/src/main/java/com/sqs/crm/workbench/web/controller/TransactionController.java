@@ -89,10 +89,10 @@ public class TransactionController {
         return p;
     }
 
-    @RequestMapping("/workbench/transaction/queryAllCustomerName.do")
-    public @ResponseBody Object queryAllCustomerName() {
+    @RequestMapping("/workbench/transaction/queryCustomerByName.do")
+    public @ResponseBody Object queryCustomerByName(String name) {
         //调用service层方法
-        List<String> customerNameList = customerService.queryAllCustomerName();
+        List<String> customerNameList = customerService.queryCustomerByName(name);
         //返回响应信息
         return customerNameList;
     }

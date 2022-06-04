@@ -8,4 +8,6 @@ public interface CustomerService {
     int saveCustomer(Customer customer);
 
     List<String> queryAllCustomerName();
+
+    List<String> queryCustomerByName(String name);
 }

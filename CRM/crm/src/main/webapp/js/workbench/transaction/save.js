@@ -112,4 +112,24 @@ $(function () {
             }
         });
     });
+
+    //客户名称自动补全
+    $("#create-accountName").typeahead({
+        source:function (jquery, process) {
+            $.ajax({
+                url: 'workbench/transaction/queryCustomerByName.do',
+                data: {
+                    name: jquery
+                },
+                type: 'post',
+                dataType: 'json',
+                success:function (data) {
+                    process(data);
+                }
+            });
+        }
+    });
+
+
+
 });
