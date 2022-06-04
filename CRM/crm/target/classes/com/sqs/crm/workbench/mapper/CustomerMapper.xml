@@ -230,4 +230,15 @@
     insert into tbl_customer (id, owner, name, website, phone, create_by, create_time, contact_summary, next_contact_time, description, address)
     values (#{id}, #{owner}, #{name}, #{website}, #{phone}, #{createBy}, #{createTime}, #{contactSummary}, #{nextContactTime}, #{description}, #{address})
   </insert>
+
+  <select id="selectAllCustomerName" resultType="string">
+    select name
+    from tbl_customer
+  </select>
+
+  <select id="selectCustomerByName" parameterType="string" resultType="string">
+    select name
+    from tbl_customer
+    where name like concat('%',#{customerName},'%');
+  </select>
 </mapper>
