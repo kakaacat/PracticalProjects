@@ -1,7 +1,5 @@
 package com.sqs.crm.workbench.web.controller;
 
-import com.sqs.crm.settings.mapper.DicValueMapper;
-import com.sqs.crm.settings.mapper.UserMapper;
 import com.sqs.crm.settings.model.DicValue;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.DicValueService;
