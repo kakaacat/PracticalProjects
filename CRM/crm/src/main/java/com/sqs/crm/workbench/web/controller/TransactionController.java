@@ -1,5 +1,7 @@
 package com.sqs.crm.workbench.web.controller;
 
+import com.sqs.crm.commons.contants.Contants;
+import com.sqs.crm.commons.domain.ReturnObject;
 import com.sqs.crm.settings.model.DicValue;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.DicValueService;
@@ -9,6 +11,7 @@ import com.sqs.crm.workbench.model.Contacts;
 import com.sqs.crm.workbench.service.ActivityService;
 import com.sqs.crm.workbench.service.ContactsService;
 import com.sqs.crm.workbench.service.CustomerService;
+import com.sqs.crm.workbench.service.TranService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -36,6 +40,8 @@ public class TransactionController {
     private ContactsService contactsService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private TranService tranService;
 
     @RequestMapping("/workbench/transaction/index.do")
     public String index(HttpServletRequest request){
@@ -100,9 +106,22 @@ public class TransactionController {
     }
 
     @RequestMapping("/workbench/transaction/saveCreateTran.do")
-    public @ResponseBody Object saveCreateTran(@RequestParam Map<String, Object> map) {
+    public @ResponseBody Object saveCreateTran(@RequestParam Map<String, Object> map, HttpSession session) {
+        //封装参数
+        map.put(Contants.SESSION_USER, session.getAttribute(Contants.SESSION_USER));
 
+        //调用service层方法，生成响应信息
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            tranService.saveCreateTran(map);
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage(Contants.RETURN_OBJECT_MESSAGE);
+        }
 
+        return returnObject;
     }
 
 
