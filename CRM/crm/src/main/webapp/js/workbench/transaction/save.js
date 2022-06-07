@@ -132,6 +132,7 @@ $(function () {
 
     //给‘保存’按钮添加单击事件
     $("#saveCreateTranBtn").click(function () {
+        //收集参数
         var owner = $("#create-owner").val();
         var money = $("#create-money").val();
         var name = $("#create-name").val();
@@ -145,6 +146,39 @@ $(function () {
         var description = $("#create-description").val();
         var contactsSummary = $("#create-contactsSummary").val();
         var nextContactTime = $("#create-nextContactTime").val();
+        //表单验证
+
+        //发送请求
+        $.ajax({
+            url: 'workbench/transaction/saveCreateTran.do',
+            data:{
+                owner: owner,
+                money: money,
+                name: name,
+                expectedDate: expectedDate,
+                customerName: customerName,
+                stage: stage,
+                type: type,
+                source: source,
+                activityId: activityId,
+                contactsId: contactsId,
+                description: description,
+                contactsSummary: contactsSummary,
+                nextContactTime: nextContactTime
+            },
+            type: 'post',
+            dataType: 'json',
+            success:function (data) {
+                if (data.code == "1") {
+                    //跳转页面
+                    window.location.href = "workbench/transaction/index.do";
+                } else {
+                    alert(data.message);
+                }
+            }
+
+        });
+
     });
 
 
