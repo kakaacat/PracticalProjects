@@ -39,7 +39,7 @@ $(function () {
         var activityName = $(this).attr("activityName");
         //把数据写入隐藏域
         $("#activitySourceId").val(id);
-        $("#activitySourceName").val(activityName);
+        $("#create-activityId").val(activityName);
         //关闭模态窗口
         $("#findMarketActivity").modal("hide");
     });
@@ -82,15 +82,15 @@ $(function () {
         var name = $(this).attr("contactName");
         //把数据写入隐藏域
         $("#contactsId").val(id);
-        $("#create-contactsName").val(name);
+        $("#create-contactsId").val(name);
         //关闭模态窗口
         $("#findContacts").modal("hide");
     });
 
     //给“阶段”输入框添加改变事件
-    $("#create-transactionStage").change(function () {
+    $("#create-stage").change(function () {
         //收集参数
-        var stageValue = $("#create-transactionStage option:selected").text();
+        var stageValue = $("#create-stage option:selected").text();
         //验证
         if (stageValue == "" || stageValue == "---请选择---") {
             //alert(stageValue); //---请选择---
@@ -114,7 +114,7 @@ $(function () {
     });
 
     //客户名称自动补全
-    $("#create-accountName").typeahead({
+    $("#create-customerName").typeahead({
         source:function (jquery, process) {
             $.ajax({
                 url: 'workbench/transaction/queryCustomerByName.do',
@@ -130,6 +130,22 @@ $(function () {
         }
     });
 
+    //给‘保存’按钮添加单击事件
+    $("#saveCreateTranBtn").click(function () {
+        var owner = $("#create-owner").val();
+        var money = $("#create-money").val();
+        var name = $("#create-name").val();
+        var expectedDate = $("#create-expectedDate").val();
+        var customerName = $("#create-customerName").val();
+        var stage = $("#create-stage").val();
+        var type = $("#create-type").val();
+        var source = $("#create-source").val();
+        var activityId = $("#create-activityId").val();
+        var contactsId = $("#create-contactsId").val();
+        var description = $("#create-description").val();
+        var contactsSummary = $("#create-contactsSummary").val();
+        var nextContactTime = $("#create-nextContactTime").val();
+    });
 
 
 });
