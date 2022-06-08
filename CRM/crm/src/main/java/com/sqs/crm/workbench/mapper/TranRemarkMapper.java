@@ -61,5 +61,5 @@ public interface TranRemarkMapper {
     /**
      * 根据tranId查询该交易下的交易备注信息
      */
-    TranRemark selectTranRemarkByTranId(String tranId);
+    List<TranRemark> selectTranRemarkByTranId(String tranId);
 }
