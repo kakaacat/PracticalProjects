@@ -5,9 +5,11 @@ import com.sqs.crm.commons.utils.DateUtils;
 import com.sqs.crm.commons.utils.UUIDUtils;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.workbench.mapper.CustomerMapper;
+import com.sqs.crm.workbench.mapper.TranHistoryMapper;
 import com.sqs.crm.workbench.mapper.TranMapper;
 import com.sqs.crm.workbench.model.Customer;
 import com.sqs.crm.workbench.model.Tran;
+import com.sqs.crm.workbench.model.TranHistory;
 import com.sqs.crm.workbench.service.TranService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class TranServiceImpl implements TranService {
     private TranMapper tranMapper;
     @Autowired
     private CustomerMapper customerMapper;
+    @Autowired
+    private TranHistoryMapper tranHistoryMapper;
 
     @Override
     public void saveCreateTran(Map<String, Object> map) {
@@ -63,5 +67,15 @@ public class TranServiceImpl implements TranService {
         tran.setSource((String) map.get("source"));
         tran.setType((String) map.get("type"));
         tranMapper.insertTran(tran);
+        //保存交易历史
+        TranHistory tranHistory = new TranHistory();
+        tranHistory.setCreateBy(tran.getCreateBy());
+        tranHistory.setCreateTime(tran.getCreateTime());
+        tranHistory.setExpectedDate(tran.getExpectedDate());
+        tranHistory.setId(UUIDUtils.getUUID());
+        tranHistory.setMoney(tran.getMoney());
+        tranHistory.setStage(tran.getStage());
+        tranHistory.setTranId(tran.getId());
+        tranHistoryMapper.insertTranHistory(tranHistory);
     }
 }
