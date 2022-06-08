@@ -6,12 +6,8 @@ import com.sqs.crm.settings.model.DicValue;
 import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.DicValueService;
 import com.sqs.crm.settings.service.UserService;
-import com.sqs.crm.workbench.model.Activity;
-import com.sqs.crm.workbench.model.Contacts;
-import com.sqs.crm.workbench.service.ActivityService;
-import com.sqs.crm.workbench.service.ContactsService;
-import com.sqs.crm.workbench.service.CustomerService;
-import com.sqs.crm.workbench.service.TranService;
+import com.sqs.crm.workbench.model.*;
+import com.sqs.crm.workbench.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +38,10 @@ public class TransactionController {
     private CustomerService customerService;
     @Autowired
     private TranService tranService;
+    @Autowired
+    private TranRemarkService tranRemarkService;
+    @Autowired
+    private TranHistoryService tranHistoryService;
 
     @RequestMapping("/workbench/transaction/index.do")
     public String index(HttpServletRequest request){
@@ -122,6 +122,20 @@ public class TransactionController {
         }
 
         return returnObject;
+    }
+
+    @RequestMapping("/workbench/transaction/tranDetail.do")
+    public String tranDetail(String id, HttpServletRequest request) {
+        //调用service层方法
+        Tran tran = tranService.queryTranForDetailById(id);
+        List<TranRemark> tranRemarkList = tranRemarkService.queryTranRemarkByTranId(id);
+        List<TranHistory> tranHistoryList = tranHistoryService.queryTranHistoryByTranId(id);
+        //保存到作用域中
+        request.setAttribute("tran", tran);
+        request.setAttribute("tranRemarkList", tranRemarkList);
+        request.setAttribute("tranHistoryList", tranHistoryList);
+        //请求转发
+        return "workbench/transaction/detail";
     }
 
 
