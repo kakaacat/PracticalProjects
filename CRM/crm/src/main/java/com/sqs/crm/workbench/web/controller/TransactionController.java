@@ -130,10 +130,14 @@ public class TransactionController {
         Tran tran = tranService.queryTranForDetailById(id);
         List<TranRemark> tranRemarkList = tranRemarkService.queryTranRemarkByTranId(id);
         List<TranHistory> tranHistoryList = tranHistoryService.queryTranHistoryByTranId(id);
+        //查询可能性possibility.properties
+        ResourceBundle bundle = ResourceBundle.getBundle("possibility");
+        String possibility = bundle.getString(tran.getStage());
         //保存到作用域中
         request.setAttribute("tran", tran);
         request.setAttribute("tranRemarkList", tranRemarkList);
         request.setAttribute("tranHistoryList", tranHistoryList);
+        request.setAttribute("possibility", possibility);
         //请求转发
         return "workbench/transaction/detail";
     }
