@@ -279,7 +279,7 @@
   </insert>
 
   <select id="selectContactsByNameForCreateTrans" parameterType="string" resultMap="BaseResultMap">
-    select id, email, mphone
+    select id, fullname, email, mphone
     from tbl_contacts
     where fullname like concat('%', #{name}, '%')
   </select>

@@ -141,8 +141,8 @@ $(function () {
         var stage = $("#create-stage").val();
         var type = $("#create-type").val();
         var source = $("#create-source").val();
-        var activityId = $("#create-activityId").val();
-        var contactsId = $("#create-contactsId").val();
+        var activityId = $("#activitySourceId").val();
+        var contactsId = $("#contactsId").val();
         var description = $("#create-description").val();
         var contactsSummary = $("#create-contactsSummary").val();
         var nextContactTime = $("#create-nextContactTime").val();
@@ -156,7 +156,7 @@ $(function () {
                 money: money,
                 name: name,
                 expectedDate: expectedDate,
-                customerId: customerName,
+                customerName: customerName,
                 stage: stage,
                 type: type,
                 source: source,
