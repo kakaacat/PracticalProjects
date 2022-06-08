@@ -154,4 +154,9 @@
       tran_id = #{tranId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+  <insert id="insertTranHistory" parameterType="com.sqs.crm.workbench.model.TranHistory">
+  insert into tbl_tran_history (id, stage, money, expected_date, create_time, create_by, tran_id)
+  values (#{id}, #{stage}, #{money}, #{expectedDate}, #{createTime}, #{createBy}, #{tranId})
+  </insert>
 </mapper>
