@@ -62,6 +62,7 @@ public class TranServiceImpl implements TranService {
         tran.setCreateBy(user.getId());
         tran.setContactSummary((String) map.get("contactSummary"));
         tran.setContactsId((String) map.get("contactsId"));
+        System.out.println("--------------------->" + map.get("contactsId"));
         tran.setActivityId((String) map.get("activityId"));
         tran.setDescription((String) map.get("description"));
         tran.setSource((String) map.get("source"));
@@ -77,5 +78,10 @@ public class TranServiceImpl implements TranService {
         tranHistory.setStage(tran.getStage());
         tranHistory.setTranId(tran.getId());
         tranHistoryMapper.insertTranHistory(tranHistory);
+    }
+
+    @Override
+    public Tran queryTranForDetailById(String id) {
+        return tranMapper.selectTranForDetailById(id);
     }
 }

@@ -147,7 +147,6 @@ $(function () {
         var contactsSummary = $("#create-contactsSummary").val();
         var nextContactTime = $("#create-nextContactTime").val();
         //表单验证
-
         //发送请求
         $.ajax({
             url: 'workbench/transaction/saveCreateTran.do',

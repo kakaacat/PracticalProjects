@@ -55,4 +55,9 @@ public interface TranMapper {
      * 保存交易
      */
     int insertTran(Tran tran);
+
+    /**
+     * 根据id查询交易明细
+     */
+    Tran selectTranForDetailById(String id);
 }

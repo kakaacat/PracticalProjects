@@ -57,4 +57,9 @@ public interface TranRemarkMapper {
      * 批量保存交易备注
      */
     int insertTranRemarkByList(List<TranRemark> tranRemarkList);
+
+    /**
+     * 根据tranId查询该交易下的交易备注信息
+     */
+    TranRemark selectTranRemarkByTranId(String tranId);
 }
