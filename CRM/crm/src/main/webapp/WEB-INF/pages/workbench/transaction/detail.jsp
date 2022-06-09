@@ -229,29 +229,38 @@ request.getContextPath() + "/";
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${tranHistoryList}" var="th">
 						<tr>
-							<td>资质审查</td>
-							<td>5,000</td>
-							<td>2017-02-07</td>
-							<td>2016-10-10 10:10:10</td>
-							<td>zhangsan</td>
+							<td>${th.stage}/td>
+							<td>${th.money}</td>
+							<td>${th.expectedDate}</td>
+							<td>${th.createTime}</td>
+							<td>${th.createBy}</td>
 						</tr>
-						<tr>
-							<td>需求分析</td>
-							<td>5,000</td>
-							<td>20</td>
-							<td>2017-02-07</td>
-							<td>2016-10-20 10:10:10</td>
-							<td>zhangsan</td>
-						</tr>
-						<tr>
-							<td>谈判/复审</td>
-							<td>5,000</td>
-							<td>90</td>
-							<td>2017-02-07</td>
-							<td>2017-02-09 10:10:10</td>
-							<td>zhangsan</td>
-						</tr>
+					</c:forEach>
+<%--						<tr>--%>
+<%--							<td>资质审查</td>--%>
+<%--							<td>5,000</td>--%>
+<%--							<td>2017-02-07</td>--%>
+<%--							<td>2016-10-10 10:10:10</td>--%>
+<%--							<td>zhangsan</td>--%>
+<%--						</tr>--%>
+<%--						<tr>--%>
+<%--							<td>需求分析</td>--%>
+<%--							<td>5,000</td>--%>
+<%--							<td>20</td>--%>
+<%--							<td>2017-02-07</td>--%>
+<%--							<td>2016-10-20 10:10:10</td>--%>
+<%--							<td>zhangsan</td>--%>
+<%--						</tr>--%>
+<%--						<tr>--%>
+<%--							<td>谈判/复审</td>--%>
+<%--							<td>5,000</td>--%>
+<%--							<td>90</td>--%>
+<%--							<td>2017-02-07</td>--%>
+<%--							<td>2017-02-09 10:10:10</td>--%>
+<%--							<td>zhangsan</td>--%>
+<%--						</tr>--%>
 					</tbody>
 				</table>
 			</div>
