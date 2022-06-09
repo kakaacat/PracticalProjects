@@ -224,8 +224,8 @@ request.getContextPath() + "/";
 							<td>阶段</td>
 							<td>金额</td>
 							<td>预计成交日期</td>
-							<td>创建时间</td>
 							<td>创建人</td>
+							<td>创建时间</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -234,8 +234,8 @@ request.getContextPath() + "/";
 							<td>${th.stage}/td>
 							<td>${th.money}</td>
 							<td>${th.expectedDate}</td>
-							<td>${th.createTime}</td>
 							<td>${th.createBy}</td>
+							<td>${th.createTime}</td>
 						</tr>
 					</c:forEach>
 <%--						<tr>--%>
