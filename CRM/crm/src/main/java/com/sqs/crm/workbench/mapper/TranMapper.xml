@@ -310,4 +310,11 @@
     left join tbl_user u3 on t.edit_by=u3.id
     where t.id=#{id}
   </select>
+
+  <select id="selectCountTranGroupByStage" resultType="com.sqs.crm.workbench.model.FunnelVO">
+    select count(*) as value, dv.value as name
+    from tbl_tran t
+    join tbl_dic_value dv on t.stage=dv.id
+    group by t.stage
+  </select>
 </mapper>

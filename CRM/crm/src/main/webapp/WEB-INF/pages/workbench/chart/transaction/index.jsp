@@ -13,71 +13,61 @@
     <title>交易统计图表</title>
     <script type="text/javascript">
         $(function () {
-            var myChart = echarts.init(document.getElementById('main'));
-            var option = {
-                title: {
-                    text: '交易统计图表',
-                    subtext: '交易表中各阶段的数量'
-                },
-                tooltip: {
-                    formatter: '{a} <br/>{b} : {c}'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: { readOnly: false },
-                        restore: {},
-                        saveAsImage: {}
-                    }
-                },
-                legend: {
-                    data: ['Show', 'Click', 'Visit', 'Inquiry', 'Order']
-                },
-                series: [
-                    {
-                        name: '交易统计图表',
-                        type: 'funnel',
-                        left: '10%',
-                        top: 60,
-                        bottom: 60,
-                        width: '80%',
-                        min: 0,
-                        max: 100,
-                        minSize: '0%',
-                        maxSize: '100%',
-                        sort: 'descending',
-                        gap: 2,
-                        label: {
-                            show: true,
-                            position: 'inside'
+            //发送查询请求
+            $.ajax({
+                url: 'workbench/chart/transaction/queryCountTranGroupByStage.do',
+                type: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    //调用 echarts 工具函数
+                    var myChart = echarts.init(document.getElementById('main'));
+                    var option = {
+                        title: {
+                            text: '交易统计图表',
+                            subtext: '交易表中各阶段的数量'
                         },
-                        labelLine: {
-                            length: 10,
-                            lineStyle: {
-                                width: 1,
-                                type: 'solid'
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{a} <br/>{b} : {c}'
+                        },
+                        toolbox: {
+                            feature: {
+                                dataView: { readOnly: false },
+                                restore: {},
+                                saveAsImage: {}
                             }
                         },
-                        itemStyle: {
-                            borderColor: '#fff',
-                            borderWidth: 1
-                        },
-                        emphasis: {
-                            label: {
-                                fontSize: 20
+                        series: [
+                            {
+                                name: '数据量',
+                                type: 'funnel',
+                                left: '10%',
+                                width: '80%',
+                                gap: 2,
+                                label: {
+                                    show: true,
+                                    position: 'inside'
+                                },
+                                itemStyle: {
+                                    borderColor: '#fff',
+                                    borderWidth: 1
+                                },
+                                emphasis: {
+                                    label: {
+                                        fontSize: 20
+                                    }
+                                },
+                                data: data
                             }
-                        },
-                        data: [
-                            { value: 60, name: 'Visit' },
-                            { value: 40, name: 'Inquiry' },
-                            { value: 20, name: 'Order' },
-                            { value: 80, name: 'Click' },
-                            { value: 100, name: 'Show' }
                         ]
-                    }
-                ]
-            };
+                    };
 
-            myChart.setOption(option);
+                    myChart.setOption(option);
+                }
+            });
+
+
+
 
         });
     </script>

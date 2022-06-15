@@ -1,6 +1,9 @@
 package com.sqs.crm.workbench.mapper;
 
+import com.sqs.crm.workbench.model.FunnelVO;
 import com.sqs.crm.workbench.model.Tran;
+
+import java.util.List;
 
 public interface TranMapper {
     /**
@@ -60,4 +63,6 @@ public interface TranMapper {
      * 根据id查询交易明细
      */
     Tran selectTranForDetailById(String id);
+
+    List<FunnelVO> selectCountTranGroupByStage();
 }

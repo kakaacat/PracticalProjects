@@ -8,6 +8,7 @@ import com.sqs.crm.workbench.mapper.CustomerMapper;
 import com.sqs.crm.workbench.mapper.TranHistoryMapper;
 import com.sqs.crm.workbench.mapper.TranMapper;
 import com.sqs.crm.workbench.model.Customer;
+import com.sqs.crm.workbench.model.FunnelVO;
 import com.sqs.crm.workbench.model.Tran;
 import com.sqs.crm.workbench.model.TranHistory;
 import com.sqs.crm.workbench.service.TranService;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,5 +85,10 @@ public class TranServiceImpl implements TranService {
     @Override
     public Tran queryTranForDetailById(String id) {
         return tranMapper.selectTranForDetailById(id);
+    }
+
+    @Override
+    public List<FunnelVO> queryCountTranGroupByStage() {
+        return tranMapper.selectCountTranGroupByStage();
     }
 }
