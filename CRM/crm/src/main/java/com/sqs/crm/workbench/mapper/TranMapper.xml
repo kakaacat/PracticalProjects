@@ -25,6 +25,7 @@
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="contact_summary" property="contactSummary" jdbcType="VARCHAR" />
     <result column="next_contact_time" property="nextContactTime" jdbcType="CHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     <!--
@@ -294,7 +295,7 @@
   </insert>
 
   <select id="selectTranForDetailById" parameterType="string" resultMap="BaseResultMap">
-    select t.id, u1.name as owner, t.money, t.name, t.expected_date, c.name as customer_id, dv1.value as stage, dv2.value as type, dv3.value as source,
+    select t.id, u1.name as owner, t.money, t.name, t.expected_date, c.name as customer_id, dv1.value as stage, dv1.order_no as order_no,dv2.value as type, dv3.value as source,
         a.name as activity_id, co.fullname as contacts_id, u2.name as create_by, t.create_time, u3.name as edit_by, t.edit_time, t.description,t.contact_summary,
         t.next_contact_time
     from tbl_tran t

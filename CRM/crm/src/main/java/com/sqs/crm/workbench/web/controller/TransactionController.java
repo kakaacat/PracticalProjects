@@ -138,6 +138,9 @@ public class TransactionController {
         request.setAttribute("tranRemarkList", tranRemarkList);
         request.setAttribute("tranHistoryList", tranHistoryList);
         request.setAttribute("possibility", possibility);
+
+        List<DicValue> stageList = dicValueService.queryDicValueByTypeCode("stage");
+        request.setAttribute("stageList", stageList);
         //请求转发
         return "workbench/transaction/detail";
     }
