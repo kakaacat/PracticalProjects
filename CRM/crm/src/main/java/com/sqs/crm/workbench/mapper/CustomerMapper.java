@@ -3,6 +3,7 @@ package com.sqs.crm.workbench.mapper;
 import com.sqs.crm.workbench.model.Customer;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CustomerMapper {
     /**
@@ -72,4 +73,9 @@ public interface CustomerMapper {
      * 根据名称精确查询客户
      */
     Customer selectCustomerDetailByName(String name);
+
+    /**
+     * 根据条件分页查询用户列表
+     */
+    List<Customer> selectCustomerByConditionForPage(Map<String, Object> map);
 }
