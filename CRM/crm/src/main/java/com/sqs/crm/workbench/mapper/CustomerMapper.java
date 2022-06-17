@@ -78,4 +78,9 @@ public interface CustomerMapper {
      * 根据条件分页查询用户列表
      */
     List<Customer> selectCustomerByConditionForPage(Map<String, Object> map);
+
+    /**
+     * 根据条件查询客户的总条数
+     */
+    int selectCountOfCustomerByCondition(Map<String, Object> map);
 }

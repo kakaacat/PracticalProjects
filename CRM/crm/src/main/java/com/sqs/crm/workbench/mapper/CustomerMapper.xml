@@ -270,4 +270,24 @@
     order by c.create_time desc
     limit #{beginNo}, #{pageSize}
   </select>
+
+  <select id="selectCountOfCustomerByCondition" parameterType="map" resultType="int">
+    select count(*)
+    from tbl_customer c
+    join tbl_user u1 on c.owner = u1.id
+    <where>
+      <if test="name != null and name != ''">
+        and c.name like concat('%', #{name}, '%')
+      </if>
+      <if test="owner != null and owner != ''">
+        and u1.name like concat('%', #{owner}, '%')
+      </if>
+      <if test="phone != null and phone != ''">
+        and c.phone like concat('%', #{phone} ,'%')
+      </if>
+      <if test="website != null and website != ''">
+        and c.website like concat('%',#{website},'%')
+      </if>
+    </where>
+  </select>
 </mapper>
