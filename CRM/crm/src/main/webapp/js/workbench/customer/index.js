@@ -71,17 +71,6 @@ $(function(){
         });
     });
 
-    //日历函数
-    $(".mydate").datetimepicker({
-        language : 'zh-CN',
-        format : 'yyyy-mm-dd',
-        minView : 'month',
-        initialDate : new Date(),
-        autoclose : true,
-        todayBtn : true,
-        clearBtn : true
-    });
-
     //查询所有数据的第一页以及总条数
     queryCustomerByConditionForPage(1, 10);
 
@@ -92,11 +81,11 @@ $(function(){
 
     //给全选按钮添加点击事件
     $("#checkAll").click(function () {
-        $("#customer-tboby input[type='checkbox']").prop("checked", this.checked);
+        $("#customer-tbody input[type='checkbox']").prop("checked", this.checked);
     });
-    $("#customer-tboby").on("click", "input[type='checkbox]", function () {
+    $("#customer-tbody").on("click", "input[type='checkbox]", function () {
         //如果列表中的checkedbox全部选中，全选也选中
-        if ($("#customer-tboby input[type='checkbox']").size() == $("#customer-tboby input[type='checkbox']:checked").size()){
+        if ($("#customer-tbody input[type='checkbox']").size() == $("#customer-tbody input[type='checkbox']:checked").size()){
             $("#checkAll").prop("checked", true);
         } else {
             $("#checkAll").prop("checked", false);
@@ -131,15 +120,15 @@ function queryCustomerByConditionForPage(pageNo, pageSize){
            //显示客户列表
             var htmlStr = "";
             $.each(data.customerList, function (index, obj) {
-                htmlStr+="<tr class=\"active\">";
-                htmlStr+="<td><input type=\"checkbox\" value=\""+ obj.id +"\"/></td>";
-                htmlStr+="<td><a style=\"text-decoration: none; cursor: pointer;\" onclick=\"window.location.href='detail.jsp';\">"+ obj.name +"</a></td>";
-                htmlStr+="<td>"+ obj.owner +"</td>";
-                htmlStr+="<td>"+ obj.phone +"</td>";
-                htmlStr+="<td>"+ obj.website +"</td>";
-                htmlStr+="</tr>";
+                htmlStr += "<tr class=\"active\">";
+                htmlStr += "<td><input type=\"checkbox\" value=\""+ obj.id +"\"/></td>";
+                htmlStr += "<td><a style=\"text-decoration: none; cursor: pointer;\" onclick=\"window.location.href='detail.jsp';\">"+ obj.name +"</a></td>";
+                htmlStr += "<td>"+ obj.owner +"</td>";
+                htmlStr += "<td>"+ obj.phone +"</td>";
+                htmlStr += "<td>"+ obj.website +"</td>";
+                htmlStr += "</tr>";
             });
-            $("#customer-tboby").html(htmlStr);
+            $("#customer-tbody").html(htmlStr);
 
             //取消全选
             $("#checkAll").prop("checked", false);

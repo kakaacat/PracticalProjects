@@ -77,7 +77,7 @@ public class CustomerController {
         map.put("owner", owner);
         map.put("phone", phone);
         map.put("website", website);
-        map.put("pageNo", (pageNo - 1) * pageSize);
+        map.put("beginNo", (pageNo - 1) * pageSize);
         map.put("pageSize", pageSize);
 
         //调用service层方法
@@ -86,8 +86,8 @@ public class CustomerController {
 
         //生产响应信息
         Map<String, Object> retMap = new HashMap<>();
-        map.put("customerList", customerList);
-        map.put("totalRows", totalRows);
+        retMap.put("customerList", customerList);
+        retMap.put("totalRows", totalRows);
 
         return retMap;
     }
