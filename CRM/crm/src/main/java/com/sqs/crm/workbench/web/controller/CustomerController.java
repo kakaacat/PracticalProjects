@@ -68,6 +68,7 @@ public class CustomerController {
         return returnObject;
     }
 
+    @RequestMapping("/workbench/customer/queryCustomerForPage.do")
     public @ResponseBody Object queryCustomerForPage(String name, String owner, String phone,
                                                      String website, int pageNo, int pageSize) {
         //封装参数

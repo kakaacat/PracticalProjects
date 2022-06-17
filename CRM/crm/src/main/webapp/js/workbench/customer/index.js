@@ -71,5 +71,98 @@ $(function(){
         });
     });
 
+    //日历函数
+    $(".mydate").datetimepicker({
+        language : 'zh-CN',
+        format : 'yyyy-mm-dd',
+        minView : 'month',
+        initialDate : new Date(),
+        autoclose : true,
+        todayBtn : true,
+        clearBtn : true
+    });
+
+    //查询所有数据的第一页以及总条数
+    queryCustomerByConditionForPage(1, 10);
+
+    //给“查询”按钮添加单击事件
+    $("#queryBtn").click(function () {
+        queryCustomerByConditionForPage(1, $("#pageDiv").bs_pagination('getOption', 'rowsPerPage'));
+    });
+
+    //给全选按钮添加点击事件
+    $("#checkAll").click(function () {
+        $("#customer-tboby input[type='checkbox']").prop("checked", this.checked);
+    });
+    $("#customer-tboby").on("click", "input[type='checkbox]", function () {
+        //如果列表中的checkedbox全部选中，全选也选中
+        if ($("#customer-tboby input[type='checkbox']").size() == $("#customer-tboby input[type='checkbox']:checked").size()){
+            $("#checkAll").prop("checked", true);
+        } else {
+            $("#checkAll").prop("checked", false);
+        }
+    });
+
+
 
 });
+//-----------------------------------------
+function queryCustomerByConditionForPage(pageNo, pageSize){
+    //收集参数
+    var name = $("#query-name").val();
+    var owner = $("#query-owner").val();
+    var phone = $("#query-phone").val();
+    var website = $("#query-website").val();
+
+    //发送请求
+    $.ajax({
+        url: 'workbench/customer/queryCustomerForPage.do',
+        data:{
+            name: name,
+            owner: owner,
+            phone: phone,
+            website: website,
+            pageNo: pageNo,
+            pageSize: pageSize
+        },
+        type: 'post',
+        dataType: 'json',
+        success:function (data) {
+           //显示客户列表
+            var htmlStr = "";
+            $.each(data.customerList, function (index, obj) {
+                htmlStr+="<tr class=\"active\">";
+                htmlStr+="<td><input type=\"checkbox\" value=\""+ obj.id +"\"/></td>";
+                htmlStr+="<td><a style=\"text-decoration: none; cursor: pointer;\" onclick=\"window.location.href='detail.jsp';\">"+ obj.name +"</a></td>";
+                htmlStr+="<td>"+ obj.owner +"</td>";
+                htmlStr+="<td>"+ obj.phone +"</td>";
+                htmlStr+="<td>"+ obj.website +"</td>";
+                htmlStr+="</tr>";
+            });
+            $("#customer-tboby").html(htmlStr);
+
+            //取消全选
+            $("#checkAll").prop("checked", false);
+
+            //调用分页插件,显示分页信息
+            $("#pageDiv").bs_pagination({
+                currentPage: pageNo,
+
+                rowsPerPage: pageSize,
+                totalRows: data.totalRows,
+                totalPages: Math.ceil(data.totalRows / pageSize),
+
+                visiblePageLinks: 5,
+
+                showGoToPage: true,
+                showRowsPerPage: true,
+                showRowsInfo: true,
+
+                onChangePage: function (event, pageObj) {
+                    queryCustomerByConditionForPage(pageObj.currentPage, pageObj.rowsPerPage);
+                }
+            });
+        }
+
+    });
+}
