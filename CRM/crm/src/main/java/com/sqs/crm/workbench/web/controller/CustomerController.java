@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : kaka
@@ -64,5 +66,28 @@ public class CustomerController {
         }
 
         return returnObject;
+    }
+
+    public @ResponseBody Object queryCustomerForPage(String name, String owner, String phone,
+                                                     String website, int pageNo, int pageSize) {
+        //封装参数
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("owner", owner);
+        map.put("phone", phone);
+        map.put("website", website);
+        map.put("pageNo", (pageNo - 1) * pageSize);
+        map.put("pageSize", pageSize);
+
+        //调用service层方法
+        List<Customer> customerList = customerService.queryCustomerByConditionForPage(map);
+        int totalRows = customerService.queryCountOfCustomerByCondition(map);
+
+        //生产响应信息
+        Map<String, Object> retMap = new HashMap<>();
+        map.put("customerList", customerList);
+        map.put("totalRows", totalRows);
+
+        return retMap;
     }
 }
