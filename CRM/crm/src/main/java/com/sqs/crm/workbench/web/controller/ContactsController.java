@@ -10,6 +10,7 @@ import com.sqs.crm.settings.service.DicValueService;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.model.Contacts;
 import com.sqs.crm.workbench.service.ContactsService;
+import com.sqs.crm.workbench.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,8 @@ public class ContactsController {
     private DicValueService dicValueService;
     @Autowired
     private ContactsService contactsService;
+    @Autowired
+    private CustomerService customerService;
 
     @RequestMapping("/workbench/contacts/index.do")
     public String index(HttpServletRequest request) {
@@ -71,5 +74,13 @@ public class ContactsController {
         }
 
         return returnObject;
+    }
+
+    @RequestMapping("/workbench/contacts/queryCustomerByName.do")
+    public @ResponseBody Object queryCustomerByName(String name) {
+        //调用service层方法
+        List<String> customerNameList = customerService.queryCustomerByName(name);
+        //返回响应信息
+        return customerNameList;
     }
 }

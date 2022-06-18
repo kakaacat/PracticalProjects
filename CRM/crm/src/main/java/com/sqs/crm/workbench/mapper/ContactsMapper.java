@@ -3,6 +3,7 @@ package com.sqs.crm.workbench.mapper;
 import com.sqs.crm.workbench.model.Contacts;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ContactsMapper {
     /**
@@ -67,4 +68,9 @@ public interface ContactsMapper {
      * 查询所有的联系人
      */
     List<Contacts> selectAllContactsForIndex();
+
+    /**
+     * 根据条件分页查询联系人
+     */
+    List<Contacts> selectContactsByConditionForPage(Map<String, Object> map);
 }

@@ -13,6 +13,24 @@ $(function(){
         //打开模态窗口
         $("#createContactsModal").modal("show");
     });
+
+    //客户名称自动补全
+    $("#create-customerName").typeahead({
+        source: function (jquery, process) {
+            $.ajax({
+                url: 'workbench/contacts/queryCustomerByName.do',
+                data: {
+                    name: jquery
+                },
+                type: 'post',
+                dataType: 'json',
+                success:function (data) {
+                    process(data);
+                }
+            });
+        }
+    });
+
     //给“保存”按钮添加事件
     $("#saveCreateContactsBtn").click(function () {
         //收集参数
@@ -90,10 +108,21 @@ $(function(){
                 }
             }
         });
-
-
-
     });
-    
+
+    //日历函数
+    $(".mydate").datetimepicker({
+        language : 'zh-CN',
+        format : 'yyyy-mm-dd',
+        minView : 'month',
+        initialDate : new Date(),
+        autoclose : true,
+        todayBtn : true,
+        clearBtn : true
+    });
+
+
+
+
     
 });
