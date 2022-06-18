@@ -152,7 +152,7 @@ function queryClueByConditionForPage(pageNo, pageSize) {
     var fullname = $.trim($("#query-fullnameInput").val());
     var company = $.trim($("#query-companyInput").val());
     var phone = $.trim($("#query-phoneInput").val());
-    var source = $("#query-sourceSel").val();
+    var source = $("#query-sourceSel option:selected").text();
     var owner = $.trim($("#query-ownerInput").val());
     var mphone = $.trim($("#query-mphoneInput").val());
     var state = $("#query-stateSel").val();

@@ -130,6 +130,7 @@ $(function(){
         queryContactsForPage(1, $("#pageDiv").bs_pagination("getOption", "rowsPerPage"));
     });
 
+
     
 });
 
@@ -139,7 +140,7 @@ function queryContactsForPage(pageNo, pageSize) {
     var owner = $("#query-owner").val();
     var fullname = $("#query-fullname").val();
     var customerId = $("#query-customerId").val();
-    var source = $("#query-source").val();
+    var source = $("#query-source option:selected").text();
 
     //发送请求
     $.ajax({

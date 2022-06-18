@@ -306,7 +306,7 @@
       <if test="customer_id != null and customer_id != ''">
         and cu.name like concat('%', #{customerId} ,'%')
       </if>
-      <if test="source != null and source != '--请选择--'">
+      <if test="source != null and source != '---请选择---'">
         and dv.value like concat('%',#{source},'%')
       </if>
     </where>
