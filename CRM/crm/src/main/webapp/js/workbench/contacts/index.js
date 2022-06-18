@@ -129,7 +129,19 @@ $(function(){
     $("#queryBtn").click(function () {
         queryContactsForPage(1, $("#pageDiv").bs_pagination("getOption", "rowsPerPage"));
     });
+    //给全选按钮添加点击事件
+    $("#checkAll").click(function () {
+        $("#tBody input[type='checkbox']").prop("checked", this.checked);
+    });
 
+    $("#tBody").on("click", "input[type='checkbox']", function () {
+        //如果列表中的checkedbox全部选中，全选也选中
+        if ($("#tBody input[type='checkbox']").size() == $("#tBody input[type='checkbox']:checked").size()){
+            $("#checkAll").prop("checked", true);
+        } else {
+            $("#checkAll").prop("checked", false);
+        }
+    });
 
     
 });
@@ -167,7 +179,7 @@ function queryContactsForPage(pageNo, pageSize) {
                 htmlStr+="<td>"+ obj.source +"</td>";
                 htmlStr+="</tr>";
             });
-            $("#tbody").html(htmlStr);
+            $("#tBody").html(htmlStr);
 
             //取消全选
             $("#checkAll").prop("checked", false);

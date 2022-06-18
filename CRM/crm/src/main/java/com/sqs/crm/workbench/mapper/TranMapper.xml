@@ -319,10 +319,10 @@
   </select>
 
   <select id="selectTranByConditionForPage" parameterType="map" resultMap="BaseResultMap">
-    select t.id, t.name, u1.name as customer_id, dv1.value as stage, dv2.value as type, u2.name as owner,
+    select t.id, t.name, cu.name as customer_id, dv1.value as stage, dv2.value as type, u2.name as owner,
         dv3.value as source, co.fullname as contacts_id
     from tbl_tran t
-    join tbl_user u1 on t.customer_id = u1.id
+    join tbl_customer cu on t.customer_id = cu.id
     join tbl_dic_value dv1 on t.stage=dv1.id
     left join tbl_dic_value dv2 on t.type=dv2.id
     join tbl_user u2 on t.owner=u2.id
@@ -342,7 +342,7 @@
         and dv1.value like concat('%', #{stage}, '%')
       </if>
       <if test="type != null and type != '---请选择---'">
-        and dv2.value like concat('%', #{stage}, '%')
+        and dv2.value like concat('%', #{type}, '%')
       </if>
       <if test="source != null and source != '---请选择---'">
         and dv3.value like concat('%', #{source}, '%')
@@ -358,7 +358,7 @@
   <select id="selectCountOfTranByCondition" parameterType="map" resultType="int">
     select count(*)
     from tbl_tran t
-    join tbl_user u1 on t.customer_id = u1.id
+    join tbl_customer cu on t.customer_id = cu.id
     join tbl_dic_value dv1 on t.stage=dv1.id
     left join tbl_dic_value dv2 on t.type=dv2.id
     join tbl_user u2 on t.owner=u2.id
@@ -378,7 +378,7 @@
         and dv1.value like concat('%', #{stage}, '%')
       </if>
       <if test="type != null and type != '---请选择---'">
-        and dv2.value like concat('%', #{stage}, '%')
+        and dv2.value like concat('%', #{type}, '%')
       </if>
       <if test="source != null and source != '---请选择---'">
         and dv3.value like concat('%', #{source}, '%')

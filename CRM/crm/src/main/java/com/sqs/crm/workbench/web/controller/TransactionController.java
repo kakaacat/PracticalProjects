@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -145,5 +146,32 @@ public class TransactionController {
         return "workbench/transaction/detail";
     }
 
+    @RequestMapping("/workbench/transaction/queryTranByConditionForPage.do")
+    public @ResponseBody Object queryTranByConditionForPage(String name, String owner, String customerId, String stage,
+                                                            String type, String source, String contactsId, int pageNo, int pageSize) {
+
+        //分装参数
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("owner", owner);
+        map.put("customerId", customerId);
+        map.put("stage", stage);
+        map.put("type", type);
+        map.put("source", source);
+        map.put("contactsId", contactsId);
+        map.put("beginNo", (pageNo - 1) * pageSize);
+        map.put("pageSize", pageSize);
+
+        //调用service层方法
+        List<Tran> tranList = tranService.queryTranByConditionForPage(map);
+        int totalRows = tranService.queryCountOfTranByCondition(map);
+
+        //生成响应信息
+        Map<String, Object> retMap = new HashMap<>();
+        retMap.put("tranList",tranList);
+        retMap.put("totalRows",totalRows);
+
+        return retMap;
+    }
 
 }

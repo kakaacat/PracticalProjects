@@ -12,4 +12,8 @@ public interface TranService {
     Tran queryTranForDetailById(String id);
 
     List<FunnelVO> queryCountTranGroupByStage();
+
+    List<Tran> queryTranByConditionForPage(Map<String, Object> map);
+
+    int queryCountOfTranByCondition(Map<String, Object> map);
 }

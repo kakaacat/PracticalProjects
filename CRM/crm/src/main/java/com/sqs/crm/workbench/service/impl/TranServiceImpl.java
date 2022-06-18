@@ -91,4 +91,14 @@ public class TranServiceImpl implements TranService {
     public List<FunnelVO> queryCountTranGroupByStage() {
         return tranMapper.selectCountTranGroupByStage();
     }
+
+    @Override
+    public List<Tran> queryTranByConditionForPage(Map<String, Object> map) {
+        return tranMapper.selectTranByConditionForPage(map);
+    }
+
+    @Override
+    public int queryCountOfTranByCondition(Map<String, Object> map) {
+        return tranMapper.selectCountOfTranByCondition(map);
+    }
 }
