@@ -1,5 +1,6 @@
 package com.sqs.crm.workbench.service;
 
+import com.sqs.crm.workbench.model.Contacts;
 import com.sqs.crm.workbench.model.Customer;
 
 import java.util.List;

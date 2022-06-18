@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : kaka
@@ -31,5 +32,15 @@ public class ContactsServiceImpl implements ContactsService {
     @Override
     public List<Contacts> queryAllContactsForIndex() {
         return contactsMapper.selectAllContactsForIndex();
+    }
+
+    @Override
+    public List<Contacts> queryContactsByConditionForPage(Map<String, Object> map) {
+        return contactsMapper.selectContactsByConditionForPage(map);
+    }
+
+    @Override
+    public int queryCountOfContactsByCondition(Map<String, Object> map) {
+        return contactsMapper.selectCountOfContactsByCondition(map);
     }
 }
