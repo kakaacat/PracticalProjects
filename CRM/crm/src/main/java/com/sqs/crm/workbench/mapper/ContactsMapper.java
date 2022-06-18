@@ -73,4 +73,8 @@ public interface ContactsMapper {
      * 根据条件分页查询联系人
      */
     List<Contacts> selectContactsByConditionForPage(Map<String, Object> map);
+    /**
+     * 根据条件查询联系人的总条数
+     */
+    int selectCountOfContactsByCondition(Map<String, Object> map);
 }

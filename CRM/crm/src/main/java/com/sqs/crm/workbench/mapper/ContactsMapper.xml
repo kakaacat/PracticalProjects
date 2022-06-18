@@ -313,4 +313,26 @@
     order by c.create_time desc
     limit #{beginNo}, #{pageSize}
   </select>
+
+  <select id="selectCountOfContactsByCondition" parameterType="map" resultType="int">
+    select count(*)
+    from tbl_contacts c
+    join tbl_user u1 on c.owner = u1.id
+    left join  tbl_customer cu on c.customer_id = cu.id
+    join tbl_dic_value dv on c.source = dv.id
+    <where>
+      <if test="owner != null and owner != ''">
+        and u1.name like concat('%', #{owner}, '%')
+      </if>
+      <if test="fullname != null and fullname != ''">
+        and c.fullname like concat('%', #{fullname}, '%')
+      </if>
+      <if test="customer_id != null and customer_id != ''">
+        and cu.name like concat('%', #{customerId} ,'%')
+      </if>
+      <if test="source != null and source != '--请选择--'">
+        and dv.value like concat('%',#{source},'%')
+      </if>
+    </where>
+  </select>
 </mapper>
