@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : kaka
@@ -82,5 +84,29 @@ public class ContactsController {
         List<String> customerNameList = customerService.queryCustomerByName(name);
         //返回响应信息
         return customerNameList;
+    }
+
+    @RequestMapping("/workbench/contacts/queryContactsForPage.do")
+    public @ResponseBody Object queryContactsForPage(String owner, String fullname, String customerId,
+                                String source, int pageNo, int pageSize) {
+
+        //封装参数
+        Map<String, Object> map = new HashMap<>();
+        map.put("owner", owner);
+        map.put("fullname", fullname);
+        map.put("customerId", customerId);
+        map.put("source", source);
+        map.put("beginNo", (pageNo - 1) * pageSize);
+        map.put("pageSize", pageSize);
+
+        //调用service层方法
+        List<Contacts> contactsList = contactsService.queryContactsByConditionForPage(map);
+        int totalRows = contactsService.queryCountOfContactsByCondition(map);
+
+        //生成响应信息
+        Map<String, Object> retMap = new HashMap<>();
+        retMap.put("contactsList", contactsList);
+        retMap.put("totalRows", totalRows);
+        return retMap;
     }
 }

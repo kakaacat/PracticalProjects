@@ -122,7 +122,73 @@ $(function(){
     });
 
 
+    //查询所有数据的第一页以及总条数
+    queryContactsForPage(1, 10);
 
+    //给“查询”按钮添加单击事件
+    $("#queryBtn").click(function () {
+        queryContactsForPage(1, $("#pageDiv").bs_pagination("getOption", "rowsPerPage"));
+    });
 
     
 });
+
+//------------------------
+function queryContactsForPage(pageNo, pageSize) {
+    //收集参数
+    var owner = $("#query-owner").val();
+    var fullname = $("#query-fullname").val();
+    var customerId = $("#query-customerId").val();
+    var source = $("#query-source").val();
+
+    //发送请求
+    $.ajax({
+        url: 'workbench/contacts/queryContactsForPage.do',
+        data:{
+            owner:owner,
+            fullname:fullname,
+            customerId:customerId,
+            source:source,
+            pageNo:pageNo,
+            pageSize:pageSize
+        },
+        type:'post',
+        dataType:'json',
+        success:function (data) {
+            //显示列表
+            var htmlStr = "";
+            $.each(data.contactsList, function (index, obj) {
+                htmlStr+="<tr class=\"active\">";
+                htmlStr+="<td><input type=\"checkbox\" value=\""+ obj.id +"\" /></td>";
+                htmlStr+="<td><a style=\"text-decoration: none; cursor: pointer;\" onclick=\"window.location.href='detail.jsp';\">"+ obj.fullname +"</a></td>";
+                htmlStr+="<td>"+ obj.customerId +"</td>";
+                htmlStr+="<td>"+ obj.owner +"</td>";
+                htmlStr+="<td>"+ obj.source +"</td>";
+                htmlStr+="</tr>";
+            });
+            $("#tbody").html(htmlStr);
+
+            //取消全选
+            $("#checkAll").prop("checked", false);
+
+            //调用分页插件
+            $("#pageDiv").bs_pagination({
+                currentPage: pageNo,
+
+                rowsPerPage: pageSize,
+                totalRows: data.totalRows,
+                totalPages: Math.ceil(data.totalRows / pageSize),
+
+                visiblePageLinks: 5,
+
+                showGoToPage: true,
+                showRowsPerPage: true,
+                showRowsInfo: true,
+
+                onChangePage: function (event, pageObj) {
+                    queryContactsForPage(pageObj.currentPage, pageObj.rowsPerPage);
+                }
+            });
+        }
+    });
+}
