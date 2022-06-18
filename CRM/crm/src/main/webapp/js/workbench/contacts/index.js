@@ -137,9 +137,9 @@ $(function(){
 //------------------------
 function queryContactsForPage(pageNo, pageSize) {
     //收集参数
-    var owner = String.trim(("#query-owner").val());
-    var fullname = String.trim($("#query-fullname").val());
-    var customerId = String.trim($("#query-customerId").val());
+    var owner = $.trim($("#query-owner").val());
+    var fullname =  $.trim($("#query-fullname").val());
+    var customerId =  $.trim($("#query-customerId").val());
     var source = $("#query-source option:selected").text();
 
     //发送请求

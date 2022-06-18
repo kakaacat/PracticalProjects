@@ -4,6 +4,7 @@ import com.sqs.crm.workbench.model.FunnelVO;
 import com.sqs.crm.workbench.model.Tran;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TranMapper {
     /**
@@ -64,5 +65,18 @@ public interface TranMapper {
      */
     Tran selectTranForDetailById(String id);
 
+    /**
+     * 根据阶段分组查询每个阶段的交易数用于图表
+     */
     List<FunnelVO> selectCountTranGroupByStage();
+
+    /**
+     * 根据条件分页查询交易列表
+     */
+    List<Tran> selectTranByConditionForPage(Map<String, Object> map);
+
+    /**
+     * 根据条件查询交易总数
+     */
+    int selectCountOfTranByCondition(Map<String,Object> map);
 }
