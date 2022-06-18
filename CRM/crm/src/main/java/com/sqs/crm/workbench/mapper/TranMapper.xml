@@ -354,4 +354,39 @@
     order by t.create_time desc
     limit #{beginNo}, #{pageSize}
   </select>
+
+  <select id="selectCountOfTranByCondition" parameterType="map" resultType="int">
+    select count(*)
+    from tbl_tran t
+    join tbl_user u1 on t.customer_id = u1.id
+    join tbl_dic_value dv1 on t.stage=dv1.id
+    left join tbl_dic_value dv2 on t.type=dv2.id
+    join tbl_user u2 on t.owner=u2.id
+    left join tbl_dic_value dv3 on t.source=dv3.id
+    left join tbl_contacts co on t.contacts_id=co.id
+    <where>
+      <if test="owner != null and owner != ''">
+        and u2.name like concat('%', #{owner}, '%')
+      </if>
+      <if test="name != null and name != ''">
+        and t.name like concat('%', #{name}, '%')
+      </if>
+      <if test="customer_id != null and customer_id != ''">
+        and u1.name like concat('%', #{customerId}, '%')
+      </if>
+      <if test="stage != null and stage != '---请选择---'">
+        and dv1.value like concat('%', #{stage}, '%')
+      </if>
+      <if test="type != null and type != '---请选择---'">
+        and dv2.value like concat('%', #{stage}, '%')
+      </if>
+      <if test="source != null and source != '---请选择---'">
+        and dv3.value like concat('%', #{source}, '%')
+      </if>
+      <if test="contacts_id != null and contacts_id != ''">
+        and co.fullname like concat('%', #{contactsId}, '%')
+      </if>
+    </where>
+  </select>
+
 </mapper>
