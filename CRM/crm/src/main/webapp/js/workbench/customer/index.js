@@ -1,10 +1,14 @@
 $(function(){
 
-    //定制字段
-    $("#definedColumns > li").click(function(e) {
-        //防止下拉菜单消失
-        e.stopPropagation();
-    });
+    // //定制字段
+    // $("#definedColumns > li").click(function(e) {
+    //     //防止下拉菜单消失
+    //     e.stopPropagation();
+    // });
+
+    //查询所有数据的第一页以及总条数
+    queryCustomerByConditionForPage(1, 10);
+
 
     //给“创建”按钮添加事件
     $("#createCustomerBtn").click(function () {
@@ -61,7 +65,7 @@ $(function(){
                     //关闭模态窗口
                     $("#createCustomerModal").modal("hide");
                     //刷新列表
-
+                    queryCustomerByConditionForPage(1, 10);
                 } else{
                     //模态窗口不关闭
                     $("#createCustomerModal").modal("show");
@@ -71,8 +75,6 @@ $(function(){
         });
     });
 
-    //查询所有数据的第一页以及总条数
-    queryCustomerByConditionForPage(1, 10);
 
     //给“查询”按钮添加单击事件
     $("#queryBtn").click(function () {
@@ -83,7 +85,7 @@ $(function(){
     $("#checkAll").click(function () {
         $("#customer-tbody input[type='checkbox']").prop("checked", this.checked);
     });
-    $("#customer-tbody").on("click", "input[type='checkbox]", function () {
+    $("#customer-tbody").on("click", "input[type='checkbox']", function () {
         //如果列表中的checkedbox全部选中，全选也选中
         if ($("#customer-tbody input[type='checkbox']").size() == $("#customer-tbody input[type='checkbox']:checked").size()){
             $("#checkAll").prop("checked", true);
@@ -91,6 +93,7 @@ $(function(){
             $("#checkAll").prop("checked", false);
         }
     });
+
 
 
 
@@ -102,7 +105,7 @@ function queryCustomerByConditionForPage(pageNo, pageSize){
     var owner = $("#query-owner").val();
     var phone = $("#query-phone").val();
     var website = $("#query-website").val();
-
+    //alert(name);
     //发送请求
     $.ajax({
         url: 'workbench/customer/queryCustomerForPage.do',
@@ -152,6 +155,5 @@ function queryCustomerByConditionForPage(pageNo, pageSize){
                 }
             });
         }
-
     });
 }

@@ -88,7 +88,6 @@ public class CustomerController {
         Map<String, Object> retMap = new HashMap<>();
         retMap.put("customerList", customerList);
         retMap.put("totalRows", totalRows);
-
         return retMap;
     }
 }

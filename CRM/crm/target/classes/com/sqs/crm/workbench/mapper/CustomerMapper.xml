@@ -278,6 +278,8 @@
     select count(*)
     from tbl_customer c
     join tbl_user u1 on c.owner = u1.id
+    join tbl_user u2 on c.create_by = u2.id
+    left join tbl_user u3 on c.edit_by = u3.id
     <where>
       <if test="name != null and name != ''">
         and c.name like concat('%', #{name}, '%')

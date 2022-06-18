@@ -248,4 +248,51 @@
     from tbl_customer
     where name = #{name}
   </select>
+
+  <select id="selectCustomerByConditionForPage" parameterType="map" resultMap="BaseResultMap">
+    select c.id, c.name, u1.name as owner, c.phone, c.website, u2.name as create_by, c.create_time, u3.name as edit_by, c.edit_time,
+            c.contact_summary, c.next_contact_time, c.description, c.address
+    from tbl_customer c
+    join tbl_user u1 on c.owner = u1.id
+    join tbl_user u2 on c.create_by = u2.id
+    left join tbl_user u3 on c.edit_by = u3.id
+    <where>
+      <if test="name != null and name != ''">
+        and c.name like concat('%', #{name}, '%')
+      </if>
+      <if test="owner != null and owner != ''">
+        and u1.name like concat('%', #{owner}, '%')
+      </if>
+      <if test="phone != null and phone != ''">
+        and c.phone like concat('%', #{phone} ,'%')
+      </if>
+      <if test="website != null and website != ''">
+        and c.website like concat('%',#{website},'%')
+      </if>
+    </where>
+    order by c.create_time desc
+    limit #{beginNo}, #{pageSize}
+  </select>
+
+  <select id="selectCountOfCustomerByCondition" parameterType="map" resultType="int">
+    select count(*)
+    from tbl_customer c
+    join tbl_user u1 on c.owner = u1.id
+    join tbl_user u2 on c.create_by = u2.id
+    left join tbl_user u3 on c.edit_by = u3.id
+    <where>
+      <if test="name != null and name != ''">
+        and c.name like concat('%', #{name}, '%')
+      </if>
+      <if test="owner != null and owner != ''">
+        and u1.name like concat('%', #{owner}, '%')
+      </if>
+      <if test="phone != null and phone != ''">
+        and c.phone like concat('%', #{phone} ,'%')
+      </if>
+      <if test="website != null and website != ''">
+        and c.website like concat('%',#{website},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -235,7 +235,7 @@ request.getContextPath() + "/";
 				    </div>
 				  </div>
 				  
-				  <button type="submit" class="btn btn-default" id="queryBtn">查询</button>
+				  <button type="button" class="btn btn-default" id="queryBtn">查询</button>
 				  
 				</form>
 			</div>
