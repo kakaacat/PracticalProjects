@@ -71,4 +71,9 @@ public class ChartController {
 
         return map;
     }
+
+    @RequestMapping("/workbench/chart/customerAndContacts/customerAndContactsIndex.do")
+    public String customerAndContactsIndex() {
+        return "workbench/chart/customerAndContacts/index";
+    }
 }

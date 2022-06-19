@@ -395,4 +395,11 @@
   <delete id="deleteClueById" parameterType="string">
     delete from tbl_clue where id = #{id}
   </delete>
+
+  <select id="selectCountClueGroupByStage" resultType="com.sqs.crm.workbench.model.FunnelVO">
+    select count(*) as value, dv.value as name
+    from tbl_clue c
+    join tbl_dic_value dv on c.source = dv.id
+    group by c.source
+  </select>
 </mapper>

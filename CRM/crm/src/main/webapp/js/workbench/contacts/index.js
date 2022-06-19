@@ -41,13 +41,13 @@ $(function(){
         var job = $("#create-job").val();
         var mphone = $("#create-mphone").val();
         var email = $("#create-email").val();
-        //var customerId = $("#create-customerName").val();
-        var customerId = "805d14c7ba724ad795155d3292207432";
+        var customerName = $("#create-customerName").val();
+        //var customerId = "805d14c7ba724ad795155d3292207432";
         var description = $("#create-describe").val();
         var contactSummary = $("#create-contactSummary1").val();
         var nextContactTime = $("#create-nextContactTime1").val();
         var address = $("#edit-address1").val();
-
+        alert(customerName);
         //表单验证
         if (owner == "") {
             alert("所有者不能为空");
@@ -87,7 +87,7 @@ $(function(){
                 job : job,
                 mphone : mphone,
                 email : email,
-                customerId : customerId,
+                customerId : customerName,
                 description : description,
                 contactSummary : contactSummary,
                 nextContactTime : nextContactTime,
@@ -100,7 +100,7 @@ $(function(){
                     //关闭模态窗口
                     $("#createContactsModal").modal("hide");
                     //刷新页面
-
+                    queryContactsForPage(1, $("#pageDiv").bs_pagination("getOption", "rowsPerPage"));
                 } else{
                     //模态窗口不关闭
                     $("#createContactsModal").modal("show");
