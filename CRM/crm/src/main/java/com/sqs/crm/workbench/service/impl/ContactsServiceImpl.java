@@ -6,6 +6,7 @@ import com.sqs.crm.workbench.mapper.ContactsMapper;
 import com.sqs.crm.workbench.mapper.CustomerMapper;
 import com.sqs.crm.workbench.model.Contacts;
 import com.sqs.crm.workbench.model.Customer;
+import com.sqs.crm.workbench.model.FunnelVO;
 import com.sqs.crm.workbench.service.ContactsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,5 +65,10 @@ public class ContactsServiceImpl implements ContactsService {
     @Override
     public int queryCountOfContactsByCondition(Map<String, Object> map) {
         return contactsMapper.selectCountOfContactsByCondition(map);
+    }
+
+    @Override
+    public List<FunnelVO> queryCountContactsGroupByCustomer() {
+        return contactsMapper.selectCountContactsGroupByCustomer();
     }
 }

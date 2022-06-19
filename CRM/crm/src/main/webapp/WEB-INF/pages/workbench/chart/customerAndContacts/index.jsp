@@ -10,12 +10,12 @@ request.getContextPath() + "/";
     <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
     <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="jquery/echars/echarts.min.js"></script>
-    <title>线索统计图表</title>
+    <title>客户和联系人统计图</title>
     <script type="text/javascript">
         $(function () {
             //发送查询请求
             $.ajax({
-                url: 'workbench/chart/clue/queryCountClueGroupByStage.do',
+                url: 'workbench/chart/customerAndContacts/queryCountContactsGroupByCustomer.do',
                 type: 'post',
                 dataType: 'json',
                 success: function (data) {
@@ -23,14 +23,14 @@ request.getContextPath() + "/";
                     var myChart = echarts.init(document.getElementById('main'));
                     var option = {
                         title:{
-                            text:'线索统计图'
+                            text:'客户和联系人统计图'
                         },
                         tooltip:{
-                            trigger:'item'
+                            target:'axis'
                         },
-                        toolbox: {
-                            feature: {
-                                dataView: { readOnly: false },
+                        toolbox:{
+                            feature:{
+                                dataView: {readOnly: false},
                                 restore: {},
                                 saveAsImage: {}
                             }
@@ -39,12 +39,15 @@ request.getContextPath() + "/";
                             type: 'category',
                             data: data.xList
                         },
-                        yAxis: {},
-                        series: [{
-                            name: '阶段',
-                            type: 'bar',
-                            data: data.yList
-                        }]
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                data: data.yList,
+                                type: 'line'
+                            }
+                        ]
                     };
 
                     myChart.setOption(option);

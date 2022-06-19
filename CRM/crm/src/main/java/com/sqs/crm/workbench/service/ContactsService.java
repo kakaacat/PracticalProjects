@@ -1,6 +1,7 @@
 package com.sqs.crm.workbench.service;
 
 import com.sqs.crm.workbench.model.Contacts;
+import com.sqs.crm.workbench.model.FunnelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -15,4 +16,6 @@ public interface ContactsService {
    List<Contacts> queryContactsByConditionForPage(Map<String, Object> map);
 
    int queryCountOfContactsByCondition(Map<String, Object> map);
+
+   List<FunnelVO> queryCountContactsGroupByCustomer();
 }

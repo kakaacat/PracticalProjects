@@ -3,6 +3,7 @@ package com.sqs.crm.workbench.web.controller;
 import com.sqs.crm.workbench.model.FunnelVO;
 import com.sqs.crm.workbench.service.ActivityService;
 import com.sqs.crm.workbench.service.ClueService;
+import com.sqs.crm.workbench.service.ContactsService;
 import com.sqs.crm.workbench.service.TranService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class ChartController {
     private ActivityService activityService;
     @Autowired
     private ClueService clueService;
+    @Autowired
+    private ContactsService contactsService;
 
     @RequestMapping("/workbench/chart/transaction/index.do")
     public String index() {
@@ -75,5 +78,25 @@ public class ChartController {
     @RequestMapping("/workbench/chart/customerAndContacts/customerAndContactsIndex.do")
     public String customerAndContactsIndex() {
         return "workbench/chart/customerAndContacts/index";
+    }
+
+
+    @RequestMapping("/workbench/chart/customerAndContacts/queryCountContactsGroupByCustomer.do")
+    @ResponseBody
+    public Object queryCountContactsGroupByCustomer() {
+        List<FunnelVO> funnelVOList = contactsService.queryCountContactsGroupByCustomer();
+        List<String> xList = new ArrayList<>();
+        for (FunnelVO funnelVO : funnelVOList) {
+            xList.add(funnelVO.getName());
+        }
+        List<Integer> yList = new ArrayList<>();
+        for (FunnelVO funnelVO : funnelVOList) {
+            yList.add(funnelVO.getValue());
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("xList", xList);
+        map.put("yList", yList);
+
+        return map;
     }
 }

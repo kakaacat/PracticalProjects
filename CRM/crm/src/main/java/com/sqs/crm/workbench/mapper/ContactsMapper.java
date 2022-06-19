@@ -1,6 +1,7 @@
 package com.sqs.crm.workbench.mapper;
 
 import com.sqs.crm.workbench.model.Contacts;
+import com.sqs.crm.workbench.model.FunnelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -77,4 +78,9 @@ public interface ContactsMapper {
      * 根据条件查询联系人的总条数
      */
     int selectCountOfContactsByCondition(Map<String, Object> map);
+
+    /**
+     * 根据客户分组查询联系人总数用于图表
+     */
+    List<FunnelVO> selectCountContactsGroupByCustomer();
 }
