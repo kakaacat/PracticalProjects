@@ -1,6 +1,7 @@
 package com.sqs.crm.workbench.service;
 
 import com.sqs.crm.workbench.model.Clue;
+import com.sqs.crm.workbench.model.FunnelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -15,4 +16,6 @@ public interface ClueService {
     Clue queryClueByIdForDetail(String id);
 
     void saveConvertClue(Map<String, Object> map);
+
+    List<FunnelVO> queryCountClueGroupByStage();
 }

@@ -143,12 +143,12 @@
 				<li class="liClass"><a href="workbench/customer/index.do" target="workareaFrame"><span class="glyphicon glyphicon-user"></span> 客户</a></li>
 				<li class="liClass"><a href="workbench/contacts/index.do" target="workareaFrame"><span class="glyphicon glyphicon-earphone"></span> 联系人</a></li>
 				<li class="liClass"><a href="workbench/transaction/index.do" target="workareaFrame"><span class="glyphicon glyphicon-usd"></span> 交易（商机）</a></li>
-<%--				<li class="liClass"><a href="visit/index.html" target="workareaFrame"><span class="glyphicon glyphicon-phone-alt"></span> 售后回访</a></li>--%>
+<%--				<li class="liClass"><a href="visit/index.jsp" target="workareaFrame"><span class="glyphicon glyphicon-phone-alt"></span> 售后回访</a></li>--%>
 				<li class="liClass">
 					<a href="#no2" class="collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-stats"></span> 统计图表</a>
 					<ul id="no2" class="nav nav-pills nav-stacked collapse">
-						<li class="liClass"><a href="chart/activity/index.html" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span> 市场活动统计图表</a></li>
-						<li class="liClass"><a href="chart/clue/index.html" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span> 线索统计图表</a></li>
+						<li class="liClass"><a href="workbench/chart/activity/activityChartIndex.do" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span> 市场活动统计图表</a></li>
+						<li class="liClass"><a href="workbench/chart/clue/clueChartIndex.do" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span> 线索统计图表</a></li>
 						<li class="liClass"><a href="chart/customerAndContacts/index.html" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span> 客户和联系人统计图表</a></li>
 						<li class="liClass"><a href="workbench/chart/transaction/index.do" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span> 交易统计图表</a></li>
 					</ul>

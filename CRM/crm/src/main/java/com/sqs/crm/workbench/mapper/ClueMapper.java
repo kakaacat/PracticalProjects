@@ -1,6 +1,7 @@
 package com.sqs.crm.workbench.mapper;
 
 import com.sqs.crm.workbench.model.Clue;
+import com.sqs.crm.workbench.model.FunnelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -76,4 +77,10 @@ public interface ClueMapper {
      * 根据id删除线索
      */
     int deleteClueById(String id);
+
+    /**
+     * 根据阶段分组查询线索的个数用于图表
+     */
+    List<FunnelVO> selectCountClueGroupByStage();
+
 }

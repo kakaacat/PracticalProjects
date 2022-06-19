@@ -193,4 +193,9 @@ public class ClueServiceImpl implements ClueService {
         //11.删除该线索
         clueMapper.deleteClueById(clueId);
     }
+
+    @Override
+    public List<FunnelVO> queryCountClueGroupByStage() {
+        return clueMapper.selectCountClueGroupByStage();
+    }
 }
