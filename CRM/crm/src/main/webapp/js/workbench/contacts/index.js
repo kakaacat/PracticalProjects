@@ -47,7 +47,7 @@ $(function(){
         var contactSummary = $("#create-contactSummary1").val();
         var nextContactTime = $("#create-nextContactTime1").val();
         var address = $("#edit-address1").val();
-        alert(customerName);
+        //alert(customerName);
         //表单验证
         if (owner == "") {
             alert("所有者不能为空");
