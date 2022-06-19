@@ -49,22 +49,7 @@ request.getContextPath() + "/";
 								<td>所有者</td>
 							</tr>
 						</thead>
-						<tbody id="tBodyTrans">
-<%--							<tr>--%>
-<%--								<td><input type="radio" name="activity"/></td>--%>
-<%--								<td>发传单</td>--%>
-<%--								<td>2020-10-10</td>--%>
-<%--								<td>2020-10-20</td>--%>
-<%--								<td>zhangsan</td>--%>
-<%--							</tr>--%>
-<%--							<tr>--%>
-<%--								<td><input type="radio" name="activity"/></td>--%>
-<%--								<td>发传单</td>--%>
-<%--								<td>2020-10-10</td>--%>
-<%--								<td>2020-10-20</td>--%>
-<%--								<td>zhangsan</td>--%>
-<%--							</tr>--%>
-						</tbody>
+						<tbody id="tBodyTrans"></tbody>
 					</table>
 				</div>
 			</div>
@@ -99,20 +84,7 @@ request.getContextPath() + "/";
 								<td>手机</td>
 							</tr>
 						</thead>
-						<tbody id="tBodycontactTran">
-<%--							<tr>--%>
-<%--								<td><input type="radio" name="activity"/></td>--%>
-<%--								<td>李四</td>--%>
-<%--								<td>lisi@bjpowernode.com</td>--%>
-<%--								<td>12345678901</td>--%>
-<%--							</tr>--%>
-<%--							<tr>--%>
-<%--								<td><input type="radio" name="activity"/></td>--%>
-<%--								<td>李四</td>--%>
-<%--								<td>lisi@bjpowernode.com</td>--%>
-<%--								<td>12345678901</td>--%>
-<%--							</tr>--%>
-						</tbody>
+						<tbody id="tBodycontactTran"></tbody>
 					</table>
 				</div>
 			</div>

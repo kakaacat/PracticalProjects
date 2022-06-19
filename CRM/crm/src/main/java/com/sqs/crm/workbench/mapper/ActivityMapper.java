@@ -1,6 +1,7 @@
 package com.sqs.crm.workbench.mapper;
 
 import com.sqs.crm.workbench.model.Activity;
+import com.sqs.crm.workbench.model.FunnelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -122,4 +123,9 @@ public interface ActivityMapper {
      * 根据name模糊查询市场活动
      */
     List<Activity> selectActivityByNameForTrans(String name);
+
+    /**
+     * 根据创建者分组查询活动的个数用于图表
+     */
+    List<FunnelVO> selectCountOfActivityGroupByUser();
 }

@@ -9,6 +9,7 @@ import com.sqs.crm.settings.model.User;
 import com.sqs.crm.settings.service.UserService;
 import com.sqs.crm.workbench.model.Activity;
 import com.sqs.crm.workbench.model.ActivityRemark;
+import com.sqs.crm.workbench.model.FunnelVO;
 import com.sqs.crm.workbench.service.ActivityRemarkService;
 import com.sqs.crm.workbench.service.ActivityService;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -368,5 +369,4 @@ public class ActivityController {
         //请求转发
         return "workbench/activity/detail";
     }
-
 }

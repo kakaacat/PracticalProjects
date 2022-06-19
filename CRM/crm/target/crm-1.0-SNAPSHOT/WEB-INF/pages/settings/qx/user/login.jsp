@@ -73,7 +73,7 @@
 
 </head>
 <body>
-	<div style="position: absolute; top: 0px; left: 0px; width: 60%;">
+	<div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
 		<img src="image/IMG_7114.JPG" style="width: 100%; height: 90%; position: relative; top: 50px;">
 	</div>
 	<div id="top" style="height: 50px; background-color: #3C3C3C; width: 100%;">

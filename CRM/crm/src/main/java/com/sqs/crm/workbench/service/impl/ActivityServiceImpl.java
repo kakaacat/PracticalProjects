@@ -2,6 +2,7 @@ package com.sqs.crm.workbench.service.impl;
 
 import com.sqs.crm.workbench.mapper.ActivityMapper;
 import com.sqs.crm.workbench.model.Activity;
+import com.sqs.crm.workbench.model.FunnelVO;
 import com.sqs.crm.workbench.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,5 +93,10 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public List<Activity> queryActivityByNameForTrans(String name) {
         return activityMapper.selectActivityByNameForTrans(name);
+    }
+
+    @Override
+    public List<FunnelVO> queryCountOfActivityGroupByUser() {
+        return activityMapper.selectCountOfActivityGroupByUser();
     }
 }

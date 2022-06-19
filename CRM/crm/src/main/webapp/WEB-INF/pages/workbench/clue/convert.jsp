@@ -50,16 +50,7 @@ request.getContextPath() + "/";
 								<td></td>
 							</tr>
 						</thead>
-						<tbody id="tbodyClueConvert">
-<%--							<tr>--%>
-<%--								<td><input type="radio" name="activity"/></td>--%>
-<%--								<td>发传单</td>--%>
-<%--								<td>2020-10-10</td>--%>
-<%--								<td>2020-10-20</td>--%>
-<%--								<td>zhangsan</td>--%>
-<%--							</tr>--%>
-
-						</tbody>
+						<tbody id="tbodyClueConvert"></tbody>
 					</table>
 				</div>
 			</div>

@@ -266,65 +266,10 @@ request.getContextPath() + "/";
 							<td>结束日期</td>
 						</tr>
 					</thead>
-					<tbody id="tBody">
-						<%--<tr class="active">
-							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">发传单</a></td>
-                            <td>zhangsan</td>
-							<td>2020-10-10</td>
-							<td>2020-10-20</td>
-						</tr>
-                        <tr class="active">
-                            <td><input type="checkbox" /></td>
-                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">发传单</a></td>
-                            <td>zhangsan</td>
-                            <td>2020-10-10</td>
-                            <td>2020-10-20</td>
-                        </tr>
-                        --%>
-					</tbody>
+					<tbody id="tBody"></tbody>
 				</table>
 				<div id="pageDiv"></div>
 			</div>
-
-
-			
-<%--			<div style="height: 50px; position: relative;top: 30px;">--%>
-<%--				<div>--%>
-<%--					<button type="button" class="btn btn-default" style="cursor: default;">共<b id="totalRowsB">50</b>条记录--%>
-<%--					</button>--%>
-<%--				</div>--%>
-<%--				<div class="btn-group" style="position: relative;top: -34px; left: 110px;">--%>
-<%--					<button type="button" class="btn btn-default" style="cursor: default;">显示</button>--%>
-<%--					<div class="btn-group">--%>
-<%--						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">--%>
-<%--							10--%>
-<%--							<span class="caret"></span>--%>
-<%--						</button>--%>
-<%--						<ul class="dropdown-menu" role="menu">--%>
-<%--							<li><a href="#">20</a></li>--%>
-<%--							<li><a href="#">30</a></li>--%>
-<%--						</ul>--%>
-<%--					</div>--%>
-<%--					<button type="button" class="btn btn-default" style="cursor: default;">条/页</button>--%>
-<%--				</div>--%>
-<%--				<div style="position: relative;top: -88px; left: 285px;">--%>
-<%--					<nav>--%>
-<%--						<ul class="pagination">--%>
-<%--							<li class="disabled"><a href="#">首页</a></li>--%>
-<%--							<li class="disabled"><a href="#">上一页</a></li>--%>
-<%--							<li class="active"><a href="#">1</a></li>--%>
-<%--							<li><a href="#">2</a></li>--%>
-<%--							<li><a href="#">3</a></li>--%>
-<%--							<li><a href="#">4</a></li>--%>
-<%--							<li><a href="#">5</a></li>--%>
-<%--							<li><a href="#">下一页</a></li>--%>
-<%--							<li class="disabled"><a href="#">末页</a></li>--%>
-<%--						</ul>--%>
-<%--					</nav>--%>
-<%--				</div>--%>
-<%--			</div>--%>
-			
 		</div>
 		
 	</div>

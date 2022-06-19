@@ -1,6 +1,7 @@
 package com.sqs.crm.workbench.web.controller;
 
 import com.sqs.crm.workbench.model.FunnelVO;
+import com.sqs.crm.workbench.service.ActivityService;
 import com.sqs.crm.workbench.service.TranService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import java.util.List;
 public class ChartController {
     @Autowired
     private TranService tranService;
+    @Autowired
+    private ActivityService activityService;
 
     @RequestMapping("/workbench/chart/transaction/index.do")
     public String index() {
@@ -26,6 +29,17 @@ public class ChartController {
     @RequestMapping("/workbench/chart/transaction/queryCountTranGroupByStage.do")
     public @ResponseBody Object queryCountTranGroupByStage() {
         List<FunnelVO> funnelVOList = tranService.queryCountTranGroupByStage();
+        return funnelVOList;
+    }
+
+
+    @RequestMapping("/workbench/chart/activity/activityChartIndex.do")
+    public String activityChartIndex() {
+        return "workbench/chart/activity/index";
+    }
+    @RequestMapping("/workbench/chart/activity/queryCountActivityGroupByUser.do")
+    public @ResponseBody Object queryCountActivityGroupByUser() {
+        List<FunnelVO> funnelVOList = activityService.queryCountOfActivityGroupByUser();
         return funnelVOList;
     }
 }

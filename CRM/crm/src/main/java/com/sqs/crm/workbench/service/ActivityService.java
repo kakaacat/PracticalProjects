@@ -1,6 +1,7 @@
 package com.sqs.crm.workbench.service;
 
 import com.sqs.crm.workbench.model.Activity;
+import com.sqs.crm.workbench.model.FunnelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -35,4 +36,6 @@ public interface ActivityService {
     List<Activity> queryActivityByNameClueIdForConvert(Map<String, Object> map);
 
     List<Activity> queryActivityByNameForTrans(String name);
+
+    List<FunnelVO> queryCountOfActivityGroupByUser();
 }

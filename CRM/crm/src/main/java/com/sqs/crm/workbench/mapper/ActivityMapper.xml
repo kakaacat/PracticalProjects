@@ -221,7 +221,7 @@
         and a.end_date &lt;= #{endDate}
       </if>
     </where>
-    order by a.create_time desc
+    order by a.start_date desc
     limit #{beginNo}, #{pageSize}
   </select>
 
@@ -361,5 +361,12 @@
     from tbl_activity a
     join tbl_user u on a.owner = u.id
     where a.name like concat('%', #{name}, '%')
+  </select>
+
+  <select id="selectCountOfActivityGroupByUser" resultType="com.sqs.crm.workbench.model.FunnelVO">
+    select count(*) as value, u.name as name
+    from tbl_activity a
+    join tbl_user u on a.owner = u.id
+    group by a.owner
   </select>
 </mapper>
