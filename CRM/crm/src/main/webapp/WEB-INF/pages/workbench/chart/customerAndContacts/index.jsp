@@ -53,10 +53,6 @@ request.getContextPath() + "/";
                     myChart.setOption(option);
                 }
             });
-
-
-
-
         });
     </script>
 </head>
