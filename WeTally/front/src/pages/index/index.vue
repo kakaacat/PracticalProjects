@@ -16,10 +16,12 @@
 
 <script>
 import login from "../../components/login";
+import accounts from "../../components/accounts";
 
 export default {
   components: {
     login,
+    accounts,
   },
 
   data () {
@@ -27,6 +29,12 @@ export default {
       notLogin:true
       }
     },
+
+  onLoad(option){
+    if (option.logout == 'true') {
+      this.notLogin = true
+    }
+  },
 
   mounted(){
     if (wx.getStorageSync('userInfo')){

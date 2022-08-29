@@ -53,6 +53,7 @@ export default {
         key: 'userInfo',
         success () {
           wx.hideTabBar()
+
           wx.showToast({
             title: '退出登录',
             icon: 'success',
