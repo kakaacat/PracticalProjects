@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import login from "../../components/login";
-import accounts from "../../components/accounts";
+import login from "../../components/index/login";
+import accounts from "../../components/index/accounts";
 
 export default {
   components: {
