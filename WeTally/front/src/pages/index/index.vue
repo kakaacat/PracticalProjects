@@ -8,7 +8,7 @@
 
       </div>
       <div style="border-radius: 10px;">
-
+        <accounts ref="accounts"></accounts>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
     },
 
   onLoad(option){
-    if (option.logout == 'true') {
+    if (option.logout === 'true') {
       this.notLogin = true
     }
   },
