@@ -1,10 +1,18 @@
 <template>
   <div class="edit-container">
-    <div>收入支出值【计算器组件】</div>
-    <div>分类【主分类和子分类】</div>
-    <div>描述</div>
-    <div>日期</div>
-    <div>支付方式</div>
+    <div class="edit-items" @click="deactivateTools">
+      <div class="edit-item-tip">——·   收支金额   ·——</div>
+      <div class="edit-item-val-type" @click.stop="callCalculator" @touchstart="touchStart" @touchend="touchEnd">
+        <div :class="accountItem.type === 0 ? 'edit-item-type out' : 'edit-item-type in'">{{accountItem.type === 0 ? '支出' : '收入'}}</div>
+        <div :class="accountItem.type === 0 ? 'edit-item-value out' : 'edit-item-value in'">{{accountItem.value}}</div>
+      </div>
+
+      <div>分类【主分类和子分类】</div>
+      <div>描述</div>
+      <div>日期</div>
+      <div>支付方式</div>
+    </div>
+
 
 
     <div class="cal-root">
@@ -60,16 +68,42 @@ export default {
     this.getToday()
   },
 
-  methods:{
+  methods: {
 
-    getCalRes (res){
+    getCalRes(res) {
       this.accountItem.value = res
     },
 
-    getToday () {
+    getToday() {
       const today = new Date()
-      this.accountItem.date = today.getFullYear() + '/' + (today.getMonth()+1) + '/' + today.getDate();
+      this.accountItem.date = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate()
     },
+
+    deactivateTools() {
+      if (this.showCalculator) {
+        this.showCalculator = false
+      }
+      if (this.showSelector) {
+        this.showSelector = false
+        this.$refs.selector.close()
+      }
+    },
+
+    callCalculator() {
+      this.showCalculator = !this.showCalculator
+      if (this.showCalculator) {
+        this.showSelector = false
+      }
+    },
+
+    touchStart() {
+
+    },
+
+    touchEnd(){
+
+    },
+
   },
 
 
