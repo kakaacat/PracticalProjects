@@ -33,7 +33,7 @@ export default {
 
     dateMode(defaultDate) {
       this.type = 'date'
-      const yearLimit = dafaultDate === null ? 2050 : Number(defaultDate[0])
+      const yearLimit = defaultDate === null ? 2050 : Number(defaultDate[0])
       const monthLimit = defaultDate === null ? 12 : Number(defaultDate[1])
       const dayLimit = defaultDate === null ? 31 : Number(defaultDate[2])
 

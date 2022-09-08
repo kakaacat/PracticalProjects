@@ -13,8 +13,13 @@
         <div>></div>
         <div>{{accountItem.subCategory}}</div>
       </div>
+
+      <div class="edit-item-tip">——·   日期   ·——</div>
+      <div class="edit-item-cat" @click.stop="callDateSelector">
+        <div>{{accountItem.date}}</div>
+      </div>
+
       <div>描述</div>
-      <div>日期</div>
       <div>支付方式</div>
     </div>
 
@@ -24,6 +29,10 @@
       <calculator @res="getCalRes" v-if="showCalculator"></calculator>
     </div>
 
+    <div v-show="showSelector" class="cal-root">
+      <scroll-selector @res="getSelectRes" ref="selector"></scroll-selector>
+    </div>
+
   </div>
 </template>
 
@@ -31,12 +40,14 @@
 import {Category} from "../../customConfig/catConfig";
 import {payConfig} from "../../customConfig/payConfig";
 import calculator from "../../components/add/calculator";
+import scrollSelector from "../../components/add/scrollSelector";
 
 export default {
   name: "index",
 
   components:{
     calculator,
+    scrollSelector,
   },
 
   data(){
@@ -114,10 +125,10 @@ export default {
     },
 
     callCatSelector() {
-      if (this.showSelector) {
+      if (this.showSelector) { //关闭唤醒
         this.showSelector = false
         this.$refs.selector.close()
-      } else {
+      } else {  //唤醒
         this.showSelector = true
         this.showCalculator = false
         this.selectType = 'cat'
@@ -128,7 +139,37 @@ export default {
       }
     },
 
-  },
+
+    callDateSelector(){
+      if (this.showSelector) {
+        this.showSelector = false
+        this.$refs.selector.close()
+      } else {
+        this.showSelector = true
+        this.showCalculator = false
+        this.selectType = 'date'
+        this.$refs.selector.dateMode(this.accountItem.date.split('/'))
+        this.$refs.selector.open()
+      }
+    },
+
+    getSelectRes(res, type){
+      if (this.selectType === 'cat' && type === 'custom') {
+        this.accountItem.category = Category[res[0]].name
+        this.accountItem.subCategory = Category[res[0]].subCat[res[1]].name
+        this.$refs.selector.cols.splice(1, 1, Category[res[0]].subCat) // array.splice(indexOfItem, 1, newValue)
+        //this.$refs.selector.cols[1]= Category[res[0]].subCat
+        //console.log(this.$refs.selector.cols[1])
+      }
+      else if (this.selectType === 'date' && type === 'date') {
+        this.accountItem.date = (2010 + res[0]) + '/' + (1 + res[1]) + '/' + (1 + res[2])
+      }
+    },
+
+
+
+
+  },//methods
 
 
 
