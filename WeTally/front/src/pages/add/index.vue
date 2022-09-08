@@ -7,7 +7,12 @@
         <div :class="accountItem.type === 0 ? 'edit-item-value out' : 'edit-item-value in'">{{accountItem.value}}</div>
       </div>
 
-      <div>分类【主分类和子分类】</div>
+      <div class="edit-item-tip">——·   分类   ·——</div>
+      <div class="edit-item-cat" @click.stop="callCatSelector">
+        <div>{{accountItem.category}}</div>
+        <div>></div>
+        <div>{{accountItem.subCategory}}</div>
+      </div>
       <div>描述</div>
       <div>日期</div>
       <div>支付方式</div>
@@ -105,6 +110,21 @@ export default {
       //console.log(e.mp.changedTouches[0].pageX)
       if (Math.abs(e.mp.changedTouches[0].pageX - this.touchStartX) > 50) {
         this.accountItem.type = 1 - this.accountItem.type
+      }
+    },
+
+    callCatSelector() {
+      if (this.showSelector) {
+        this.showSelector = false
+        this.$refs.selector.close()
+      } else {
+        this.showSelector = true
+        this.showCalculator = false
+        this.selectType = 'cat'
+        this.$refs.selector.colCount = 2
+        this.$refs.selector.cols = [Category, Category[0].subCat]
+        this.$refs.selector.open()
+        this.$refs.selector.type = 'custom'
       }
     },
 
