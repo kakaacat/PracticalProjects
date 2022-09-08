@@ -96,12 +96,16 @@ export default {
       }
     },
 
-    touchStart() {
-
+    touchStart(e) {
+      this.touchStartX = e.pageX
+      //console.log(e.pageX)
     },
 
-    touchEnd(){
-
+    touchEnd(e){
+      //console.log(e.mp.changedTouches[0].pageX)
+      if (Math.abs(e.mp.changedTouches[0].pageX - this.touchStartX) > 50) {
+        this.accountItem.type = 1 - this.accountItem.type
+      }
     },
 
   },
