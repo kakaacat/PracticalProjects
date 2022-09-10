@@ -52,6 +52,7 @@ import {Category} from "../../customConfig/catConfig";
 import {payConfig} from "../../customConfig/payConfig";
 import calculator from "../../components/add/calculator";
 import scrollSelector from "../../components/add/scrollSelector";
+import config from "../../config";
 
 export default {
   name: "index",
