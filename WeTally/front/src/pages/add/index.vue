@@ -6,7 +6,6 @@
         <div :class="accountItem.type === 0 ? 'edit-item-type out' : 'edit-item-type in'">{{accountItem.type === 0 ? '支出' : '收入'}}</div>
         <div :class="accountItem.type === 0 ? 'edit-item-value out' : 'edit-item-value in'">{{accountItem.value}}</div>
       </div>
-      <div class="line"></div>
 
       <div class="edit-item-tip">——·   分类   ·——</div>
       <div class="edit-item-cat" @click.stop="callCatSelector">
@@ -14,20 +13,25 @@
         <div>></div>
         <div>{{accountItem.subCategory}}</div>
       </div>
-      <div class="line"></div>
 
       <div class="edit-item-tip">——·   日期   ·——</div>
       <div class="edit-item-cat" @click.stop="callDateSelector">
         <div>{{accountItem.date}}</div>
       </div>
-      <div class="line"></div>
 
       <div class="edit-item-tip">——·   描述   ·——</div>
       <textarea placeholder="输入一些描述吧..." class="edit-item-desc" v-model="accountItem.desc"></textarea>
-      <div class="line"></div>
 
-      <div>支付方式</div>
-      <div class="line"></div>
+      <div class="edit-item-tip">——·   支付方式   ·——</div>
+      <div class="edit-item-pay">
+        <ul>
+          <li v-for="(item, index) in payMethod" :key="index" @click="activatePay(index)"
+            :class="!item.isSelected ? 'deactivate-pay pay' : 'pay'" :style="'background-color:' + item.color">
+            {{item.payCn}}
+          </li>
+        </ul>
+      </div>
+      <div @click="subnit" class="log">记账！</div>
     </div>
 
 
@@ -92,6 +96,67 @@ export default {
   },
 
   methods: {
+
+    check () {
+      if (this.accountItem.value === '0.00') {
+        wx.showToast({
+          title: '请填入有效收支金额',
+          icon: 'none',
+          duration: 1000
+        })
+        return false
+      }
+      if (this.accountItem.pay === '') {
+        wx.showToast({
+          title: '请选择支付钱包',
+          icon: 'none',
+          duration: 1000
+        })
+        return false
+      }
+      return true
+    },
+    clear () {
+      this.accountItem = {
+        type: 0,
+        value : '0.00',
+        category: Category[0].name,
+        subCategory: Category[0].subCat[0].name,
+        date:'',
+        desc:'',
+        pay:''
+      }
+      this.activatePay(-1)
+    },
+    submit () {
+      var _this = this
+      _this.accountItem['userid'] = wx.getStorageSync('userinfo').openId
+      if (this.check()) {
+        wx.request({
+          url: config.accountUrl + '/add',
+          data: _this.accountItem,
+          method: 'POST',
+          header: {
+            'content-type': 'application/json'
+          },
+          success (res) {
+            console.log(res.data)
+            if (res.data.msg === "ok") {
+              _this.clear()
+              wx.reLaunch({
+                url: '../index/main',
+                success (res) {
+                  console.log(res)
+                },
+                error (res) {
+                  console.log(res)
+                },
+              })
+            }
+          }
+        })
+      }
+    },
 
     getCalRes(res) {
       this.accountItem.value = res
@@ -170,6 +235,17 @@ export default {
       }
       else if (this.selectType === 'date' && type === 'date') {
         this.accountItem.date = (2010 + res[0]) + '/' + (1 + res[1]) + '/' + (1 + res[2])
+      }
+    },
+
+    activatePay(index){
+      for (const i in this.payMethod) {
+        if (i === index.toString()) {
+          this.accountItem.pay = this.payMethod[i].payEn
+          this.payMethod[i].isSelected = true
+        } else {
+          this.payMethod[i].isSelected = false
+        }
       }
     },
 
