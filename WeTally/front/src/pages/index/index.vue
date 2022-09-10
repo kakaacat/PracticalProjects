@@ -5,7 +5,6 @@
     </div>
     <div v-else>
       <div  class="index-title">
-
       </div>
       <div style="border-radius: 10px;">
         <accounts ref="accounts"></accounts>
@@ -17,6 +16,7 @@
 <script>
 import login from "../../components/index/login";
 import accounts from "../../components/index/accounts";
+import config from "../../config";
 
 export default {
   components: {
@@ -39,7 +39,7 @@ export default {
   mounted(){
     if (wx.getStorageSync('userInfo')){
       this.notLogin = false
-      this.getReader()
+      this.getRecord()
     }else{
       wx.hideTabBar()
     }
@@ -54,27 +54,30 @@ export default {
         icon: 'success',
         duration: 1000
       })
-      this.getReader()
-    }
+      this.getRecord()
+    },
+
+    getRecord () {
+      var _this = this
+      wx.request({
+        url: config.accountUrl + '/all',
+        data: _this.accountItem,
+        method: 'GET',
+        header: {
+          'content-type': 'application/json'
+        },
+        success (res) {
+          console.log('get record success')
+          console.log(res.data)
+          _this.$refs.accounts.items = res.data.reverse()
+          _this.$refs.accounts.processItemInfo()
+        }
+      })
+    },
+
   },
 
-  getRecord () {
-    var _this = this
-    wx.request({
-      url: config.accountUrl + '/all',
-      data: _this.accountItem,
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success (res) {
-        console.log('get record success')
-        console.log(res.data)
-        _this.$refs.accounts.items = res.data.reverse()
-        _this.$refs.accounts.processItemInfo()
-      }
-    })
-  },
+
 
 }
 </script>
