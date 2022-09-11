@@ -45,7 +45,7 @@ public class EmployeeController {
         }
         //4、密码对比
         if (!emp.getPassword().equals(password)) {
-            return R.error("登录失败");
+            return R.error("密码或账号错误");
         }
         //5、检查员工状态
         if (emp.getStatus() == 0) {
@@ -54,5 +54,15 @@ public class EmployeeController {
         //6、登录成功
         request.getSession().setAttribute("employee", emp.getId());
         return R.success(emp);
+    }
+
+    /**
+     * 员工登出
+     * @return
+     */
+    @PostMapping("/logout")
+    public R<String> logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("employee");
+        return R.success("退出成功");
     }
 }
