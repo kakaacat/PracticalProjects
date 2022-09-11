@@ -79,12 +79,9 @@ public class EmployeeController {
         employee.setCreateUser(empid);
         employee.setUpdateUser(empid);
 
-        try {
-            employeeService.save(employee);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return R.error("新增失败");
-        }
+
+        employeeService.save(employee);
+
         return R.success("新增成功");
     }
 

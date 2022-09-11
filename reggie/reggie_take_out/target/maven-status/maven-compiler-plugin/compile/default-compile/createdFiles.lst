@@ -1,6 +1,7 @@
 com\sqs\reggie\service\impl\EmployeeServiceImpl.class
 com\sqs\reggie\controller\EmployeeController.class
 com\sqs\reggie\entity\Employee.class
+com\sqs\reggie\common\GlobalExceptionHandler.class
 com\sqs\reggie\service\EmployeeService.class
 com\sqs\reggie\config\WebMvcConfig.class
 com\sqs\reggie\common\R.class
