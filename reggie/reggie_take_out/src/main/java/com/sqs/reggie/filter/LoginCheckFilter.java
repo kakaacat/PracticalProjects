@@ -25,7 +25,7 @@ public class LoginCheckFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         //1、获取本次请求的Url
         String uri = request.getRequestURI();

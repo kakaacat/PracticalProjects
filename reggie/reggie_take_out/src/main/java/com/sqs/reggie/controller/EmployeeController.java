@@ -10,6 +10,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 /**
  * @Author : kaka
@@ -65,4 +66,27 @@ public class EmployeeController {
         request.getSession().removeAttribute("employee");
         return R.success("退出成功");
     }
+
+    @PostMapping
+    public R<String> save(@RequestBody Employee employee, HttpServletRequest request) {
+        employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
+
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+
+        Long empid = (Long)request.getSession().getAttribute("employee");
+
+        employee.setCreateUser(empid);
+        employee.setUpdateUser(empid);
+
+        try {
+            employeeService.save(employee);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error("新增失败");
+        }
+        return R.success("新增成功");
+    }
+
+
 }

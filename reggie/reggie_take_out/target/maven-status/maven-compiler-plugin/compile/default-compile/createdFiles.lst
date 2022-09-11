@@ -5,4 +5,5 @@ com\sqs\reggie\service\EmployeeService.class
 com\sqs\reggie\config\WebMvcConfig.class
 com\sqs\reggie\common\R.class
 com\sqs\reggie\mapper\EmployeeMapper.class
+com\sqs\reggie\filter\LoginCheckFilter.class
 com\sqs\reggie\ReggieApplication.class
