@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sqs.reggie.common.R;
 import com.sqs.reggie.entity.Employee;
 import com.sqs.reggie.service.EmployeeService;
+import com.sun.org.apache.regexp.internal.REUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,5 +111,19 @@ public class EmployeeController {
         return R.success(pageInfo);
     }
 
+    /**
+     * 根据id更新员工信息
+     * @param employee
+     * @return
+     */
+    @PutMapping
+    public R<String> update(HttpServletRequest request ,@RequestBody Employee employee) {
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser((Long) request.getSession().getAttribute("employee"));
+
+        employeeService.updateById(employee);
+
+        return R.success("员工信息更新成功");
+    }
 
 }
