@@ -1,10 +1,12 @@
 package com.sqs.reggie.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sqs.reggie.common.R;
 import com.sqs.reggie.entity.Employee;
 import com.sqs.reggie.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
@@ -83,6 +85,29 @@ public class EmployeeController {
         employeeService.save(employee);
 
         return R.success("新增成功");
+    }
+
+
+    /**
+     * 员工信息的分页查询
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @GetMapping("/page")
+    public R<Page> page(int page, int pageSize, String name) {
+        Page pageInfo = new Page(page, pageSize);
+        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
+        //查询
+        queryWrapper.like(StringUtils.isNotEmpty(name), Employee::getName, name);
+        //添加排序条件
+        queryWrapper.orderByDesc(Employee::getUpdateTime);
+
+        //执行
+        employeeService.page(pageInfo, queryWrapper);
+
+        return R.success(pageInfo);
     }
 
 
