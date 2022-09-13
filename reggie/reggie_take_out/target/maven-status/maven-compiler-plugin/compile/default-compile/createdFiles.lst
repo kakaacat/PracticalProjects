@@ -1,4 +1,8 @@
+com\sqs\reggie\entity\Category.class
 com\sqs\reggie\service\impl\EmployeeServiceImpl.class
+com\sqs\reggie\mapper\CategoryMapper.class
+com\sqs\reggie\service\impl\CategoryServiceImpl.class
+com\sqs\reggie\service\CategoryService.class
 com\sqs\reggie\controller\EmployeeController.class
 com\sqs\reggie\common\BaseContext.class
 com\sqs\reggie\entity\Employee.class
@@ -8,6 +12,7 @@ com\sqs\reggie\common\JacksonObjectMapper.class
 com\sqs\reggie\config\WebMvcConfig.class
 com\sqs\reggie\common\R.class
 com\sqs\reggie\mapper\EmployeeMapper.class
+com\sqs\reggie\controller\CategoryController.class
 com\sqs\reggie\filter\LoginCheckFilter.class
 com\sqs\reggie\common\MyMetaObjectHandler.class
 com\sqs\reggie\ReggieApplication.class
