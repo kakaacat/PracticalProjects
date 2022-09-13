@@ -1,6 +1,7 @@
 package com.sqs.reggie.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.sqs.reggie.common.BaseContext;
 import com.sqs.reggie.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
@@ -45,7 +46,11 @@ public class LoginCheckFilter implements Filter {
             return;
         }
         //4、判断是否登录
-        if (request.getSession().getAttribute("employee") != null) {
+        Long currentId = (Long) request.getSession().getAttribute("employee");
+        if (currentId != null) {
+
+            BaseContext.setCurrentId(currentId);
+
             filterChain.doFilter(request, response);
             return;
         }
