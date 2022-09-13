@@ -74,13 +74,13 @@ public class EmployeeController {
     public R<String> save(@RequestBody Employee employee, HttpServletRequest request) {
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
 
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+        //employee.setCreateTime(LocalDateTime.now());
+        //employee.setUpdateTime(LocalDateTime.now());
 
-        Long empid = (Long)request.getSession().getAttribute("employee");
+        //Long empid = (Long)request.getSession().getAttribute("employee");
 
-        employee.setCreateUser(empid);
-        employee.setUpdateUser(empid);
+        //employee.setCreateUser(empid);
+        //employee.setUpdateUser(empid);
 
 
         employeeService.save(employee);
