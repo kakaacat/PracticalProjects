@@ -74,6 +74,8 @@ public class EmployeeController {
     public R<String> save(@RequestBody Employee employee, HttpServletRequest request) {
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
 
+        log.info("当前线程id------> {}", Thread.currentThread().getId());
+
         //employee.setCreateTime(LocalDateTime.now());
         //employee.setUpdateTime(LocalDateTime.now());
 

@@ -1,5 +1,6 @@
 com\sqs\reggie\service\impl\EmployeeServiceImpl.class
 com\sqs\reggie\controller\EmployeeController.class
+com\sqs\reggie\common\BaseContext.class
 com\sqs\reggie\entity\Employee.class
 com\sqs\reggie\common\GlobalExceptionHandler.class
 com\sqs\reggie\service\EmployeeService.class
@@ -8,5 +9,6 @@ com\sqs\reggie\config\WebMvcConfig.class
 com\sqs\reggie\common\R.class
 com\sqs\reggie\mapper\EmployeeMapper.class
 com\sqs\reggie\filter\LoginCheckFilter.class
+com\sqs\reggie\common\MyMetaObjectHandler.class
 com\sqs\reggie\ReggieApplication.class
 com\sqs\reggie\config\MyBatisPlusConfig.class

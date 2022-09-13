@@ -46,9 +46,12 @@ public class LoginCheckFilter implements Filter {
             return;
         }
         //4、判断是否登录
-        Long currentId = (Long) request.getSession().getAttribute("employee");
-        if (currentId != null) {
 
+        if (request.getSession().getAttribute("employee") != null) {
+
+            log.info("当前线程id------> {}", Thread.currentThread().getId());
+
+            Long currentId = (Long) request.getSession().getAttribute("employee");
             BaseContext.setCurrentId(currentId);
 
             filterChain.doFilter(request, response);
