@@ -8,6 +8,7 @@ com\sqs\reggie\service\CategoryService.class
 com\sqs\reggie\controller\EmployeeController.class
 com\sqs\reggie\service\impl\DishFlavorServiceImpl.class
 com\sqs\reggie\service\impl\DishServiceImpl.class
+com\sqs\reggie\dto\DishDto.class
 com\sqs\reggie\mapper\SetmealMapper.class
 com\sqs\reggie\common\BaseContext.class
 com\sqs\reggie\common\CustomException.class
