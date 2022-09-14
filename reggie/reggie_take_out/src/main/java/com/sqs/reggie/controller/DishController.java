@@ -98,4 +98,18 @@ public class DishController {
 
         return R.success(dishDto);
     }
+
+
+    /**
+     * 修改菜品
+     * @param dishDto
+     * @return
+     */
+    @PutMapping
+    public R<String> update(@RequestBody DishDto dishDto) {
+
+        dishService.updateWithFlavor(dishDto);
+
+        return R.success("修改菜品成功");
+    }
 }
