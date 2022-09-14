@@ -1,5 +1,7 @@
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\service\impl\EmployeeServiceImpl.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\common\CustomException.java
+D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\mapper\DishFlavorMapper.java
+D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\service\impl\DishFlavorServiceImpl.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\common\GlobalExceptionHandler.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\service\impl\DishServiceImpl.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\controller\CategoryController.java
@@ -13,8 +15,10 @@ D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\service\impl\SetmealServiceImpl.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\entity\Employee.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\config\MyBatisPlusConfig.java
+D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\entity\DishFlavor.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\common\MyMetaObjectHandler.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\entity\Category.java
+D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\controller\DishController.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\controller\EmployeeController.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\service\SetmealService.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\common\JacksonObjectMapper.java
@@ -22,7 +26,9 @@ D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\filter\LoginCheckFilter.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\mapper\EmployeeMapper.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\mapper\DishMapper.java
+D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\service\DishFlavorService.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\common\BaseContext.java
+D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\controller\CommonController.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\service\impl\CategoryServiceImpl.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\mapper\CategoryMapper.java
 D:\IntelliJ IDEA\PracticalProjects\reggie\reggie_take_out\src\main\java\com\sqs\reggie\service\EmployeeService.java
