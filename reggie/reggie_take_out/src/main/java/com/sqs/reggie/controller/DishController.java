@@ -63,7 +63,7 @@ public class DishController {
         queryWrapper.like(name != null, Dish::getName, name);
         queryWrapper.orderByDesc(Dish::getUpdateTime);
 
-        dishService.page(pageInfo);
+        dishService.page(pageInfo, queryWrapper);
 
         //对象拷贝
         BeanUtils.copyProperties(pageInfo, dishDtoPage, "records");
@@ -111,5 +111,22 @@ public class DishController {
         dishService.updateWithFlavor(dishDto);
 
         return R.success("修改菜品成功");
+    }
+
+    /**
+     * 根据id查询菜品
+     * @param dish
+     * @return
+     */
+    @GetMapping("/list")
+    public R<List<Dish>> list(Dish dish) {
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
+        queryWrapper.eq(Dish::getStatus, 1);
+        queryWrapper.orderByAsc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+
+        List<Dish> list = dishService.list(queryWrapper);
+
+        return R.success(list);
     }
 }
