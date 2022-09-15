@@ -3,9 +3,12 @@ com\sqs\reggie\service\impl\EmployeeServiceImpl.class
 com\sqs\reggie\mapper\CategoryMapper.class
 com\sqs\reggie\service\impl\CategoryServiceImpl.class
 com\sqs\reggie\service\SetmealService.class
+com\sqs\reggie\controller\SetmealController.class
 com\sqs\reggie\controller\DishController.class
+com\sqs\reggie\mapper\SetmealDishMapper.class
 com\sqs\reggie\service\CategoryService.class
 com\sqs\reggie\controller\EmployeeController.class
+com\sqs\reggie\service\impl\SetmealDishServiceImpl.class
 com\sqs\reggie\service\impl\DishFlavorServiceImpl.class
 com\sqs\reggie\service\impl\DishServiceImpl.class
 com\sqs\reggie\dto\DishDto.class
@@ -19,6 +22,7 @@ com\sqs\reggie\common\JacksonObjectMapper.class
 com\sqs\reggie\mapper\DishFlavorMapper.class
 com\sqs\reggie\service\DishFlavorService.class
 com\sqs\reggie\service\DishService.class
+com\sqs\reggie\service\SetmealDishService.class
 com\sqs\reggie\config\WebMvcConfig.class
 com\sqs\reggie\common\R.class
 com\sqs\reggie\mapper\EmployeeMapper.class
@@ -28,8 +32,10 @@ com\sqs\reggie\filter\LoginCheckFilter.class
 com\sqs\reggie\mapper\DishMapper.class
 com\sqs\reggie\entity\DishFlavor.class
 com\sqs\reggie\entity\Dish.class
+com\sqs\reggie\entity\SetmealDish.class
 com\sqs\reggie\entity\Setmeal.class
 com\sqs\reggie\service\impl\SetmealServiceImpl.class
 com\sqs\reggie\common\MyMetaObjectHandler.class
 com\sqs\reggie\ReggieApplication.class
 com\sqs\reggie\config\MyBatisPlusConfig.class
+com\sqs\reggie\dto\SetmealDto.class
