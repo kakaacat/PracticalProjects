@@ -1,5 +1,6 @@
 com\sqs\reggie\entity\Category.class
 com\sqs\reggie\service\impl\EmployeeServiceImpl.class
+com\sqs\reggie\mapper\ShoppingCartMapper.class
 com\sqs\reggie\mapper\CategoryMapper.class
 com\sqs\reggie\service\impl\CategoryServiceImpl.class
 com\sqs\reggie\service\SetmealService.class
@@ -15,11 +16,13 @@ com\sqs\reggie\mapper\AddressBookMapper.class
 com\sqs\reggie\service\impl\DishFlavorServiceImpl.class
 com\sqs\reggie\entity\AddressBook.class
 com\sqs\reggie\controller\UserController.class
+com\sqs\reggie\service\ShoppingCartService.class
 com\sqs\reggie\service\impl\DishServiceImpl.class
 com\sqs\reggie\dto\DishDto.class
 com\sqs\reggie\entity\User.class
 com\sqs\reggie\mapper\SetmealMapper.class
 com\sqs\reggie\common\BaseContext.class
+com\sqs\reggie\service\impl\ShoppingCartServiceImpl.class
 com\sqs\reggie\common\CustomException.class
 com\sqs\reggie\entity\Employee.class
 com\sqs\reggie\controller\AddressBookController.class
@@ -36,6 +39,7 @@ com\sqs\reggie\mapper\EmployeeMapper.class
 com\sqs\reggie\controller\CommonController.class
 com\sqs\reggie\controller\CategoryController.class
 com\sqs\reggie\filter\LoginCheckFilter.class
+com\sqs\reggie\controller\ShoppingCartController.class
 com\sqs\reggie\utils\ValidateCodeUtils.class
 com\sqs\reggie\mapper\DishMapper.class
 com\sqs\reggie\entity\DishFlavor.class
@@ -47,6 +51,7 @@ com\sqs\reggie\service\impl\UserServiceImpl.class
 com\sqs\reggie\common\MyMetaObjectHandler.class
 com\sqs\reggie\ReggieApplication.class
 com\sqs\reggie\config\MyBatisPlusConfig.class
+com\sqs\reggie\entity\ShoppingCart.class
 com\sqs\reggie\service\UserService.class
 com\sqs\reggie\utils\SMSUtils.class
 com\sqs\reggie\dto\SetmealDto.class
