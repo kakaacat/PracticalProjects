@@ -10,7 +10,10 @@ com\sqs\reggie\service\CategoryService.class
 com\sqs\reggie\controller\EmployeeController.class
 com\sqs\reggie\mapper\UserMapper.class
 com\sqs\reggie\service\impl\SetmealDishServiceImpl.class
+com\sqs\reggie\service\impl\AddressBookServiceImpl.class
+com\sqs\reggie\mapper\AddressBookMapper.class
 com\sqs\reggie\service\impl\DishFlavorServiceImpl.class
+com\sqs\reggie\entity\AddressBook.class
 com\sqs\reggie\controller\UserController.class
 com\sqs\reggie\service\impl\DishServiceImpl.class
 com\sqs\reggie\dto\DishDto.class
@@ -19,6 +22,7 @@ com\sqs\reggie\mapper\SetmealMapper.class
 com\sqs\reggie\common\BaseContext.class
 com\sqs\reggie\common\CustomException.class
 com\sqs\reggie\entity\Employee.class
+com\sqs\reggie\controller\AddressBookController.class
 com\sqs\reggie\common\GlobalExceptionHandler.class
 com\sqs\reggie\service\EmployeeService.class
 com\sqs\reggie\common\JacksonObjectMapper.class
@@ -46,3 +50,4 @@ com\sqs\reggie\config\MyBatisPlusConfig.class
 com\sqs\reggie\service\UserService.class
 com\sqs\reggie\utils\SMSUtils.class
 com\sqs\reggie\dto\SetmealDto.class
+com\sqs\reggie\service\AddressBookService.class
