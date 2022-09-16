@@ -102,7 +102,7 @@ public class SetmealController {
      * @return
      */
     @GetMapping("/list")
-    public R<List<Setmeal>> list(@RequestBody Setmeal setmeal) {
+    public R<List<Setmeal>> list(Setmeal setmeal) {
         LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(setmeal.getCategoryId() != null, Setmeal::getCategoryId, setmeal.getCategoryId());
         queryWrapper.eq(setmeal.getStatus() != null, Setmeal::getStatus, setmeal.getStatus());
