@@ -83,4 +83,20 @@ public class ShoppingCartController {
         return R.success(list);
     }
 
+    /**
+     * 清空购物车
+     * @return
+     */
+    @DeleteMapping("/clean")
+    public R<String> clean() {
+        //获取当前用户id
+        Long currentId = BaseContext.getCurrentId();
+
+        LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ShoppingCart::getUserId, currentId);
+        shoppingCartService.remove(queryWrapper);
+
+        return R.success("清空购物车成功");
+    }
+
 }
