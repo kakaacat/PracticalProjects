@@ -13,9 +13,12 @@ import com.sqs.reggie.service.DishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -33,7 +36,10 @@ public class DishController {
     private DishFlavorService dishFlavorService;
     @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 新增菜品
@@ -133,6 +139,18 @@ public class DishController {
 
     @GetMapping("/list")
     public R<List<DishDto>> list(Dish dish) {
+        List<DishDto> dishDtoList = null;
+
+        String redisKey = "dish_" + dish.getCategoryId();
+        //从redis中获取缓存
+        dishDtoList = (List<DishDto>)redisTemplate.opsForValue().get(redisKey);
+        //dishDtoList = (List<DishDto>)stringRedisTemplate.opsForValue().get(redisKey);
+        if (dishDtoList != null) {
+            //redis中存在
+            return R.success(dishDtoList);
+        }
+
+        //如果不存在，就查询数据库
         LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
         queryWrapper.eq(Dish::getStatus, 1);
@@ -140,7 +158,7 @@ public class DishController {
 
         List<Dish> list = dishService.list(queryWrapper);
 
-        List<DishDto> dishDtoList = list.stream().map((item) ->{
+        dishDtoList = list.stream().map((item) ->{
             DishDto dishDto = new DishDto();
             BeanUtils.copyProperties(item, dishDto);
 
@@ -161,6 +179,9 @@ public class DishController {
 
             return dishDto;
         }).collect(Collectors.toList());
+
+        //查询成功，并将数据缓存到redis
+        redisTemplate.opsForValue().set(redisKey, dishDtoList, 1, TimeUnit.MINUTES);
 
         return R.success(dishDtoList);
     }
