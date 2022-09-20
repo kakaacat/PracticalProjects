@@ -1,5 +1,7 @@
-//package com.sqs.reggie.config;
-//
+package com.sqs.reggie.config;
+
+//使用StringRedisTemplate来代替配置
+
 //import org.springframework.cache.annotation.CachingConfigurerSupport;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
