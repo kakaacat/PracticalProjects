@@ -51,6 +51,11 @@ public class DishController {
 
         dishService.saveWithFlavor(dishDto);
 
+        //请理所有菜品的缓存
+        //redisTemplate.delete(redisTemplate.keys("dish_*"));
+        //清除更新菜品的缓存
+        redisTemplate.delete("dish_" + dishDto.getCategoryId());
+
         return R.success("新增菜品成功");
     }
 
@@ -116,6 +121,11 @@ public class DishController {
     public R<String> update(@RequestBody DishDto dishDto) {
 
         dishService.updateWithFlavor(dishDto);
+
+        //请理所有菜品的缓存
+        //redisTemplate.delete(redisTemplate.keys("dish_*"));
+        //清除更新菜品的缓存
+        redisTemplate.delete("dish_" + dishDto.getCategoryId());
 
         return R.success("修改菜品成功");
     }
