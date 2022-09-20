@@ -2873,8 +2873,8 @@ input[type="number"] {
   margin-right: 3px;
 }
 .el-table-column--selection .cell {
-  padding-left: 14px;
-  padding-right: 14px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 .el-table-filter {
   border: 1px solid #ebeef5;
@@ -11636,7 +11636,7 @@ input[type="number"] {
   display: block;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  padding-left: 24px;
+  padding-left: 50px;
   line-height: 30px;
 }
 .el-transfer-panel__item .el-checkbox__input {

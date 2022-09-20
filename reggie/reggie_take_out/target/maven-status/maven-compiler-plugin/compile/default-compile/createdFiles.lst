@@ -2,6 +2,7 @@ com\sqs\reggie\entity\Category.class
 com\sqs\reggie\service\impl\EmployeeServiceImpl.class
 com\sqs\reggie\controller\OrderDetailController.class
 com\sqs\reggie\mapper\ShoppingCartMapper.class
+com\sqs\reggie\config\RedisConfig.class
 com\sqs\reggie\mapper\CategoryMapper.class
 com\sqs\reggie\service\impl\CategoryServiceImpl.class
 com\sqs\reggie\service\SetmealService.class
